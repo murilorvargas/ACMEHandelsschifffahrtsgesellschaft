@@ -1,10 +1,12 @@
 package modules.cargoType.dtos;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PositiveOrZero;
 
 public class CreatePerishableCargoTypeDTO {
     @NotBlank(message = "The number cannot be blank.")
-    private String number;
+    @PositiveOrZero(message = "The number must be a positive value.")
+    private int number;
 
     private String description;
 
@@ -14,7 +16,7 @@ public class CreatePerishableCargoTypeDTO {
     @NotBlank(message = "The max validity time cannot be blank.")
     private int maxValidityTime;
 
-    public CreatePerishableCargoTypeDTO(String number, String description, String origin,
+    public CreatePerishableCargoTypeDTO(int number, String description, String origin,
             int maxValidityTime) {
         this.number = number;
         this.description = description;
@@ -22,7 +24,7 @@ public class CreatePerishableCargoTypeDTO {
         this.maxValidityTime = maxValidityTime;
     }
 
-    public String getNumber() {
+    public int getNumber() {
         return number;
     }
 

@@ -18,9 +18,9 @@ public class CargoTypeService {
 
     public IPerishableCargoTypeReadable createPerishableCargoType(
             CreatePerishableCargoTypeDTO createPerishableCargoTypeDTO) {
-        ICargoTypeReadable cargoType = this.cargoTypeRepository.findById(createPerishableCargoTypeDTO.getNumber());
+        ICargoTypeReadable cargoType = this.cargoTypeRepository.findByNumber(createPerishableCargoTypeDTO.getNumber());
         if (cargoType != null) {
-            throw new CargoTypeAlreadyExists(createPerishableCargoTypeDTO.getNumber());
+            throw new CargoTypeAlreadyExists(String.valueOf(createPerishableCargoTypeDTO.getNumber()));
         }
         return this.cargoTypeRepository.createPerishableCargoType(
                 createPerishableCargoTypeDTO.getNumber(),
@@ -30,9 +30,9 @@ public class CargoTypeService {
     }
 
     public IDurableCargoTypeReadable createDurableCargoType(CreateDurableCargoTypeDTO createDurableCargoTypeDTO) {
-        ICargoTypeReadable cargoType = this.cargoTypeRepository.findById(createDurableCargoTypeDTO.getNumber());
+        ICargoTypeReadable cargoType = this.cargoTypeRepository.findByNumber(createDurableCargoTypeDTO.getNumber());
         if (cargoType != null) {
-            throw new CargoTypeAlreadyExists(createDurableCargoTypeDTO.getNumber());
+            throw new CargoTypeAlreadyExists(String.valueOf(createDurableCargoTypeDTO.getNumber()));
         }
         return this.cargoTypeRepository.createDurableCargoType(
                 createDurableCargoTypeDTO.getNumber(),

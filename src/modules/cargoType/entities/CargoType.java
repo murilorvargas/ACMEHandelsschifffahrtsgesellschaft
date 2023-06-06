@@ -1,15 +1,15 @@
 package modules.cargoType.entities;
 
 public class CargoType implements Comparable<CargoType>, ICargoTypeReadable {
-    private String number;
+    private int number;
     private String description;
 
-    public CargoType(String number, String description) {
+    public CargoType(int number, String description) {
         this.number = number;
         this.description = description;
     }
 
-    public String getNumber() {
+    public int getNumber() {
         return number;
     }
 
@@ -19,6 +19,6 @@ public class CargoType implements Comparable<CargoType>, ICargoTypeReadable {
 
     @Override
     public int compareTo(CargoType other) {
-        return this.number.compareTo(other.number);
+        return this.number - other.number;
     }
 }

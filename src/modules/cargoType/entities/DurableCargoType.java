@@ -5,7 +5,7 @@ public class DurableCargoType extends CargoType implements IDurableCargoTypeRead
     private String mainMaterial;
     private double ipiPercentage;
 
-    public DurableCargoType(String number, String description, String sector, String mainMaterial,
+    public DurableCargoType(int number, String description, String sector, String mainMaterial,
             double ipiPercentage) {
         super(number, description);
         this.sector = sector;

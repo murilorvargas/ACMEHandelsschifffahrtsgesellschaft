@@ -1,11 +1,12 @@
 package modules.cargoType.dtos;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
 public class CreateDurableCargoTypeDTO {
     @NotBlank(message = "The number cannot be blank.")
-    private String number;
+    @PositiveOrZero(message = "The number must be a positive value.")
+    private int number;
 
     private String description;
 
@@ -15,10 +16,10 @@ public class CreateDurableCargoTypeDTO {
     @NotBlank(message = "The main material cannot be blank.")
     private String mainMaterial;
 
-    @Positive(message = "The IPI percentage must be a positive value.")
+    @PositiveOrZero(message = "The IPI percentage must be a positive value.")
     private double ipiPercentage;
 
-    public CreateDurableCargoTypeDTO(String number, String description, String sector, String mainMaterial,
+    public CreateDurableCargoTypeDTO(int number, String description, String sector, String mainMaterial,
             double ipiPercentage) {
         this.number = number;
         this.description = description;
@@ -28,7 +29,7 @@ public class CreateDurableCargoTypeDTO {
 
     }
 
-    public String getNumber() {
+    public int getNumber() {
         return number;
     }
 

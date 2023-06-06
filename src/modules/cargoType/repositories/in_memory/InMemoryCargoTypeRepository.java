@@ -26,7 +26,7 @@ public class InMemoryCargoTypeRepository implements ICargoTypeRepository {
     }
 
     @Override
-    public IPerishableCargoTypeReadable createPerishableCargoType(String number, String description, String origin,
+    public IPerishableCargoTypeReadable createPerishableCargoType(int number, String description, String origin,
             int maxValidityTime) {
         PerishableCargoType perishableCargoType = new PerishableCargoType(
                 number,
@@ -39,7 +39,7 @@ public class InMemoryCargoTypeRepository implements ICargoTypeRepository {
     }
 
     @Override
-    public IDurableCargoTypeReadable createDurableCargoType(String number, String description, String sector,
+    public IDurableCargoTypeReadable createDurableCargoType(int number, String description, String sector,
             String mainMaterial,
             double ipiPercentage) {
         DurableCargoType durableCargoType = new DurableCargoType(
@@ -53,9 +53,9 @@ public class InMemoryCargoTypeRepository implements ICargoTypeRepository {
     }
 
     @Override
-    public ICargoTypeReadable findById(String number) {
+    public ICargoTypeReadable findByNumber(int number) {
         for (CargoType cargoType : cargoTypeList) {
-            if (cargoType.getNumber().equals(number)) {
+            if (cargoType.getNumber() == number) {
                 return cargoType;
             }
         }

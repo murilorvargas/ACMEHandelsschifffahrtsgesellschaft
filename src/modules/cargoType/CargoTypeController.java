@@ -19,7 +19,7 @@ public class CargoTypeController {
         this.cargoTypeService = new CargoTypeService();
     }
 
-    public IPerishableCargoTypeReadable onCreatePerishableCargoType(String number, String description, String origin,
+    public IPerishableCargoTypeReadable onCreatePerishableCargoType(int number, String description, String origin,
             int maxValidityTime) {
         CreatePerishableCargoTypeDTO cargoTypeDTO = new CreatePerishableCargoTypeDTO(number, description, origin,
                 maxValidityTime);
@@ -39,7 +39,7 @@ public class CargoTypeController {
         }
     }
 
-    public IDurableCargoTypeReadable onCreateDurableCargoType(String number, String description, String sector,
+    public IDurableCargoTypeReadable onCreateDurableCargoType(int number, String description, String sector,
             String mainMaterial,
             double ipiPercentage) {
         CreateDurableCargoTypeDTO cargoTypeDTO = new CreateDurableCargoTypeDTO(number, description, sector,
