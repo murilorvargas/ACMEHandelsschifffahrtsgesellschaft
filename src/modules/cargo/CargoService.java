@@ -3,14 +3,19 @@ package modules.cargo;
 import java.util.TreeSet;
 
 import modules.cargo.dtos.CreateCargoDTO;
-import modules.cargo.entities.Cargo;
+import modules.cargo.dtos.FindCargoByIdDTO;
+import modules.cargo.dtos.UpdateCargoStatusDTO;
+import modules.cargo.entities.ICargoReadable;
+import modules.cargo.enums.CargoStatus;
 import modules.cargo.repositories.ICargoRepository;
 import modules.cargo.repositories.in_memory.InMemoryCargoRepository;
 import modules.cargoType.entities.CargoType;
 import modules.cargoType.repositories.ICargoTypeRepository;
 import modules.cargoType.repositories.in_memory.InMemoryCargoTypeRepository;
+import shared.errors.CargoNotFound;
 import shared.errors.CargoTypeNotFound;
 import shared.errors.NoCargoRegistered;
+import shared.errors.StatusChangeNotAllowed;
 
 public class CargoService {
     private ICargoTypeRepository cargoTypeRepository;
@@ -21,7 +26,7 @@ public class CargoService {
         this.cargoRepository = InMemoryCargoRepository.instanceOf();
     }
 
-    public Cargo createCargo(CreateCargoDTO createCargoDTO) {
+    public ICargoReadable createCargo(CreateCargoDTO createCargoDTO) {
         CargoType cargoType = this.cargoTypeRepository.findById(createCargoDTO.getCargoTypeId());
 
         if (cargoType == null) {
@@ -33,12 +38,38 @@ public class CargoService {
                 createCargoDTO.getMaxTime(), cargoType);
     }
 
-    public TreeSet<Cargo> findAllCargos() {
-        TreeSet<Cargo> cargos = this.cargoRepository.findAllCargos();
+    public ICargoReadable updateCargoStatus(UpdateCargoStatusDTO updateCargoStatusDTO) {
+        ICargoReadable cargo = this.cargoRepository.findById(updateCargoStatusDTO.getId());
+        if (cargo == null) {
+            throw new CargoNotFound(updateCargoStatusDTO.getId());
+        }
+
+        if (cargo.getStatus() == CargoStatus.COMPLETED) {
+            throw new StatusChangeNotAllowed();
+        }
+
+        if (cargo.getStatus() == updateCargoStatusDTO.getCargoStatus()) {
+            return cargo;
+        }
+
+        return this.cargoRepository.updateStatus(updateCargoStatusDTO.getId(), updateCargoStatusDTO.getCargoStatus());
+    }
+
+    public TreeSet<ICargoReadable> findAllCargos() {
+        TreeSet<ICargoReadable> cargos = this.cargoRepository.findAll();
         if (cargos.isEmpty()) {
             throw new NoCargoRegistered();
         }
 
         return cargos;
+    }
+
+    public ICargoReadable findCargoById(FindCargoByIdDTO findCargoByIdDTO) {
+        ICargoReadable cargo = this.cargoRepository.findById(findCargoByIdDTO.getId());
+        if (cargo == null) {
+            throw new CargoNotFound(findCargoByIdDTO.getId());
+        }
+
+        return cargo;
     }
 }
