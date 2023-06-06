@@ -4,13 +4,13 @@ import javax.validation.constraints.NotBlank;
 
 public class FindCargoByIdDTO {
     @NotBlank(message = "The id cannot be blank.")
-    private String id;
+    private int id;
 
-    public FindCargoByIdDTO(String id) {
+    public FindCargoByIdDTO(int id) {
         this.id = id;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 }

@@ -4,14 +4,14 @@ import modules.cargo.enums.CargoStatus;
 import modules.cargoType.entities.ICargoTypeReadable;
 
 public class Cargo implements Comparable<Cargo>, ICargoReadable {
-    private String id;
+    private int id;
     private double weight;
     private double declaredValue;
     private int maxTime;
     private CargoStatus status;
     private ICargoTypeReadable cargoType;
 
-    public Cargo(String id, double weight, double declaredValue, int maxTime, ICargoTypeReadable cargoType) {
+    public Cargo(int id, double weight, double declaredValue, int maxTime, ICargoTypeReadable cargoType) {
         this.id = id;
         this.weight = weight;
         this.declaredValue = declaredValue;
@@ -20,7 +20,7 @@ public class Cargo implements Comparable<Cargo>, ICargoReadable {
         this.cargoType = cargoType;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -50,6 +50,6 @@ public class Cargo implements Comparable<Cargo>, ICargoReadable {
 
     @Override
     public int compareTo(Cargo other) {
-        return this.id.compareTo(other.id);
+        return this.id - other.id;
     }
 }

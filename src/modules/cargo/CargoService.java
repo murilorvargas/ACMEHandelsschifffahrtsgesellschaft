@@ -27,10 +27,10 @@ public class CargoService {
     }
 
     public ICargoReadable createCargo(CreateCargoDTO createCargoDTO) {
-        ICargoTypeReadable cargoType = this.cargoTypeRepository.findById(createCargoDTO.getCargoTypeId());
+        ICargoTypeReadable cargoType = this.cargoTypeRepository.findByNumber(createCargoDTO.getCargoTypeNumber());
 
         if (cargoType == null) {
-            throw new CargoTypeNotFound(createCargoDTO.getCargoTypeId());
+            throw new CargoTypeNotFound(String.valueOf(createCargoDTO.getCargoTypeNumber()));
         }
 
         return this.cargoRepository.create(createCargoDTO.getId(), createCargoDTO.getWeight(),
@@ -41,7 +41,7 @@ public class CargoService {
     public ICargoReadable updateCargoStatus(UpdateCargoStatusDTO updateCargoStatusDTO) {
         ICargoReadable cargo = this.cargoRepository.findById(updateCargoStatusDTO.getId());
         if (cargo == null) {
-            throw new CargoNotFound(updateCargoStatusDTO.getId());
+            throw new CargoNotFound(String.valueOf(updateCargoStatusDTO.getId()));
         }
 
         if (cargo.getStatus() == CargoStatus.COMPLETED) {
@@ -67,7 +67,7 @@ public class CargoService {
     public ICargoReadable findCargoById(FindCargoByIdDTO findCargoByIdDTO) {
         ICargoReadable cargo = this.cargoRepository.findById(findCargoByIdDTO.getId());
         if (cargo == null) {
-            throw new CargoNotFound(findCargoByIdDTO.getId());
+            throw new CargoNotFound(String.valueOf(findCargoByIdDTO.getId()));
         }
 
         return cargo;

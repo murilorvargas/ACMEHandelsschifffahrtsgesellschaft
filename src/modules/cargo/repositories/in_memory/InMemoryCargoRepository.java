@@ -25,7 +25,7 @@ public class InMemoryCargoRepository implements ICargoRepository {
     }
 
     @Override
-    public ICargoReadable create(String id, double weight, double declaredValue, int maxTime,
+    public ICargoReadable create(int id, double weight, double declaredValue, int maxTime,
             ICargoTypeReadable cargoType) {
         Cargo cargo = new Cargo(id, weight, declaredValue,
                 maxTime, cargoType);
@@ -35,9 +35,9 @@ public class InMemoryCargoRepository implements ICargoRepository {
     }
 
     @Override
-    public ICargoReadable updateStatus(String id, CargoStatus cargoStatus) {
+    public ICargoReadable updateStatus(int id, CargoStatus cargoStatus) {
         for (Cargo cargo : this.cargoList) {
-            if (cargo.getId().equals(id)) {
+            if (cargo.getId() == id) {
                 cargo.setStatus(cargoStatus);
                 return cargo;
             }
@@ -56,9 +56,9 @@ public class InMemoryCargoRepository implements ICargoRepository {
     }
 
     @Override
-    public ICargoReadable findById(String id) {
+    public ICargoReadable findById(int id) {
         for (Cargo cargo : this.cargoList) {
-            if (cargo.getId().equals(id)) {
+            if (cargo.getId() == id) {
                 return cargo;
             }
         }

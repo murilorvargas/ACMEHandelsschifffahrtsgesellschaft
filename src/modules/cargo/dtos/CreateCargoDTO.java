@@ -5,7 +5,7 @@ import javax.validation.constraints.PositiveOrZero;
 
 public class CreateCargoDTO {
     @NotBlank(message = "The id cannot be blank.")
-    private String id;
+    private int id;
 
     @NotBlank(message = "The weight cannot be blank.")
     @PositiveOrZero(message = "The weight must be a positive value.")
@@ -19,18 +19,19 @@ public class CreateCargoDTO {
     @PositiveOrZero(message = "The max time must be a positive value.")
     private int maxTime;
 
-    @NotBlank(message = "The cargo type id cannot be blank.")
-    private String cargoTypeId;
+    @NotBlank(message = "The cargo type number cannot be blank.")
+    @PositiveOrZero(message = "The max time must be a positive value.")
+    private int cargoTypeNumber;
 
-    public CreateCargoDTO(String id, double weight, double declaredValue, int maxTime, String cargoTypeId) {
+    public CreateCargoDTO(int id, double weight, double declaredValue, int maxTime, int cargoTypeNumber) {
         this.id = id;
         this.weight = weight;
         this.declaredValue = declaredValue;
         this.maxTime = maxTime;
-        this.cargoTypeId = cargoTypeId;
+        this.cargoTypeNumber = cargoTypeNumber;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -46,7 +47,7 @@ public class CreateCargoDTO {
         return maxTime;
     }
 
-    public String getCargoTypeId() {
-        return cargoTypeId;
+    public int getCargoTypeNumber() {
+        return cargoTypeNumber;
     }
 }

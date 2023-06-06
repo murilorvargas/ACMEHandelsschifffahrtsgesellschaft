@@ -4,7 +4,7 @@ import modules.cargo.enums.CargoStatus;
 import modules.cargoType.entities.ICargoTypeReadable;
 
 public interface ICargoReadable {
-    String getId();
+    int getId();
 
     double getWeight();
 

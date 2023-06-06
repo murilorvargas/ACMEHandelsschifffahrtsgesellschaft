@@ -22,9 +22,9 @@ public class CargoController {
         this.cargoService = cargoService;
     }
 
-    public ICargoReadable onCreateCargo(String id, double weight, double declaredValue, int maxTime,
-            String cargoTypeId) {
-        CreateCargoDTO createCargoDTO = new CreateCargoDTO(id, weight, declaredValue, maxTime, cargoTypeId);
+    public ICargoReadable onCreateCargo(int id, double weight, double declaredValue, int maxTime,
+            int cargoTypeNumber) {
+        CreateCargoDTO createCargoDTO = new CreateCargoDTO(id, weight, declaredValue, maxTime, cargoTypeNumber);
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -42,7 +42,7 @@ public class CargoController {
         }
     }
 
-    public ICargoReadable onUpdateCargoStatus(String id, String cargoStatus) {
+    public ICargoReadable onUpdateCargoStatus(int id, String cargoStatus) {
         CargoStatus cargoStatusEnum = null;
         try {
             cargoStatusEnum = CargoStatus.valueOf(cargoStatus.toUpperCase());
@@ -72,7 +72,7 @@ public class CargoController {
         return cargoService.findAllCargos();
     }
 
-    public ICargoReadable onFindCargoById(String id) {
+    public ICargoReadable onFindCargoById(int id) {
         FindCargoByIdDTO findCargoByIdDTO = new FindCargoByIdDTO(id);
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();

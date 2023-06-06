@@ -7,11 +7,11 @@ import modules.cargo.enums.CargoStatus;
 import modules.cargoType.entities.ICargoTypeReadable;
 
 public interface ICargoRepository {
-    ICargoReadable create(String id, double weight, double declaredValue, int maxTime, ICargoTypeReadable cargoType);
+    ICargoReadable create(int id, double weight, double declaredValue, int maxTime, ICargoTypeReadable cargoType);
 
-    ICargoReadable updateStatus(String id, CargoStatus cargoStatus);
+    ICargoReadable updateStatus(int id, CargoStatus cargoStatus);
 
     TreeSet<ICargoReadable> findAll();
 
-    ICargoReadable findById(String id);
+    ICargoReadable findById(int id);
 }
