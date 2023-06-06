@@ -8,6 +8,8 @@ import java.util.Set;
 
 import modules.cargoType.dtos.CreateDurableCargoTypeDTO;
 import modules.cargoType.dtos.CreatePerishableCargoTypeDTO;
+import modules.cargoType.entities.DurableCargoType;
+import modules.cargoType.entities.PerishableCargoType;
 import shared.errors.FieldValidationError;
 
 public class CargoTypeController {
@@ -17,7 +19,8 @@ public class CargoTypeController {
         this.cargoTypeService = new CargoTypeService();
     }
 
-    public void createPerishableCargoType(String id, String description, String origin, int maxValidityTime) {
+    public PerishableCargoType createPerishableCargoType(String id, String description, String origin,
+            int maxValidityTime) {
         CreatePerishableCargoTypeDTO cargoTypeDTO = new CreatePerishableCargoTypeDTO(id, description, origin,
                 maxValidityTime);
 
@@ -32,11 +35,11 @@ public class CargoTypeController {
             }
             throw new FieldValidationError(errors);
         } else {
-            cargoTypeService.createPerishableCargoType(cargoTypeDTO);
+            return cargoTypeService.createPerishableCargoType(cargoTypeDTO);
         }
     }
 
-    public void createDurableCargoType(String id, String description, String sector, String mainMaterial,
+    public DurableCargoType createDurableCargoType(String id, String description, String sector, String mainMaterial,
             double ipiPercentage) {
         CreateDurableCargoTypeDTO cargoTypeDTO = new CreateDurableCargoTypeDTO(id, description, sector,
                 mainMaterial, ipiPercentage);
@@ -52,7 +55,7 @@ public class CargoTypeController {
             }
             throw new FieldValidationError(errors);
         } else {
-            cargoTypeService.createDurableCargoType(cargoTypeDTO);
+            return cargoTypeService.createDurableCargoType(cargoTypeDTO);
         }
     }
 }

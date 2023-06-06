@@ -1,12 +1,14 @@
 package modules.cargoType.repositories;
 
 import modules.cargoType.entities.CargoType;
+import modules.cargoType.entities.DurableCargoType;
+import modules.cargoType.entities.PerishableCargoType;
 
 public interface ICargoTypeRepository {
-        void createPerishableCargoType(String id, String description, String origin,
+        PerishableCargoType createPerishableCargoType(String id, String description, String origin,
                         int maxValidityTime);
 
-        void createDurableCargoType(String id, String description, String sector, String mainMaterial,
+        DurableCargoType createDurableCargoType(String id, String description, String sector, String mainMaterial,
                         double ipiPercentage);
 
         CargoType findById(String id);

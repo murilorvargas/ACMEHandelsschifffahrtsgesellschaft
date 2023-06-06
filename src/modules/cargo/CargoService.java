@@ -1,6 +1,7 @@
 package modules.cargo;
 
 import modules.cargo.dtos.CreateCargoDTO;
+import modules.cargo.entities.Cargo;
 import modules.cargo.repositories.ICargoRepository;
 import modules.cargo.repositories.in_memory.InMemoryCargoRepository;
 import modules.cargoType.entities.CargoType;
@@ -17,14 +18,14 @@ public class CargoService {
         this.cargoRepository = InMemoryCargoRepository.instanceOf();
     }
 
-    public void createCargo(CreateCargoDTO createCargoDTO) {
+    public Cargo createCargo(CreateCargoDTO createCargoDTO) {
         CargoType cargoType = this.cargoTypeRepository.findById(createCargoDTO.getCargoTypeId());
 
         if (cargoType == null) {
             throw new CargoTypeNotFound(createCargoDTO.getCargoTypeId());
         }
 
-        this.cargoRepository.create(createCargoDTO.getId(), createCargoDTO.getWeight(),
+        return this.cargoRepository.create(createCargoDTO.getId(), createCargoDTO.getWeight(),
                 createCargoDTO.getDeclaredValue(),
                 createCargoDTO.getMaxTime(), cargoType);
     }
