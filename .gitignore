@@ -1,0 +1,18 @@
+# Java-specific ignores
+*.class
+*.jar
+
+# VS Code-specific ignores
+.vscode/
+.settings/
+
+# Build output
+bin/
+target/
+
+# IntelliJ IDEA-specific ignores
+*.iml
+*.ipr
+*.iws
+.idea/
+out/
