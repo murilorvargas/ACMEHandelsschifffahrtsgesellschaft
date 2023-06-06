@@ -1,7 +1,5 @@
 package modules.cargo.entities;
 
-import java.util.UUID;
-
 import modules.cargo.enums.CargoStatus;
 import modules.cargoType.entities.CargoType;
 
@@ -13,8 +11,8 @@ public class Cargo {
     private CargoStatus status;
     private CargoType cargoType;
 
-    public Cargo(double weight, double declaredValue, int maxTime, CargoType cargoType) {
-        this.id = UUID.randomUUID().toString();
+    public Cargo(String id, double weight, double declaredValue, int maxTime, CargoType cargoType) {
+        this.id = id;
         this.weight = weight;
         this.declaredValue = declaredValue;
         this.maxTime = maxTime;

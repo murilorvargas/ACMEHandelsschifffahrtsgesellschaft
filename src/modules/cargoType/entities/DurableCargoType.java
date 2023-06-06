@@ -5,9 +5,9 @@ public class DurableCargoType extends CargoType {
     private String mainMaterial;
     private double ipiPercentage;
 
-    public DurableCargoType(String description, String sector, String mainMaterial,
+    public DurableCargoType(String id, String description, String sector, String mainMaterial,
             double ipiPercentage) {
-        super(description);
+        super(id, description);
         this.sector = sector;
         this.mainMaterial = mainMaterial;
         this.ipiPercentage = ipiPercentage;

@@ -16,9 +16,9 @@ public class CargoTypeController {
         this.cargoTypeService = new CargoTypeService();
     }
 
-    public void createDurableCargoType(String description, String sector, String mainMaterial,
+    public void createDurableCargoType(String id, String description, String sector, String mainMaterial,
             double ipiPercentage) {
-        CreateDurableCargoTypeDTO cargoTypeDTO = new CreateDurableCargoTypeDTO(description, sector,
+        CreateDurableCargoTypeDTO cargoTypeDTO = new CreateDurableCargoTypeDTO(id, description, sector,
                 mainMaterial, ipiPercentage);
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();

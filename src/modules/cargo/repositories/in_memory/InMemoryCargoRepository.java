@@ -22,9 +22,9 @@ public class InMemoryCargoRepository implements ICargoRepository {
     }
 
     @Override
-    public void create(double weight, double declaredValue, int maxTime, CargoType cargoType) {
+    public void create(String id, double weight, double declaredValue, int maxTime, CargoType cargoType) {
 
-        Cargo cargo = new Cargo(weight, declaredValue,
+        Cargo cargo = new Cargo(id, weight, declaredValue,
                 maxTime, cargoType);
         this.cargoList.add(cargo);
     }

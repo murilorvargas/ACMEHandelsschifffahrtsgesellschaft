@@ -4,8 +4,8 @@ public class PerishableCargoType extends CargoType {
     private String origin;
     private int maxValidityTime;
 
-    public PerishableCargoType(String description, String origin, int maxValidityTime) {
-        super(description);
+    public PerishableCargoType(String id, String description, String origin, int maxValidityTime) {
+        super(id, description);
         this.origin = origin;
         this.maxValidityTime = maxValidityTime;
     }

@@ -24,7 +24,8 @@ public class CargoService {
             throw new CargoTypeNotFound(createCargoDTO.getCargoTypeId());
         }
 
-        this.cargoRepository.create(createCargoDTO.getWeight(), createCargoDTO.getDeclaredValue(),
+        this.cargoRepository.create(createCargoDTO.getId(), createCargoDTO.getWeight(),
+                createCargoDTO.getDeclaredValue(),
                 createCargoDTO.getMaxTime(), cargoType);
     }
 }

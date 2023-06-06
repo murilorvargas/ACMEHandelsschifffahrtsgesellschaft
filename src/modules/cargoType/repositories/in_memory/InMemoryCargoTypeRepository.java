@@ -23,9 +23,10 @@ public class InMemoryCargoTypeRepository implements ICargoTypeRepository {
     }
 
     @Override
-    public void createPerishableCargoType(String description, String origin,
+    public void createPerishableCargoType(String id, String description, String origin,
             int maxValidityTime) {
         PerishableCargoType perishableCargoType = new PerishableCargoType(
+                id,
                 description, origin,
                 maxValidityTime);
 
@@ -33,9 +34,10 @@ public class InMemoryCargoTypeRepository implements ICargoTypeRepository {
     }
 
     @Override
-    public void createDurableCargoType(String description, String sector, String mainMaterial,
+    public void createDurableCargoType(String id, String description, String sector, String mainMaterial,
             double ipiPercentage) {
         DurableCargoType durableCargoType = new DurableCargoType(
+                id,
                 description, sector, mainMaterial,
                 ipiPercentage);
 
