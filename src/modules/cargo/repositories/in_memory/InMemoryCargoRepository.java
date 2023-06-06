@@ -1,13 +1,13 @@
 package modules.cargo.repositories.in_memory;
 
-import java.util.ArrayList;
+import java.util.TreeSet;
 
 import modules.cargo.entities.Cargo;
 import modules.cargo.repositories.ICargoRepository;
 import modules.cargoType.entities.CargoType;
 
 public class InMemoryCargoRepository implements ICargoRepository {
-    private ArrayList<Cargo> cargoList;
+    private TreeSet<Cargo> cargoList;
     private static InMemoryCargoRepository instance = null;
 
     public static synchronized InMemoryCargoRepository instanceOf() {
@@ -18,14 +18,15 @@ public class InMemoryCargoRepository implements ICargoRepository {
     }
 
     private InMemoryCargoRepository() {
-        this.cargoList = new ArrayList<Cargo>();
+        this.cargoList = new TreeSet<Cargo>();
     }
 
     @Override
-    public void create(String id, double weight, double declaredValue, int maxTime, CargoType cargoType) {
-
+    public Cargo create(String id, double weight, double declaredValue, int maxTime, CargoType cargoType) {
         Cargo cargo = new Cargo(id, weight, declaredValue,
                 maxTime, cargoType);
         this.cargoList.add(cargo);
+
+        return cargo;
     }
 }
