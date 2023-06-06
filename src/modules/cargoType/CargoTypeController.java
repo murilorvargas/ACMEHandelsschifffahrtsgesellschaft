@@ -19,9 +19,9 @@ public class CargoTypeController {
         this.cargoTypeService = new CargoTypeService();
     }
 
-    public PerishableCargoType onCreatePerishableCargoType(String id, String description, String origin,
+    public PerishableCargoType onCreatePerishableCargoType(String number, String description, String origin,
             int maxValidityTime) {
-        CreatePerishableCargoTypeDTO cargoTypeDTO = new CreatePerishableCargoTypeDTO(id, description, origin,
+        CreatePerishableCargoTypeDTO cargoTypeDTO = new CreatePerishableCargoTypeDTO(number, description, origin,
                 maxValidityTime);
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -39,9 +39,10 @@ public class CargoTypeController {
         }
     }
 
-    public DurableCargoType onCreateDurableCargoType(String id, String description, String sector, String mainMaterial,
+    public DurableCargoType onCreateDurableCargoType(String number, String description, String sector,
+            String mainMaterial,
             double ipiPercentage) {
-        CreateDurableCargoTypeDTO cargoTypeDTO = new CreateDurableCargoTypeDTO(id, description, sector,
+        CreateDurableCargoTypeDTO cargoTypeDTO = new CreateDurableCargoTypeDTO(number, description, sector,
                 mainMaterial, ipiPercentage);
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();

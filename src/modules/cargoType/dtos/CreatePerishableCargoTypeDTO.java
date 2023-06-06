@@ -3,8 +3,8 @@ package modules.cargoType.dtos;
 import javax.validation.constraints.NotBlank;
 
 public class CreatePerishableCargoTypeDTO {
-    @NotBlank(message = "The id cannot be blank.")
-    private String id;
+    @NotBlank(message = "The number cannot be blank.")
+    private String number;
 
     private String description;
 
@@ -14,16 +14,16 @@ public class CreatePerishableCargoTypeDTO {
     @NotBlank(message = "The max validity time cannot be blank.")
     private int maxValidityTime;
 
-    public CreatePerishableCargoTypeDTO(String id, String description, String origin,
+    public CreatePerishableCargoTypeDTO(String number, String description, String origin,
             int maxValidityTime) {
-        this.id = id;
+        this.number = number;
         this.description = description;
         this.origin = origin;
         this.maxValidityTime = maxValidityTime;
     }
 
-    public String getId() {
-        return id;
+    public String getNumber() {
+        return number;
     }
 
     public String getDescription() {

@@ -4,8 +4,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 
 public class CreateDurableCargoTypeDTO {
-    @NotBlank(message = "The id cannot be blank.")
-    private String id;
+    @NotBlank(message = "The number cannot be blank.")
+    private String number;
 
     private String description;
 
@@ -18,9 +18,9 @@ public class CreateDurableCargoTypeDTO {
     @Positive(message = "The IPI percentage must be a positive value.")
     private double ipiPercentage;
 
-    public CreateDurableCargoTypeDTO(String id, String description, String sector, String mainMaterial,
+    public CreateDurableCargoTypeDTO(String number, String description, String sector, String mainMaterial,
             double ipiPercentage) {
-        this.id = id;
+        this.number = number;
         this.description = description;
         this.sector = sector;
         this.mainMaterial = mainMaterial;
@@ -28,8 +28,8 @@ public class CreateDurableCargoTypeDTO {
 
     }
 
-    public String getId() {
-        return id;
+    public String getNumber() {
+        return number;
     }
 
     public String getDescription() {

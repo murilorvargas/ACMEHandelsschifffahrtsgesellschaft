@@ -17,24 +17,24 @@ public class CargoTypeService {
     }
 
     public PerishableCargoType createPerishableCargoType(CreatePerishableCargoTypeDTO createPerishableCargoTypeDTO) {
-        CargoType cargoType = this.cargoTypeRepository.findById(createPerishableCargoTypeDTO.getId());
+        CargoType cargoType = this.cargoTypeRepository.findById(createPerishableCargoTypeDTO.getNumber());
         if (cargoType != null) {
-            throw new CargoTypeAlreadyExists(createPerishableCargoTypeDTO.getId());
+            throw new CargoTypeAlreadyExists(createPerishableCargoTypeDTO.getNumber());
         }
         return this.cargoTypeRepository.createPerishableCargoType(
-                createPerishableCargoTypeDTO.getId(),
+                createPerishableCargoTypeDTO.getNumber(),
                 createPerishableCargoTypeDTO.getDescription(), createPerishableCargoTypeDTO.getOrigin(),
                 createPerishableCargoTypeDTO.getMaxValidityTime());
 
     }
 
     public DurableCargoType createDurableCargoType(CreateDurableCargoTypeDTO createDurableCargoTypeDTO) {
-        CargoType cargoType = this.cargoTypeRepository.findById(createDurableCargoTypeDTO.getId());
+        CargoType cargoType = this.cargoTypeRepository.findById(createDurableCargoTypeDTO.getNumber());
         if (cargoType != null) {
-            throw new CargoTypeAlreadyExists(createDurableCargoTypeDTO.getId());
+            throw new CargoTypeAlreadyExists(createDurableCargoTypeDTO.getNumber());
         }
         return this.cargoTypeRepository.createDurableCargoType(
-                createDurableCargoTypeDTO.getId(),
+                createDurableCargoTypeDTO.getNumber(),
                 createDurableCargoTypeDTO.getDescription(), createDurableCargoTypeDTO.getSector(),
                 createDurableCargoTypeDTO.getMainMaterial(), createDurableCargoTypeDTO.getIpiPercentage());
     }
