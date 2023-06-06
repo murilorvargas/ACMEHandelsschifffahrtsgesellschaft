@@ -1,8 +1,11 @@
 package modules.cargo.repositories.in_memory;
 
+import java.util.Comparator;
 import java.util.TreeSet;
 
 import modules.cargo.entities.Cargo;
+import modules.cargo.entities.ICargoReadable;
+import modules.cargo.enums.CargoStatus;
 import modules.cargo.repositories.ICargoRepository;
 import modules.cargoType.entities.CargoType;
 
@@ -22,7 +25,7 @@ public class InMemoryCargoRepository implements ICargoRepository {
     }
 
     @Override
-    public Cargo create(String id, double weight, double declaredValue, int maxTime, CargoType cargoType) {
+    public ICargoReadable create(String id, double weight, double declaredValue, int maxTime, CargoType cargoType) {
         Cargo cargo = new Cargo(id, weight, declaredValue,
                 maxTime, cargoType);
         this.cargoList.add(cargo);
@@ -31,7 +34,34 @@ public class InMemoryCargoRepository implements ICargoRepository {
     }
 
     @Override
-    public TreeSet<Cargo> findAllCargos() {
-        return this.cargoList;
+    public ICargoReadable updateStatus(String id, CargoStatus cargoStatus) {
+        for (Cargo cargo : this.cargoList) {
+            if (cargo.getId().equals(id)) {
+                cargo.setStatus(cargoStatus);
+                return cargo;
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public TreeSet<ICargoReadable> findAll() {
+        TreeSet<ICargoReadable> cargoSet = new TreeSet<>(Comparator.comparing(ICargoReadable::getId));
+        for (Cargo cargo : this.cargoList) {
+            cargoSet.add(cargo);
+        }
+        return cargoSet;
+    }
+
+    @Override
+    public ICargoReadable findById(String id) {
+        for (Cargo cargo : this.cargoList) {
+            if (cargo.getId().equals(id)) {
+                return cargo;
+            }
+        }
+
+        return null;
     }
 }
