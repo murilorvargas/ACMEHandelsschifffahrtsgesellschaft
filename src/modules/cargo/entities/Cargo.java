@@ -3,7 +3,7 @@ package modules.cargo.entities;
 import modules.cargo.enums.CargoStatus;
 import modules.cargoType.entities.CargoType;
 
-public class Cargo {
+public class Cargo implements Comparable<Cargo> {
     private String id;
     private double weight;
     private double declaredValue;
@@ -42,5 +42,10 @@ public class Cargo {
 
     public CargoType getCargoType() {
         return cargoType;
+    }
+
+    @Override
+    public int compareTo(Cargo other) {
+        return this.id.compareTo(other.id);
     }
 }
