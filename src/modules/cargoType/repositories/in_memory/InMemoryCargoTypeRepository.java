@@ -1,6 +1,6 @@
 package modules.cargoType.repositories.in_memory;
 
-import java.util.ArrayList;
+import java.util.TreeSet;
 
 import modules.cargoType.entities.CargoType;
 import modules.cargoType.entities.DurableCargoType;
@@ -8,7 +8,7 @@ import modules.cargoType.entities.PerishableCargoType;
 import modules.cargoType.repositories.ICargoTypeRepository;
 
 public class InMemoryCargoTypeRepository implements ICargoTypeRepository {
-    private ArrayList<CargoType> cargoTypeList;
+    private TreeSet<CargoType> cargoTypeList;
     private static InMemoryCargoTypeRepository instance = null;
 
     public static synchronized InMemoryCargoTypeRepository instanceOf() {
@@ -19,7 +19,7 @@ public class InMemoryCargoTypeRepository implements ICargoTypeRepository {
     }
 
     private InMemoryCargoTypeRepository() {
-        this.cargoTypeList = new ArrayList<CargoType>();
+        this.cargoTypeList = new TreeSet<CargoType>();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package modules.cargoType.entities;
 
-public class CargoType {
+public class CargoType implements Comparable<CargoType> {
     private String id;
     private String description;
 
@@ -15,5 +15,10 @@ public class CargoType {
 
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public int compareTo(CargoType other) {
+        return this.id.compareTo(other.id);
     }
 }
