@@ -29,4 +29,9 @@ public class InMemoryCargoRepository implements ICargoRepository {
 
         return cargo;
     }
+
+    @Override
+    public TreeSet<Cargo> findAllCargos() {
+        return this.cargoList;
+    }
 }

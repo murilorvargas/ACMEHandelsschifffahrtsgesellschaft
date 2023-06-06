@@ -1,5 +1,7 @@
 package modules.cargo;
 
+import java.util.TreeSet;
+
 import modules.cargo.dtos.CreateCargoDTO;
 import modules.cargo.entities.Cargo;
 import modules.cargo.repositories.ICargoRepository;
@@ -8,6 +10,7 @@ import modules.cargoType.entities.CargoType;
 import modules.cargoType.repositories.ICargoTypeRepository;
 import modules.cargoType.repositories.in_memory.InMemoryCargoTypeRepository;
 import shared.errors.CargoTypeNotFound;
+import shared.errors.NoCargoRegistered;
 
 public class CargoService {
     private ICargoTypeRepository cargoTypeRepository;
@@ -28,5 +31,14 @@ public class CargoService {
         return this.cargoRepository.create(createCargoDTO.getId(), createCargoDTO.getWeight(),
                 createCargoDTO.getDeclaredValue(),
                 createCargoDTO.getMaxTime(), cargoType);
+    }
+
+    public TreeSet<Cargo> findAllCargos() {
+        TreeSet<Cargo> cargos = this.cargoRepository.findAllCargos();
+        if (cargos.isEmpty()) {
+            throw new NoCargoRegistered();
+        }
+
+        return cargos;
     }
 }
