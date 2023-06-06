@@ -4,19 +4,19 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 
 public class CreateCargoDTO {
-    @NotBlank(message = "The weight cannot be blank")
-    @Positive(message = "The weight must be a positive value")
+    @NotBlank(message = "The weight cannot be blank.")
+    @Positive(message = "The weight must be a positive value.")
     private double weight;
 
-    @NotBlank(message = "The declared value cannot be blank")
-    @Positive(message = "The declared value must be a positive value")
+    @NotBlank(message = "The declared value cannot be blank.")
+    @Positive(message = "The declared value must be a positive value.")
     private double declaredValue;
 
-    @NotBlank(message = "The max time cannot be blank")
-    @Positive(message = "The max time must be a positive value")
+    @NotBlank(message = "The max time cannot be blank.")
+    @Positive(message = "The max time must be a positive value.")
     private int maxTime;
 
-    @NotBlank(message = "The cargo type id cannot be blank")
+    @NotBlank(message = "The cargo type id cannot be blank.")
     private String cargoTypeId;
 
     public CreateCargoDTO(double weight, double declaredValue, int maxTime, String cargoTypeId) {
