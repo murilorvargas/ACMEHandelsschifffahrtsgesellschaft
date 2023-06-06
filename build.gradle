@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+group 'com.example'
+version '1.0-SNAPSHOT'
+
+sourceSets.main.java.srcDirs = ['src']
+
+project.ext.mainClassName = 'gui.MainApplication'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'javax.validation:validation-api:2.0.1.Final'
+    implementation 'org.apache.bval:bval-jsr:2.0.5'
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+// Run task for the project
+task run(type: JavaExec) {
+    main = project.mainClassName
+    classpath = sourceSets.main.runtimeClasspath
+}
+
