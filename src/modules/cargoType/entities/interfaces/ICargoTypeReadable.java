@@ -1,4 +1,4 @@
-package modules.cargoType.entities;
+package modules.cargoType.entities.interfaces;
 
 public interface ICargoTypeReadable {
     int getNumber();

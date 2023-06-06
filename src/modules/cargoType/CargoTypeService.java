@@ -2,11 +2,11 @@ package modules.cargoType;
 
 import modules.cargoType.dtos.CreateDurableCargoTypeDTO;
 import modules.cargoType.dtos.CreatePerishableCargoTypeDTO;
-import modules.cargoType.entities.ICargoTypeReadable;
-import modules.cargoType.entities.IDurableCargoTypeReadable;
-import modules.cargoType.entities.IPerishableCargoTypeReadable;
-import modules.cargoType.repositories.ICargoTypeRepository;
-import modules.cargoType.repositories.in_memory.InMemoryCargoTypeRepository;
+import modules.cargoType.entities.interfaces.ICargoTypeReadable;
+import modules.cargoType.entities.interfaces.IDurableCargoTypeReadable;
+import modules.cargoType.entities.interfaces.IPerishableCargoTypeReadable;
+import modules.cargoType.repositories.InMemoryCargoTypeRepository;
+import modules.cargoType.repositories.interfaces.ICargoTypeRepository;
 import shared.errors.CargoTypeAlreadyExists;
 
 public class CargoTypeService {

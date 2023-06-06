@@ -1,7 +1,7 @@
-package modules.cargo.entities;
+package modules.cargo.entities.interfaces;
 
 import modules.cargo.enums.CargoStatus;
-import modules.cargoType.entities.ICargoTypeReadable;
+import modules.cargoType.entities.interfaces.ICargoTypeReadable;
 
 public interface ICargoReadable {
     int getId();

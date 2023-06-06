@@ -1,5 +1,7 @@
 package modules.cargoType.entities;
 
+import modules.cargoType.entities.interfaces.ICargoTypeReadable;
+
 public class CargoType implements Comparable<CargoType>, ICargoTypeReadable {
     private int number;
     private String description;

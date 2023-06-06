@@ -1,8 +1,8 @@
-package modules.cargoType.repositories;
+package modules.cargoType.repositories.interfaces;
 
-import modules.cargoType.entities.ICargoTypeReadable;
-import modules.cargoType.entities.IDurableCargoTypeReadable;
-import modules.cargoType.entities.IPerishableCargoTypeReadable;
+import modules.cargoType.entities.interfaces.ICargoTypeReadable;
+import modules.cargoType.entities.interfaces.IDurableCargoTypeReadable;
+import modules.cargoType.entities.interfaces.IPerishableCargoTypeReadable;
 
 public interface ICargoTypeRepository {
         IPerishableCargoTypeReadable createPerishableCargoType(int number, String description, String origin,

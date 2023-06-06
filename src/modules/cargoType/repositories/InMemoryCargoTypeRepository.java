@@ -1,14 +1,14 @@
-package modules.cargoType.repositories.in_memory;
+package modules.cargoType.repositories;
 
 import java.util.TreeSet;
 
 import modules.cargoType.entities.CargoType;
 import modules.cargoType.entities.DurableCargoType;
-import modules.cargoType.entities.ICargoTypeReadable;
-import modules.cargoType.entities.IDurableCargoTypeReadable;
-import modules.cargoType.entities.IPerishableCargoTypeReadable;
 import modules.cargoType.entities.PerishableCargoType;
-import modules.cargoType.repositories.ICargoTypeRepository;
+import modules.cargoType.entities.interfaces.ICargoTypeReadable;
+import modules.cargoType.entities.interfaces.IDurableCargoTypeReadable;
+import modules.cargoType.entities.interfaces.IPerishableCargoTypeReadable;
+import modules.cargoType.repositories.interfaces.ICargoTypeRepository;
 
 public class InMemoryCargoTypeRepository implements ICargoTypeRepository {
     private TreeSet<CargoType> cargoTypeList;

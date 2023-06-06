@@ -1,13 +1,13 @@
-package modules.cargo.repositories.in_memory;
+package modules.cargo.repositories;
 
 import java.util.Comparator;
 import java.util.TreeSet;
 
 import modules.cargo.entities.Cargo;
-import modules.cargo.entities.ICargoReadable;
+import modules.cargo.entities.interfaces.ICargoReadable;
 import modules.cargo.enums.CargoStatus;
-import modules.cargo.repositories.ICargoRepository;
-import modules.cargoType.entities.ICargoTypeReadable;
+import modules.cargo.repositories.interfaces.ICargoRepository;
+import modules.cargoType.entities.interfaces.ICargoTypeReadable;
 
 public class InMemoryCargoRepository implements ICargoRepository {
     private TreeSet<Cargo> cargoList;

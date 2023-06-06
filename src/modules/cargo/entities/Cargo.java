@@ -1,7 +1,8 @@
 package modules.cargo.entities;
 
+import modules.cargo.entities.interfaces.ICargoReadable;
 import modules.cargo.enums.CargoStatus;
-import modules.cargoType.entities.ICargoTypeReadable;
+import modules.cargoType.entities.interfaces.ICargoTypeReadable;
 
 public class Cargo implements Comparable<Cargo>, ICargoReadable {
     private int id;

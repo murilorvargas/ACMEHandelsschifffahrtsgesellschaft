@@ -1,5 +1,7 @@
 package modules.cargoType.entities;
 
+import modules.cargoType.entities.interfaces.IPerishableCargoTypeReadable;
+
 public class PerishableCargoType extends CargoType implements IPerishableCargoTypeReadable {
     private String origin;
     private int maxValidityTime;

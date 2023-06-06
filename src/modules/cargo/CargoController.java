@@ -11,7 +11,7 @@ import javax.validation.ValidatorFactory;
 import modules.cargo.dtos.CreateCargoDTO;
 import modules.cargo.dtos.FindCargoByIdDTO;
 import modules.cargo.dtos.UpdateCargoStatusDTO;
-import modules.cargo.entities.ICargoReadable;
+import modules.cargo.entities.interfaces.ICargoReadable;
 import modules.cargo.enums.CargoStatus;
 import shared.errors.FieldValidationError;
 

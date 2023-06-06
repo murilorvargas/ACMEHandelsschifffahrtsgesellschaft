@@ -1,5 +1,7 @@
 package modules.cargoType.entities;
 
+import modules.cargoType.entities.interfaces.IDurableCargoTypeReadable;
+
 public class DurableCargoType extends CargoType implements IDurableCargoTypeReadable {
     private String sector;
     private String mainMaterial;

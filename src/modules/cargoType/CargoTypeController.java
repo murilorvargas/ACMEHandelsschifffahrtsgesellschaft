@@ -8,8 +8,8 @@ import java.util.Set;
 
 import modules.cargoType.dtos.CreateDurableCargoTypeDTO;
 import modules.cargoType.dtos.CreatePerishableCargoTypeDTO;
-import modules.cargoType.entities.IDurableCargoTypeReadable;
-import modules.cargoType.entities.IPerishableCargoTypeReadable;
+import modules.cargoType.entities.interfaces.IDurableCargoTypeReadable;
+import modules.cargoType.entities.interfaces.IPerishableCargoTypeReadable;
 import shared.errors.FieldValidationError;
 
 public class CargoTypeController {
