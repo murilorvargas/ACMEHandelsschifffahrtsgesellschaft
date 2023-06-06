@@ -6,7 +6,7 @@ import modules.cargo.enums.CargoStatus;
 import modules.cargoType.entities.CargoType;
 
 public class Cargo {
-    private UUID id;
+    private String id;
     private double weight;
     private double declaredValue;
     private int maxTime;
@@ -14,7 +14,7 @@ public class Cargo {
     private CargoType cargoType;
 
     public Cargo(double weight, double declaredValue, int maxTime, CargoType cargoType) {
-        this.id = UUID.randomUUID();
+        this.id = UUID.randomUUID().toString();
         this.weight = weight;
         this.declaredValue = declaredValue;
         this.maxTime = maxTime;
@@ -22,7 +22,7 @@ public class Cargo {
         this.cargoType = cargoType;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 

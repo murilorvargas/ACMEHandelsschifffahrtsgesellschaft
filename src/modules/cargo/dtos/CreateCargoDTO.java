@@ -1,14 +1,12 @@
 package modules.cargo.dtos;
 
-import java.util.UUID;
-
 public class CreateCargoDTO {
     private double weight;
     private double declaredValue;
     private int maxTime;
-    private UUID cargoTypeId;
+    private String cargoTypeId;
 
-    public CreateCargoDTO(double weight, double declaredValue, int maxTime, UUID cargoTypeId) {
+    public CreateCargoDTO(double weight, double declaredValue, int maxTime, String cargoTypeId) {
         this.weight = weight;
         this.declaredValue = declaredValue;
         this.maxTime = maxTime;
@@ -27,7 +25,7 @@ public class CreateCargoDTO {
         return maxTime;
     }
 
-    public UUID getCargoTypeId() {
+    public String getCargoTypeId() {
         return cargoTypeId;
     }
 }

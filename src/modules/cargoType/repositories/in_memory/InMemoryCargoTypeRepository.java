@@ -1,7 +1,6 @@
 package modules.cargoType.repositories.in_memory;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 import modules.cargoType.entities.CargoType;
 import modules.cargoType.entities.DurableCargoType;
@@ -44,7 +43,7 @@ public class InMemoryCargoTypeRepository implements ICargoTypeRepository {
     }
 
     @Override
-    public CargoType findById(UUID id) {
+    public CargoType findById(String id) {
         for (CargoType cargoType : cargoTypeList) {
             if (cargoType.getId().equals(id)) {
                 return cargoType;

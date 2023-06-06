@@ -3,17 +3,17 @@ package modules.cargoType.entities;
 import java.util.UUID;
 
 public class CargoType {
-    private UUID id;
+    private String id;
     private String number;
     private String description;
 
     public CargoType(String number, String description) {
-        this.id = UUID.randomUUID();
+        this.id = UUID.randomUUID().toString();
         this.number = number;
         this.description = description;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
