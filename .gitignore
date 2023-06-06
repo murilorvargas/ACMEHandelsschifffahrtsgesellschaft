@@ -2,6 +2,10 @@
 *.class
 *.jar
 
+# Gradle-specific ignores
+.gradle/
+build/
+
 # VS Code-specific ignores
 .vscode/
 .settings/
