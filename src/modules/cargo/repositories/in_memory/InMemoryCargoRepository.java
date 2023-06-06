@@ -7,7 +7,7 @@ import modules.cargo.entities.Cargo;
 import modules.cargo.entities.ICargoReadable;
 import modules.cargo.enums.CargoStatus;
 import modules.cargo.repositories.ICargoRepository;
-import modules.cargoType.entities.CargoType;
+import modules.cargoType.entities.ICargoTypeReadable;
 
 public class InMemoryCargoRepository implements ICargoRepository {
     private TreeSet<Cargo> cargoList;
@@ -25,7 +25,8 @@ public class InMemoryCargoRepository implements ICargoRepository {
     }
 
     @Override
-    public ICargoReadable create(String id, double weight, double declaredValue, int maxTime, CargoType cargoType) {
+    public ICargoReadable create(String id, double weight, double declaredValue, int maxTime,
+            ICargoTypeReadable cargoType) {
         Cargo cargo = new Cargo(id, weight, declaredValue,
                 maxTime, cargoType);
         this.cargoList.add(cargo);

@@ -9,7 +9,7 @@ import modules.cargo.entities.ICargoReadable;
 import modules.cargo.enums.CargoStatus;
 import modules.cargo.repositories.ICargoRepository;
 import modules.cargo.repositories.in_memory.InMemoryCargoRepository;
-import modules.cargoType.entities.CargoType;
+import modules.cargoType.entities.ICargoTypeReadable;
 import modules.cargoType.repositories.ICargoTypeRepository;
 import modules.cargoType.repositories.in_memory.InMemoryCargoTypeRepository;
 import shared.errors.CargoNotFound;
@@ -27,7 +27,7 @@ public class CargoService {
     }
 
     public ICargoReadable createCargo(CreateCargoDTO createCargoDTO) {
-        CargoType cargoType = this.cargoTypeRepository.findById(createCargoDTO.getCargoTypeId());
+        ICargoTypeReadable cargoType = this.cargoTypeRepository.findById(createCargoDTO.getCargoTypeId());
 
         if (cargoType == null) {
             throw new CargoTypeNotFound(createCargoDTO.getCargoTypeId());

@@ -1,7 +1,7 @@
 package modules.cargo.entities;
 
 import modules.cargo.enums.CargoStatus;
-import modules.cargoType.entities.CargoType;
+import modules.cargoType.entities.ICargoTypeReadable;
 
 public class Cargo implements Comparable<Cargo>, ICargoReadable {
     private String id;
@@ -9,9 +9,9 @@ public class Cargo implements Comparable<Cargo>, ICargoReadable {
     private double declaredValue;
     private int maxTime;
     private CargoStatus status;
-    private CargoType cargoType;
+    private ICargoTypeReadable cargoType;
 
-    public Cargo(String id, double weight, double declaredValue, int maxTime, CargoType cargoType) {
+    public Cargo(String id, double weight, double declaredValue, int maxTime, ICargoTypeReadable cargoType) {
         this.id = id;
         this.weight = weight;
         this.declaredValue = declaredValue;
@@ -40,7 +40,7 @@ public class Cargo implements Comparable<Cargo>, ICargoReadable {
         return status;
     }
 
-    public CargoType getCargoType() {
+    public ICargoTypeReadable getCargoType() {
         return cargoType;
     }
 

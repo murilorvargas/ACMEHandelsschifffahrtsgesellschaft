@@ -4,6 +4,9 @@ import java.util.TreeSet;
 
 import modules.cargoType.entities.CargoType;
 import modules.cargoType.entities.DurableCargoType;
+import modules.cargoType.entities.ICargoTypeReadable;
+import modules.cargoType.entities.IDurableCargoTypeReadable;
+import modules.cargoType.entities.IPerishableCargoTypeReadable;
 import modules.cargoType.entities.PerishableCargoType;
 import modules.cargoType.repositories.ICargoTypeRepository;
 
@@ -23,7 +26,7 @@ public class InMemoryCargoTypeRepository implements ICargoTypeRepository {
     }
 
     @Override
-    public PerishableCargoType createPerishableCargoType(String number, String description, String origin,
+    public IPerishableCargoTypeReadable createPerishableCargoType(String number, String description, String origin,
             int maxValidityTime) {
         PerishableCargoType perishableCargoType = new PerishableCargoType(
                 number,
@@ -36,7 +39,7 @@ public class InMemoryCargoTypeRepository implements ICargoTypeRepository {
     }
 
     @Override
-    public DurableCargoType createDurableCargoType(String number, String description, String sector,
+    public IDurableCargoTypeReadable createDurableCargoType(String number, String description, String sector,
             String mainMaterial,
             double ipiPercentage) {
         DurableCargoType durableCargoType = new DurableCargoType(
@@ -50,7 +53,7 @@ public class InMemoryCargoTypeRepository implements ICargoTypeRepository {
     }
 
     @Override
-    public CargoType findById(String number) {
+    public ICargoTypeReadable findById(String number) {
         for (CargoType cargoType : cargoTypeList) {
             if (cargoType.getNumber().equals(number)) {
                 return cargoType;

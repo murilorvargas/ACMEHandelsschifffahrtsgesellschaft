@@ -1,6 +1,6 @@
 package modules.cargoType.entities;
 
-public class DurableCargoType extends CargoType {
+public class DurableCargoType extends CargoType implements IDurableCargoTypeReadable {
     private String sector;
     private String mainMaterial;
     private double ipiPercentage;

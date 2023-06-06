@@ -1,6 +1,6 @@
 package modules.cargoType.entities;
 
-public class CargoType implements Comparable<CargoType> {
+public class CargoType implements Comparable<CargoType>, ICargoTypeReadable {
     private String number;
     private String description;
 
