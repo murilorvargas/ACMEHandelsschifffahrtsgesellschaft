@@ -1,7 +1,6 @@
 package modules.ship.repositories.interfaces;
 
 import java.util.List;
-import java.util.TreeSet;
 import modules.ship.entities.interfaces.IShipReadable;
 
 public interface IShipRepository {
