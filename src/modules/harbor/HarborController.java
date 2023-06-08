@@ -20,7 +20,7 @@ public class HarborController {
         this.harborService = harborService;
     }
 
-    public IHarborReadable createHarbor(int id, String name, String country) {
+    public IHarborReadable onCreateHarbor(int id, String name, String country) {
         CreateHarborDTO createHarborDTO = new CreateHarborDTO(id, name, country);
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -39,7 +39,7 @@ public class HarborController {
         }
     }
 
-    public List<IHarborReadable> findAllHarbors() {
+    public List<IHarborReadable> onFindAllHarbors() {
         return harborService.findAllHarbors();
     }
 
