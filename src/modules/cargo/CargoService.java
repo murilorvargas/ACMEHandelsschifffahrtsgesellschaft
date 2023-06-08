@@ -1,6 +1,6 @@
 package modules.cargo;
 
-import java.util.TreeSet;
+import java.util.List;
 
 import modules.cargo.dtos.CreateCargoDTO;
 import modules.cargo.dtos.FindCargoByIdDTO;
@@ -12,16 +12,24 @@ import modules.cargo.repositories.interfaces.ICargoRepository;
 import modules.cargoType.entities.interfaces.ICargoTypeReadable;
 import modules.cargoType.repositories.InMemoryCargoTypeRepository;
 import modules.cargoType.repositories.interfaces.ICargoTypeRepository;
+import modules.harbor.entities.interfaces.IHarborReadable;
+import modules.harbor.repositories.InMemoryHarborRepository;
+import modules.harbor.repositories.interfaces.IHarborRepository;
 import shared.errors.CargoNotFound;
 import shared.errors.CargoTypeNotFound;
+import shared.errors.DestinationHarborNotFound;
 import shared.errors.NoCargoRegistered;
+import shared.errors.OriginAndDestinationHarborAreTheSame;
+import shared.errors.OriginHarborNotFound;
 import shared.errors.StatusChangeNotAllowed;
 
 public class CargoService {
+    private IHarborRepository harborRepository;
     private ICargoTypeRepository cargoTypeRepository;
     private ICargoRepository cargoRepository;
 
     public CargoService() {
+        this.harborRepository = InMemoryHarborRepository.instanceOf();
         this.cargoTypeRepository = InMemoryCargoTypeRepository.instanceOf();
         this.cargoRepository = InMemoryCargoRepository.instanceOf();
     }
@@ -33,9 +41,25 @@ public class CargoService {
             throw new CargoTypeNotFound(String.valueOf(createCargoDTO.getCargoTypeNumber()));
         }
 
+        IHarborReadable originHarbor = this.harborRepository.findById(createCargoDTO.getOriginHarborId());
+
+        if (originHarbor == null) {
+            throw new OriginHarborNotFound(String.valueOf(createCargoDTO.getOriginHarborId()));
+        }
+
+        IHarborReadable destinationHarbor = this.harborRepository.findById(createCargoDTO.getDestinationHarborId());
+
+        if (destinationHarbor == null) {
+            throw new DestinationHarborNotFound(String.valueOf(createCargoDTO.getDestinationHarborId()));
+        }
+
+        if (originHarbor.getId() == destinationHarbor.getId()) {
+            throw new OriginAndDestinationHarborAreTheSame();
+        }
+
         return this.cargoRepository.create(createCargoDTO.getId(), createCargoDTO.getWeight(),
                 createCargoDTO.getDeclaredValue(),
-                createCargoDTO.getMaxTime(), cargoType);
+                createCargoDTO.getMaxTime(), cargoType, originHarbor, destinationHarbor);
     }
 
     public ICargoReadable updateCargoStatus(UpdateCargoStatusDTO updateCargoStatusDTO) {
@@ -55,8 +79,8 @@ public class CargoService {
         return this.cargoRepository.updateStatus(updateCargoStatusDTO.getId(), updateCargoStatusDTO.getCargoStatus());
     }
 
-    public TreeSet<ICargoReadable> findAllCargos() {
-        TreeSet<ICargoReadable> cargos = this.cargoRepository.findAll();
+    public List<ICargoReadable> findAllCargos() {
+        List<ICargoReadable> cargos = this.cargoRepository.findAll();
         if (cargos.isEmpty()) {
             throw new NoCargoRegistered();
         }

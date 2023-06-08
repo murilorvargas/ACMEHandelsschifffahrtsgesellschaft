@@ -1,7 +1,7 @@
 package modules.cargo;
 
+import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -23,8 +23,9 @@ public class CargoController {
     }
 
     public ICargoReadable onCreateCargo(int id, double weight, double declaredValue, int maxTime,
-            int cargoTypeNumber) {
-        CreateCargoDTO createCargoDTO = new CreateCargoDTO(id, weight, declaredValue, maxTime, cargoTypeNumber);
+            int cargoTypeNumber, int originHarborId, int destinationHarborId) {
+        CreateCargoDTO createCargoDTO = new CreateCargoDTO(id, weight, declaredValue, maxTime, cargoTypeNumber,
+                originHarborId, destinationHarborId);
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -68,7 +69,7 @@ public class CargoController {
         }
     }
 
-    public TreeSet<ICargoReadable> onFindAllCargos() {
+    public List<ICargoReadable> onFindAllCargos() {
         return cargoService.findAllCargos();
     }
 

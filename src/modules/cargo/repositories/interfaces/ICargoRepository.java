@@ -1,17 +1,19 @@
 package modules.cargo.repositories.interfaces;
 
-import java.util.TreeSet;
+import java.util.List;
 
 import modules.cargo.entities.interfaces.ICargoReadable;
 import modules.cargo.enums.CargoStatus;
 import modules.cargoType.entities.interfaces.ICargoTypeReadable;
+import modules.harbor.entities.interfaces.IHarborReadable;
 
 public interface ICargoRepository {
-    ICargoReadable create(int id, double weight, double declaredValue, int maxTime, ICargoTypeReadable cargoType);
+    ICargoReadable create(int id, double weight, double declaredValue, int maxTime, ICargoTypeReadable cargoType,
+            IHarborReadable originHarbor, IHarborReadable destinationHarbor);
 
     ICargoReadable updateStatus(int id, CargoStatus cargoStatus);
 
-    TreeSet<ICargoReadable> findAll();
+    List<ICargoReadable> findAll();
 
     ICargoReadable findById(int id);
 }
