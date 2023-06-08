@@ -1,6 +1,7 @@
 package modules.cargo.repositories;
 
-import java.util.Comparator;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeSet;
 
 import modules.cargo.entities.Cargo;
@@ -8,6 +9,7 @@ import modules.cargo.entities.interfaces.ICargoReadable;
 import modules.cargo.enums.CargoStatus;
 import modules.cargo.repositories.interfaces.ICargoRepository;
 import modules.cargoType.entities.interfaces.ICargoTypeReadable;
+import modules.harbor.entities.interfaces.IHarborReadable;
 
 public class InMemoryCargoRepository implements ICargoRepository {
     private TreeSet<Cargo> cargoList;
@@ -26,9 +28,9 @@ public class InMemoryCargoRepository implements ICargoRepository {
 
     @Override
     public ICargoReadable create(int id, double weight, double declaredValue, int maxTime,
-            ICargoTypeReadable cargoType) {
+            ICargoTypeReadable cargoType, IHarborReadable originHarbor, IHarborReadable destinationHarbor) {
         Cargo cargo = new Cargo(id, weight, declaredValue,
-                maxTime, cargoType);
+                maxTime, cargoType, originHarbor, destinationHarbor);
         this.cargoList.add(cargo);
 
         return cargo;
@@ -47,8 +49,8 @@ public class InMemoryCargoRepository implements ICargoRepository {
     }
 
     @Override
-    public TreeSet<ICargoReadable> findAll() {
-        TreeSet<ICargoReadable> cargoSet = new TreeSet<>(Comparator.comparing(ICargoReadable::getId));
+    public List<ICargoReadable> findAll() {
+        List<ICargoReadable> cargoSet = new ArrayList<>();
         for (Cargo cargo : this.cargoList) {
             cargoSet.add(cargo);
         }

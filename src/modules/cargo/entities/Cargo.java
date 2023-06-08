@@ -3,6 +3,7 @@ package modules.cargo.entities;
 import modules.cargo.entities.interfaces.ICargoReadable;
 import modules.cargo.enums.CargoStatus;
 import modules.cargoType.entities.interfaces.ICargoTypeReadable;
+import modules.harbor.entities.interfaces.IHarborReadable;
 
 public class Cargo implements Comparable<Cargo>, ICargoReadable {
     private int id;
@@ -11,14 +12,19 @@ public class Cargo implements Comparable<Cargo>, ICargoReadable {
     private int maxTime;
     private CargoStatus status;
     private ICargoTypeReadable cargoType;
+    private IHarborReadable originHarbor;
+    private IHarborReadable destinationHarbor;
 
-    public Cargo(int id, double weight, double declaredValue, int maxTime, ICargoTypeReadable cargoType) {
+    public Cargo(int id, double weight, double declaredValue, int maxTime, ICargoTypeReadable cargoType,
+            IHarborReadable originHarbor, IHarborReadable destinationHarbor) {
         this.id = id;
         this.weight = weight;
         this.declaredValue = declaredValue;
         this.maxTime = maxTime;
         this.status = CargoStatus.PENDING;
         this.cargoType = cargoType;
+        this.originHarbor = originHarbor;
+        this.destinationHarbor = destinationHarbor;
     }
 
     public int getId() {
@@ -43,6 +49,14 @@ public class Cargo implements Comparable<Cargo>, ICargoReadable {
 
     public ICargoTypeReadable getCargoType() {
         return cargoType;
+    }
+
+    public IHarborReadable getOriginHarbor() {
+        return originHarbor;
+    }
+
+    public IHarborReadable getDestinationHarbor() {
+        return destinationHarbor;
     }
 
     public void setStatus(CargoStatus status) {
