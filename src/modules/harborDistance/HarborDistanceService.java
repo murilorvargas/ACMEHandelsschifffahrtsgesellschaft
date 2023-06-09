@@ -3,6 +3,7 @@ package modules.harborDistance;
 import modules.harbor.entities.interfaces.IHarborReadable;
 import modules.harbor.repositories.interfaces.IHarborRepository;
 import modules.harbor.repositories.InMemoryHarborRepository;
+import modules.harborDistance.dtos.CreateDefaultHarborDistanceToAllHarborsDTO;
 import modules.harborDistance.dtos.CreateHarborDistanceDTO;
 import modules.harborDistance.entities.interfaces.IHarborDistanceReadable;
 import modules.harborDistance.repositories.interfaces.IHarborDistanceRepository;
@@ -40,5 +41,26 @@ public class HarborDistanceService {
         }
 
         return this.harborDistanceRepository.create(createHarborDistanceDTO.getValue(), firstHarbor, secondHarbor);
+    }
+
+    public void createDefaultHarborDistanceToAllHarbors(
+            CreateDefaultHarborDistanceToAllHarborsDTO createDefaultHarborDistanceToAllHarborsDTO) {
+        IHarborReadable harbor = this.harborRepository
+                .findById(createDefaultHarborDistanceToAllHarborsDTO.getHarborId());
+        if (harbor == null) {
+            throw new HarborNotFound(String.valueOf(createDefaultHarborDistanceToAllHarborsDTO.getHarborId()));
+        }
+
+        for (IHarborReadable otherHarbor : this.harborRepository.findAll()) {
+            if (harbor.getId() != otherHarbor.getId()) {
+                IHarborDistanceReadable harborDistanceAlreadyExists = this.harborDistanceRepository.findByHarbors(
+                        harbor.getId(),
+                        otherHarbor.getId());
+                if (harborDistanceAlreadyExists == null) {
+                    this.harborDistanceRepository.create(100, harbor, otherHarbor);
+                }
+            }
+        }
+
     }
 }
