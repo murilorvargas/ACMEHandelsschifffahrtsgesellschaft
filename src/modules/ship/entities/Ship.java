@@ -5,21 +5,21 @@ import modules.ship.entities.interfaces.IShipReadable;
 
 public class Ship implements Comparable<Ship>, IShipReadable {
 
-    private UUID id;
+    private String id;
     private String name;
     private double speed;
     private double autonomy;
     private double costPerMile;
 
     public Ship(String name, double speed, double autonomy, double costPerMile) {
-        this.id = UUID.randomUUID();
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.speed = speed;
         this.autonomy = autonomy;
         this.costPerMile = costPerMile;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 

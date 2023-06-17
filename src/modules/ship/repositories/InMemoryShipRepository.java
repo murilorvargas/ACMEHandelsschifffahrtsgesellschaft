@@ -2,6 +2,7 @@ package modules.ship.repositories;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 import modules.ship.entities.Ship;
 import modules.ship.entities.interfaces.IShipReadable;
@@ -9,7 +10,7 @@ import modules.ship.repositories.interfaces.IShipRepository;
 
 public class InMemoryShipRepository implements IShipRepository {
 
-    private List<Ship> shipList;
+    private TreeSet<Ship> shipList;
     private static InMemoryShipRepository instance = null;
 
     public static synchronized InMemoryShipRepository instanceOf() {
@@ -20,7 +21,7 @@ public class InMemoryShipRepository implements IShipRepository {
     }
 
     private InMemoryShipRepository() {
-        this.shipList = new ArrayList<Ship>();
+        this.shipList = new TreeSet<Ship>();
     }
 
     @Override

@@ -1,14 +1,9 @@
 package modules.ship.dtos;
 
-import java.util.UUID;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PositiveOrZero;
 
 public class CreateShipDTO {
-
-    @NotBlank(message = "The id cannot be blank.")
-    private UUID id;
-
     @NotBlank(message = "The name cannot be blank.")
     private String name;
 
@@ -25,15 +20,10 @@ public class CreateShipDTO {
     private double costPerMile;
 
     public CreateShipDTO(String name, double speed, double autonomy, double costPerMile) {
-        this.id = UUID.randomUUID();
         this.name = name;
         this.speed = speed;
         this.autonomy = autonomy;
         this.costPerMile = costPerMile;
-    }
-
-    public UUID getId() {
-        return id;
     }
 
     public String getName() {
