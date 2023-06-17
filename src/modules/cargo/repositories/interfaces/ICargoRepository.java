@@ -15,5 +15,7 @@ public interface ICargoRepository {
 
     List<ICargoReadable> findAll();
 
+    List<ICargoReadable> findByStatus(CargoStatus cargoStatus);
+
     ICargoReadable findById(int id);
 }

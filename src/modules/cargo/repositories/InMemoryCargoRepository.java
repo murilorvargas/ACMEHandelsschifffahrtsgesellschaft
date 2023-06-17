@@ -58,6 +58,17 @@ public class InMemoryCargoRepository implements ICargoRepository {
     }
 
     @Override
+    public List<ICargoReadable> findByStatus(CargoStatus cargoStatus) {
+        List<ICargoReadable> cargoSet = new ArrayList<>();
+        for (Cargo cargo : this.cargoList) {
+            if (cargo.getStatus() == cargoStatus) {
+                cargoSet.add(cargo);
+            }
+        }
+        return cargoSet;
+    }
+
+    @Override
     public ICargoReadable findById(int id) {
         for (Cargo cargo : this.cargoList) {
             if (cargo.getId() == id) {
