@@ -10,6 +10,7 @@ public class Ship implements Comparable<Ship>, IShipReadable {
     private double speed;
     private double autonomy;
     private double costPerMile;
+    private boolean isAvailable;
 
     public Ship(String name, double speed, double autonomy, double costPerMile) {
         this.id = UUID.randomUUID().toString();
@@ -17,6 +18,7 @@ public class Ship implements Comparable<Ship>, IShipReadable {
         this.speed = speed;
         this.autonomy = autonomy;
         this.costPerMile = costPerMile;
+        this.isAvailable = true;
     }
 
     public String getId() {
@@ -37,6 +39,15 @@ public class Ship implements Comparable<Ship>, IShipReadable {
 
     public double getCostPerMile() {
         return costPerMile;
+    }
+
+    public boolean getIsAvailable() {
+        return isAvailable;
+    }
+
+    public void setIsAvailable(boolean isAvailable) {
+        this.isAvailable = isAvailable;
+
     }
 
     @Override

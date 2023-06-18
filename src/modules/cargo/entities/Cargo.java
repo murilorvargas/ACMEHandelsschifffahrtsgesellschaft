@@ -1,6 +1,7 @@
 package modules.cargo.entities;
 
 import modules.cargo.entities.interfaces.ICargoReadable;
+import modules.cargo.enums.CargoPriority;
 import modules.cargo.enums.CargoStatus;
 import modules.cargoType.entities.interfaces.ICargoTypeReadable;
 import modules.harbor.entities.interfaces.IHarborReadable;
@@ -10,17 +11,20 @@ public class Cargo implements Comparable<Cargo>, ICargoReadable {
     private double weight;
     private double declaredValue;
     private int maxTime;
+    private CargoPriority priority;
     private CargoStatus status;
     private ICargoTypeReadable cargoType;
     private IHarborReadable originHarbor;
     private IHarborReadable destinationHarbor;
 
-    public Cargo(int id, double weight, double declaredValue, int maxTime, ICargoTypeReadable cargoType,
+    public Cargo(int id, double weight, double declaredValue, int maxTime, CargoPriority priority,
+            ICargoTypeReadable cargoType,
             IHarborReadable originHarbor, IHarborReadable destinationHarbor) {
         this.id = id;
         this.weight = weight;
         this.declaredValue = declaredValue;
         this.maxTime = maxTime;
+        this.priority = priority;
         this.status = CargoStatus.PENDING;
         this.cargoType = cargoType;
         this.originHarbor = originHarbor;
@@ -41,6 +45,10 @@ public class Cargo implements Comparable<Cargo>, ICargoReadable {
 
     public int getMaxTime() {
         return maxTime;
+    }
+
+    public CargoPriority getPriority() {
+        return priority;
     }
 
     public CargoStatus getStatus() {

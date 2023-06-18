@@ -1,6 +1,7 @@
 package modules.cargo.dtos;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.PositiveOrZero;
 
 public class CreateCargoDTO {
@@ -19,6 +20,9 @@ public class CreateCargoDTO {
     @PositiveOrZero(message = "The max time must be a positive value.")
     private int maxTime;
 
+    @Pattern(regexp = "^(quick|cheap)$", message = "The cargo type must be 'quick' or 'cheap'.")
+    private String priority;
+
     @NotBlank(message = "The cargo type number cannot be blank.")
     @PositiveOrZero(message = "The cargo type must be a positive value.")
     private int cargoTypeNumber;
@@ -31,12 +35,14 @@ public class CreateCargoDTO {
     @PositiveOrZero(message = "The destination harbor id be a positive value.")
     private int destinationHarbor;
 
-    public CreateCargoDTO(int id, double weight, double declaredValue, int maxTime, int cargoTypeNumber,
+    public CreateCargoDTO(int id, double weight, double declaredValue, int maxTime, String priority,
+            int cargoTypeNumber,
             int originHarborId, int destinationHarbor) {
         this.id = id;
         this.weight = weight;
         this.declaredValue = declaredValue;
         this.maxTime = maxTime;
+        this.priority = priority;
         this.cargoTypeNumber = cargoTypeNumber;
         this.originHarborId = originHarborId;
         this.destinationHarbor = destinationHarbor;
@@ -56,6 +62,10 @@ public class CreateCargoDTO {
 
     public int getMaxTime() {
         return maxTime;
+    }
+
+    public String getPriority() {
+        return priority;
     }
 
     public int getCargoTypeNumber() {

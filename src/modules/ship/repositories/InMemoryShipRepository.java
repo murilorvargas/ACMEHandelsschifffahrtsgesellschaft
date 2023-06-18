@@ -33,6 +33,17 @@ public class InMemoryShipRepository implements IShipRepository {
     }
 
     @Override
+    public IShipReadable updateAvailability(String id, boolean isAvailable) {
+        for (Ship ship : this.shipList) {
+            if (ship.getId().equals(id)) {
+                ship.setIsAvailable(isAvailable);
+                return ship;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public List<IShipReadable> findAll() {
         List<IShipReadable> shipSet = new ArrayList<>();
         for (Ship ship : this.shipList) {

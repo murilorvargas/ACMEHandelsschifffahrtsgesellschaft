@@ -6,6 +6,7 @@ import modules.cargo.dtos.CreateCargoDTO;
 import modules.cargo.dtos.FindCargoByIdDTO;
 import modules.cargo.dtos.UpdateCargoStatusDTO;
 import modules.cargo.entities.interfaces.ICargoReadable;
+import modules.cargo.enums.CargoPriority;
 import modules.cargo.enums.CargoStatus;
 import modules.cargo.repositories.InMemoryCargoRepository;
 import modules.cargo.repositories.interfaces.ICargoRepository;
@@ -59,7 +60,9 @@ public class CargoService {
 
         return this.cargoRepository.create(createCargoDTO.getId(), createCargoDTO.getWeight(),
                 createCargoDTO.getDeclaredValue(),
-                createCargoDTO.getMaxTime(), cargoType, originHarbor, destinationHarbor);
+                createCargoDTO.getMaxTime(),
+                createCargoDTO.getPriority().equals("quick") ? CargoPriority.QUICK : CargoPriority.CHEAP,
+                cargoType, originHarbor, destinationHarbor);
     }
 
     public ICargoReadable updateCargoStatus(UpdateCargoStatusDTO updateCargoStatusDTO) {

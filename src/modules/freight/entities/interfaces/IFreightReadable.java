@@ -1,11 +1,17 @@
 package modules.freight.entities.interfaces;
 
+import modules.cargo.entities.interfaces.ICargoReadable;
 import modules.freight.enums.FreightStatus;
+import modules.ship.entities.interfaces.IShipReadable;
 
 public interface IFreightReadable {
     String getId();
 
+    double getValue();
+
     FreightStatus getStatus();
 
-    double getValue();
+    IShipReadable getShip();
+
+    ICargoReadable getCargo();
 }

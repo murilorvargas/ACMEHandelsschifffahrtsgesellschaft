@@ -2,10 +2,12 @@ package modules.freight.repositories;
 
 import java.util.TreeSet;
 
+import modules.cargo.entities.interfaces.ICargoReadable;
 import modules.freight.entities.Freight;
 import modules.freight.entities.interfaces.IFreightReadable;
 import modules.freight.enums.FreightStatus;
 import modules.freight.repositories.interfaces.IFreightRepository;
+import modules.ship.entities.interfaces.IShipReadable;
 
 public class InMemoryFreightRepository implements IFreightRepository {
     private TreeSet<Freight> freightSet;
@@ -23,14 +25,15 @@ public class InMemoryFreightRepository implements IFreightRepository {
     }
 
     @Override
-    public IFreightReadable createFreight(FreightStatus status, double value) {
-        Freight freight = new Freight(status, value);
+    public IFreightReadable createFreight(double value, FreightStatus status, IShipReadable ship,
+            ICargoReadable cargo) {
+        Freight freight = new Freight(value, status, ship, cargo);
         freightSet.add(freight);
         return freight;
     }
 
     @Override
-    public void updateFreight(String id, FreightStatus status, double value) {
+    public void updateFreight(String id, FreightStatus status) {
         for (Freight freight : freightSet) {
             if (freight.getId().equals(id)) {
                 freight.setStatus(status);

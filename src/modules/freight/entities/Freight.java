@@ -2,18 +2,24 @@ package modules.freight.entities;
 
 import java.util.UUID;
 
+import modules.cargo.entities.interfaces.ICargoReadable;
 import modules.freight.entities.interfaces.IFreightReadable;
 import modules.freight.enums.FreightStatus;
+import modules.ship.entities.interfaces.IShipReadable;
 
 public class Freight implements IFreightReadable {
     private String id;
-    private FreightStatus status;
     private double value;
+    private FreightStatus status;
+    private IShipReadable ship;
+    private ICargoReadable cargo;
 
-    public Freight(FreightStatus status, double value) {
+    public Freight(double value, FreightStatus status, IShipReadable ship, ICargoReadable cargo) {
         this.id = UUID.randomUUID().toString();
-        this.status = status;
         this.value = value;
+        this.status = status;
+        this.ship = ship;
+        this.cargo = cargo;
     }
 
     public String getId() {
@@ -24,11 +30,19 @@ public class Freight implements IFreightReadable {
         return status;
     }
 
+    public double getValue() {
+        return value;
+    }
+
     public void setStatus(FreightStatus status) {
         this.status = status;
     }
 
-    public double getValue() {
-        return value;
+    public IShipReadable getShip() {
+        return ship;
+    }
+
+    public ICargoReadable getCargo() {
+        return cargo;
     }
 }

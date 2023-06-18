@@ -6,6 +6,7 @@ import java.util.TreeSet;
 
 import modules.cargo.entities.Cargo;
 import modules.cargo.entities.interfaces.ICargoReadable;
+import modules.cargo.enums.CargoPriority;
 import modules.cargo.enums.CargoStatus;
 import modules.cargo.repositories.interfaces.ICargoRepository;
 import modules.cargoType.entities.interfaces.ICargoTypeReadable;
@@ -27,10 +28,10 @@ public class InMemoryCargoRepository implements ICargoRepository {
     }
 
     @Override
-    public ICargoReadable create(int id, double weight, double declaredValue, int maxTime,
+    public ICargoReadable create(int id, double weight, double declaredValue, int maxTime, CargoPriority priority,
             ICargoTypeReadable cargoType, IHarborReadable originHarbor, IHarborReadable destinationHarbor) {
         Cargo cargo = new Cargo(id, weight, declaredValue,
-                maxTime, cargoType, originHarbor, destinationHarbor);
+                maxTime, priority, cargoType, originHarbor, destinationHarbor);
         this.cargoList.add(cargo);
 
         return cargo;

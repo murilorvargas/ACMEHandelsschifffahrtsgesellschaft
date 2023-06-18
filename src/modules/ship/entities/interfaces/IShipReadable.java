@@ -12,4 +12,5 @@ public interface IShipReadable {
 
     double getCostPerMile();
 
+    boolean getIsAvailable();
 }
