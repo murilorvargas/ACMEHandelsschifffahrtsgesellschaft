@@ -19,8 +19,8 @@ public class ClientController {
 
     private ClientService clientService;
 
-    public ClientController(ClientService clientRepository) {
-        this.clientService = clientRepository;
+    public ClientController() {
+        this.clientService = new ClientService();
     }
 
     public IClientReadable onCreateClient(int code, String name, String email) {

@@ -18,8 +18,8 @@ import shared.errors.FieldValidationError;
 public class CargoController {
     private CargoService cargoService;
 
-    public CargoController(CargoService cargoService) {
-        this.cargoService = cargoService;
+    public CargoController() {
+        this.cargoService = new CargoService();
     }
 
     public ICargoReadable onCreateCargo(int id, double weight, double declaredValue, int maxTime, String priority,

@@ -17,8 +17,8 @@ public class ShipController {
 
     private ShipService shipService;
 
-    public ShipController(ShipService shipService) {
-        this.shipService = shipService;
+    public ShipController() {
+        this.shipService = new ShipService();
     }
 
     public IShipReadable onCreateShip(String name, double speed, double autonomy, double costPerMile) {

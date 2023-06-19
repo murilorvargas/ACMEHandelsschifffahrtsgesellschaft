@@ -1,12 +1,12 @@
-package fileReading;
+package fileReader.processors;
 
-public class FileReader {
+public class BaseFileReaderProcessor {
 
     private String fileName;
     private String fileReadType;
     private String filePath;
 
-    public FileReader(String fileName) {
+    public BaseFileReaderProcessor(String fileName) {
         this.fileName = fileName;
         this.filePath = fileName + ".csv";
     }

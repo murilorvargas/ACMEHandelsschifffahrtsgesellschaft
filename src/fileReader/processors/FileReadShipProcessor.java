@@ -1,4 +1,4 @@
-package fileReading.files;
+package fileReader.processors;
 
 import java.io.BufferedReader;
 import java.nio.charset.Charset;
@@ -7,16 +7,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import fileReading.FileReader;
-import fileReading.interfaces.IFileReader;
-import modules.harbor.HarborController;
-import modules.harbor.HarborService;
+import fileReader.processors.interfaces.IFileReader;
+import modules.ship.ShipController;
 import shared.errors.BaseRunTimeException;
 
-public class FileReadHarbor extends FileReader implements IFileReader {
+public class FileReadShipProcessor extends BaseFileReaderProcessor implements IFileReader {
+    private ShipController shipController;
 
-    public FileReadHarbor(String fileName) {
+    public FileReadShipProcessor(String fileName) {
         super(fileName);
+        this.shipController = new ShipController();
     }
 
     @Override
@@ -40,14 +40,13 @@ public class FileReadHarbor extends FileReader implements IFileReader {
             for (String line : lines) {
                 String[] fields = line.split(";");
 
-                HarborController harborController = new HarborController(new HarborService());
-                if (fields.length >= 3) {
-                    int harborId = Integer.parseInt(fields[0]);
-                    String harborName = fields[1];
-                    String harborCountry = fields[2];
-                    harborController.onCreateHarbor(harborId, harborName, harborCountry);
+                if (fields.length >= 4) {
+                    String shipName = fields[0];
+                    double shipSpeed = Double.parseDouble(fields[1]);
+                    double autonomy = Double.parseDouble(fields[2]);
+                    double costPerMile = Double.parseDouble(fields[3]);
+                    this.shipController.onCreateShip(shipName, shipSpeed, autonomy, costPerMile);
                 }
-
             }
         } catch (BaseRunTimeException e) {
             e.getMessage();
