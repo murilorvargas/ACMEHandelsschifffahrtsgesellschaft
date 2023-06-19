@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GUI extends JFrame {
+public class Interface extends JFrame {
 
     // Componentes principais
     private JTextField nomeField;
@@ -22,9 +22,8 @@ public class GUI extends JFrame {
     private int velocidade;
     private double autonomia;
     private double custoPorMilhaBasico;
-    private Navio navio;
 
-    public FormularioNavio() {
+    public Interface() {
         super();
         Catalogo catalogo = new Catalogo();
 
@@ -92,22 +91,7 @@ public class GUI extends JFrame {
                     return;
                 }
 
-                Navio navio = new Navio(nome, velocidade, autonomia, custoPorMilhaBasico);
-                cadastrou = catalogo.addNavio(navio);
-
-                if (cadastrou) {
-                    mensagem.setForeground(Color.GREEN);
-                    mensagem.setText("Navio Cadastrado: " +
-                            "Nome: " + nomeField.getText() + ", " +
-                            "Velocidade: " + velocidadeField.getText() + ", " +
-                            "Autonomia: " + autonomiaField.getText() + ", " +
-                            "Custo por milha básico: " + custoPorMilhaBasicoField.getText());
-
-                    System.out.println(catalogo.toString());
-                } else {
-                    mensagem.setForeground(Color.RED);
-                    mensagem.setText("Erro ao adicionar navio ao catálogo: Navio já cadastrado ou nome inválido");
-                }
+            
             }
         });
 
@@ -151,6 +135,7 @@ public class GUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        GUI window = new GUI();
+        Interface window = new Interface();
     }
+}
 
