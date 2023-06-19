@@ -23,6 +23,7 @@ import modules.ship.repositories.InMemoryShipRepository;
 import modules.ship.repositories.interfaces.IShipRepository;
 import shared.errors.FreightNotFound;
 import shared.errors.HarborDistanceNotFound;
+import shared.errors.NoFreightsRegistered;
 
 public class FreightService {
     private IFreightRepository freightRepository;
@@ -95,6 +96,15 @@ public class FreightService {
         this.freightRepository.updateFreight(finishFreightDTO.getFreightId(), FreightStatus.COMPLETED);
         this.shipRepository.updateAvailability(freight.getShip().getId(), true);
         this.cargoRepository.updateStatus(freight.getCargo().getId(), CargoStatus.COMPLETED);
+    }
+
+    public List<IFreightReadable> findAllInProgressFreights() {
+        List<IFreightReadable> freightsList =  this.freightRepository.findAllInProgress();
+        if (freightsList.isEmpty()) {
+            throw new NoFreightsRegistered();
+        }
+
+        return freightsList;
     }
 
     private boolean canDeliver(double shipSpeed, double distanceInNauticalMiles, int maxTimeInDays) {

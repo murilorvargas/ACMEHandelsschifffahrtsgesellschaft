@@ -1,5 +1,6 @@
 package modules.freight;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -8,6 +9,7 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import modules.freight.dtos.FinishFreightDTO;
+import modules.freight.entities.interfaces.IFreightReadable;
 import shared.errors.FieldValidationError;
 
 public class FreightController {
@@ -19,7 +21,7 @@ public class FreightController {
     }
 
     public void onCreateFreights() {
-        freightService.createFreights();
+        this.freightService.createFreights();
     }
 
     public void onFinishFreight(String freightId) {
@@ -37,8 +39,12 @@ public class FreightController {
             }
             throw new FieldValidationError(errors);
         } else {
-            freightService.finishFreight(finishFreightDTO);
+            this.freightService.finishFreight(finishFreightDTO);
         }
+    }
+
+    public List<IFreightReadable> onFindAllInProgressFreights() {
+        return this.freightService.findAllInProgressFreights();
     }
 
 }

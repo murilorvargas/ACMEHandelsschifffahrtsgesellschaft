@@ -1,5 +1,7 @@
 package modules.freight.repositories;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeSet;
 
 import modules.cargo.entities.interfaces.ICargoReadable;
@@ -40,6 +42,18 @@ public class InMemoryFreightRepository implements IFreightRepository {
                 break;
             }
         }
+    }
+
+    @Override
+    public List<IFreightReadable> findAllInProgress() {
+        List<IFreightReadable> freightList = new ArrayList<>();
+        for(Freight freight : freightSet) {
+            if(freight.getStatus() == FreightStatus.IN_PROGRESS) {
+                freightList.add(freight);
+            }
+        }
+
+        return freightList;
     }
 
     @Override 
