@@ -10,6 +10,8 @@ import modules.cargo.repositories.InMemoryCargoRepository;
 import modules.cargo.repositories.interfaces.ICargoRepository;
 import modules.cargoType.entities.DurableCargoType;
 import modules.cargoType.entities.interfaces.IDurableCargoTypeReadable;
+import modules.freight.dtos.FinishFreightDTO;
+import modules.freight.entities.interfaces.IFreightReadable;
 import modules.freight.enums.FreightStatus;
 import modules.freight.repositories.InMemoryFreightRepository;
 import modules.freight.repositories.interfaces.IFreightRepository;
@@ -19,6 +21,8 @@ import modules.harborDistance.repositories.interfaces.IHarborDistanceRepository;
 import modules.ship.entities.interfaces.IShipReadable;
 import modules.ship.repositories.InMemoryShipRepository;
 import modules.ship.repositories.interfaces.IShipRepository;
+import shared.errors.FreightNotFound;
+import shared.errors.HarborDistanceNotFound;
 
 public class FreightService {
     private IFreightRepository freightRepository;
@@ -42,8 +46,8 @@ public class FreightService {
                     pendingCargo.getOriginHarbor().getId(), pendingCargo.getDestinationHarbor().getId());
 
             if (harborDistance == null) {
-                // TODO: Implementar erro ou deixar o continue?
-                continue;
+                throw new HarborDistanceNotFound(String.valueOf(pendingCargo.getOriginHarbor().getId()),
+                        String.valueOf(pendingCargo.getDestinationHarbor().getId()));
             }
 
             List<IShipReadable> shipsWithAutonomy = new ArrayList<>();
@@ -83,7 +87,15 @@ public class FreightService {
         }
     }
 
-    // TODO: Implementar o método de finalizar frete
+    public void finishFreight(FinishFreightDTO finishFreightDTO) {
+        IFreightReadable freight = this.freightRepository.findById(finishFreightDTO.getFreightId());
+        if (freight == null) {
+            throw new FreightNotFound(finishFreightDTO.getFreightId());
+        }
+        this.freightRepository.updateFreight(finishFreightDTO.getFreightId(), FreightStatus.COMPLETED);
+        this.shipRepository.updateAvailability(freight.getShip().getId(), true);
+        this.cargoRepository.updateStatus(freight.getCargo().getId(), CargoStatus.COMPLETED);
+    }
 
     private boolean canDeliver(double shipSpeed, double distanceInNauticalMiles, int maxTimeInDays) {
         double estimatedTimeInHours = distanceInNauticalMiles / shipSpeed;

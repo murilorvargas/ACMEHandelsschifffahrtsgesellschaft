@@ -9,4 +9,6 @@ public interface IFreightRepository {
     IFreightReadable createFreight(double value, FreightStatus status, IShipReadable ship, ICargoReadable cargo);
 
     void updateFreight(String id, FreightStatus status);
+
+    IFreightReadable findById(String id);
 }

@@ -41,4 +41,14 @@ public class InMemoryFreightRepository implements IFreightRepository {
             }
         }
     }
+
+    @Override 
+    public IFreightReadable findById(String id) {
+        for (Freight freight : freightSet) {
+            if (freight.getId().equals(id)) {
+                return freight;
+            }
+        }
+        return null;
+    }
 }
