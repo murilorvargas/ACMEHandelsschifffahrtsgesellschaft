@@ -35,9 +35,13 @@ public class CreateCargoDTO {
     @PositiveOrZero(message = "The destination harbor id be a positive value.")
     private int destinationHarbor;
 
+    @NotBlank(message = "The destination harbor id number cannot be blank.")
+    @PositiveOrZero(message = "The destination harbor id be a positive value.")
+    private int clientId;
+
     public CreateCargoDTO(int id, double weight, double declaredValue, int maxTime, String priority,
             int cargoTypeNumber,
-            int originHarborId, int destinationHarbor) {
+            int originHarborId, int destinationHarbor, int clientId) {
         this.id = id;
         this.weight = weight;
         this.declaredValue = declaredValue;
@@ -46,6 +50,7 @@ public class CreateCargoDTO {
         this.cargoTypeNumber = cargoTypeNumber;
         this.originHarborId = originHarborId;
         this.destinationHarbor = destinationHarbor;
+        this.clientId = clientId;
     }
 
     public int getId() {
@@ -78,5 +83,9 @@ public class CreateCargoDTO {
 
     public int getDestinationHarborId() {
         return destinationHarbor;
+    }
+
+    public int getClientId() {
+        return clientId;
     }
 }

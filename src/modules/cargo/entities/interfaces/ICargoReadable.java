@@ -3,6 +3,7 @@ package modules.cargo.entities.interfaces;
 import modules.cargo.enums.CargoPriority;
 import modules.cargo.enums.CargoStatus;
 import modules.cargoType.entities.interfaces.ICargoTypeReadable;
+import modules.client.entities.interfaces.IClientReadable;
 import modules.harbor.entities.interfaces.IHarborReadable;
 
 public interface ICargoReadable {
@@ -23,4 +24,6 @@ public interface ICargoReadable {
     IHarborReadable getOriginHarbor();
 
     IHarborReadable getDestinationHarbor();
+
+    IClientReadable getClient();
 }

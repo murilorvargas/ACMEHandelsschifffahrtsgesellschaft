@@ -23,10 +23,10 @@ public class CargoController {
     }
 
     public ICargoReadable onCreateCargo(int id, double weight, double declaredValue, int maxTime, String priority,
-            int cargoTypeNumber, int originHarborId, int destinationHarborId) {
+            int cargoTypeNumber, int originHarborId, int destinationHarborId, int clientId) {
         CreateCargoDTO createCargoDTO = new CreateCargoDTO(id, weight, declaredValue, maxTime, priority,
                 cargoTypeNumber,
-                originHarborId, destinationHarborId);
+                originHarborId, destinationHarborId, clientId);
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();

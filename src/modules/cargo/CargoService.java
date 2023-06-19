@@ -13,11 +13,14 @@ import modules.cargo.repositories.interfaces.ICargoRepository;
 import modules.cargoType.entities.interfaces.ICargoTypeReadable;
 import modules.cargoType.repositories.InMemoryCargoTypeRepository;
 import modules.cargoType.repositories.interfaces.ICargoTypeRepository;
+import modules.client.entities.interfaces.IClientReadable;
+import modules.client.repositories.interfaces.IClientRepository;
 import modules.harbor.entities.interfaces.IHarborReadable;
 import modules.harbor.repositories.InMemoryHarborRepository;
 import modules.harbor.repositories.interfaces.IHarborRepository;
 import shared.errors.CargoAlreadyExists;
 import shared.errors.CargoNotFound;
+import shared.errors.ClientCodeNotFound;
 import shared.errors.DestinationHarborNotFound;
 import shared.errors.NoCargoRegistered;
 import shared.errors.OriginAndDestinationHarborAreTheSame;
@@ -28,6 +31,7 @@ public class CargoService {
     private IHarborRepository harborRepository;
     private ICargoTypeRepository cargoTypeRepository;
     private ICargoRepository cargoRepository;
+    private IClientRepository clientRepository;
 
     public CargoService() {
         this.harborRepository = InMemoryHarborRepository.instanceOf();
@@ -58,11 +62,17 @@ public class CargoService {
             throw new OriginAndDestinationHarborAreTheSame();
         }
 
+        IClientReadable client = this.clientRepository.findByCode(createCargoDTO.getClientId());
+
+        if (client == null) {
+            throw new ClientCodeNotFound(createCargoDTO.getClientId());
+        }
+
         return this.cargoRepository.create(createCargoDTO.getId(), createCargoDTO.getWeight(),
                 createCargoDTO.getDeclaredValue(),
                 createCargoDTO.getMaxTime(),
                 createCargoDTO.getPriority().equals("quick") ? CargoPriority.QUICK : CargoPriority.CHEAP,
-                cargoType, originHarbor, destinationHarbor);
+                cargoType, originHarbor, destinationHarbor, client);
     }
 
     public ICargoReadable updateCargoStatus(UpdateCargoStatusDTO updateCargoStatusDTO) {
