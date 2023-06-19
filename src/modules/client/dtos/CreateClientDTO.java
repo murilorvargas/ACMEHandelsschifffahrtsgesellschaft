@@ -5,7 +5,6 @@ import javax.validation.constraints.PositiveOrZero;
 
 public class CreateClientDTO {
 
-    @NotBlank(message = "The name cannot be blank.")
     @PositiveOrZero(message = "The name must be a positive value.")
     private int code;
 

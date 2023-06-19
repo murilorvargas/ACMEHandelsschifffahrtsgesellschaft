@@ -7,7 +7,7 @@ version '1.0-SNAPSHOT'
 
 sourceSets.main.java.srcDirs = ['src']
 
-project.ext.mainClassName = 'gui.MainApplication'
+project.ext.mainClassName = 'application.App'
 
 repositories {
     mavenCentral()

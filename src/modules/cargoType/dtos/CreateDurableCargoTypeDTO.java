@@ -4,7 +4,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PositiveOrZero;
 
 public class CreateDurableCargoTypeDTO {
-    @NotBlank(message = "The number cannot be blank.")
     @PositiveOrZero(message = "The number must be a positive value.")
     private int number;
 

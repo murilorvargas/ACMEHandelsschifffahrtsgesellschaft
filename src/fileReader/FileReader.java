@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 
 import fileReader.processors.FileReaderProcessorFactory;
 import fileReader.processors.interfaces.IFileReader;
+import shared.errors.BaseRunTimeException;
 import shared.errors.FileTypeNotFound;
 import shared.errors.ReadingFileError;
 
@@ -25,6 +26,8 @@ public class FileReader {
             Constructor<? extends IFileReader> constructor = fileReaderProcessor.getConstructor(String.class);
             IFileReader fileReader = constructor.newInstance(fileName);
             fileReader.readFile();
+        } catch (BaseRunTimeException e) {
+            throw e;
         } catch (Exception e) {
             throw new ReadingFileError();
         }

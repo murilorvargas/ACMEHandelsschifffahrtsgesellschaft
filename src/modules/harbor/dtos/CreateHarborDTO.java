@@ -4,7 +4,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PositiveOrZero;
 
 public class CreateHarborDTO {
-    @NotBlank(message = "The id cannot be blank")
     @PositiveOrZero(message = "The id must be a positive value")
     private int id;
 

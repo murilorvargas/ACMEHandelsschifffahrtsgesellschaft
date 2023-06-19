@@ -23,7 +23,7 @@ public class FileReadCargoTypeProcessor extends BaseFileReaderProcessor implemen
 
         ArrayList<String> linesList = new ArrayList<>();
 
-        Path filePath = Paths.get(getFilePath());
+        Path filePath = Paths.get(this.getFilePath());
 
         BufferedReader reader = Files.newBufferedReader(filePath, Charset.forName("UTF-8"));
         String line = reader.readLine();

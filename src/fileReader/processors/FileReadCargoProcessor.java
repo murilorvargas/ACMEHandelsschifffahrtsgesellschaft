@@ -22,7 +22,7 @@ public class FileReadCargoProcessor extends BaseFileReaderProcessor implements I
     public void readFile() throws Exception {
         ArrayList<String> linesList = new ArrayList<>();
 
-        Path filePath = Paths.get(getFilePath());
+        Path filePath = Paths.get(this.getFilePath());
 
         BufferedReader reader = Files.newBufferedReader(filePath, Charset.forName("UTF-8"));
         String line = reader.readLine();

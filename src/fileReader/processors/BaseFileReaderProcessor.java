@@ -8,7 +8,7 @@ public class BaseFileReaderProcessor {
 
     public BaseFileReaderProcessor(String fileName) {
         this.fileName = fileName;
-        this.filePath = fileName + ".csv";
+        this.filePath = "files/" + fileName + ".CSV";
     }
 
     public String getFileName() {

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import fileReader.processors.interfaces.IFileReader;
 import modules.ship.ShipController;
-import shared.errors.BaseRunTimeException;
 
 public class FileReadShipProcessor extends BaseFileReaderProcessor implements IFileReader {
     private ShipController shipController;
@@ -20,36 +19,30 @@ public class FileReadShipProcessor extends BaseFileReaderProcessor implements IF
     }
 
     @Override
-    public void readFile() {
-        ArrayList<String> lines = new ArrayList<>();
+    public void readFile() throws Exception {
+        ArrayList<String> linesList = new ArrayList<>();
 
-        Path filePath = Paths.get(getFilePath());
+        Path filePath = Paths.get(this.getFilePath());
 
-        try (BufferedReader reader = Files.newBufferedReader(filePath, Charset.forName("UTF-8"))) {
-            String line = reader.readLine();
+        BufferedReader reader = Files.newBufferedReader(filePath, Charset.forName("UTF-8"));
+        String line = reader.readLine();
+        line = reader.readLine();
+        while (line != null) {
+            linesList.add(line);
             line = reader.readLine();
-            while (line != null) {
-                lines.add(line);
-                line = reader.readLine();
-            }
-        } catch (Exception e) {
-            System.err.format("Erro na leitura do arquivo: %s", e.getMessage());
         }
 
-        try {
-            for (String line : lines) {
-                String[] fields = line.split(";");
+        for (String singleLine : linesList) {
+            String[] fields = singleLine.split(";");
 
-                if (fields.length >= 4) {
-                    String shipName = fields[0];
-                    double shipSpeed = Double.parseDouble(fields[1]);
-                    double autonomy = Double.parseDouble(fields[2]);
-                    double costPerMile = Double.parseDouble(fields[3]);
-                    this.shipController.onCreateShip(shipName, shipSpeed, autonomy, costPerMile);
-                }
+            if (fields.length >= 4) {
+                String shipName = fields[0];
+                double shipSpeed = Double.parseDouble(fields[1]);
+                double autonomy = Double.parseDouble(fields[2]);
+                double costPerMile = Double.parseDouble(fields[3]);
+                this.shipController.onCreateShip(shipName, shipSpeed, autonomy, costPerMile);
             }
-        } catch (BaseRunTimeException e) {
-            e.getMessage();
         }
+
     }
 }

@@ -1,12 +1,12 @@
 package modules.cargo.dtos;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 
 import modules.cargo.enums.CargoStatus;
 
 public class UpdateCargoStatusDTO {
-    @NotBlank(message = "The id cannot be blank.")
+    @PositiveOrZero(message = "The id must be a positive value.")
     private int id;
 
     @NotNull(message = "The cargo status cannot be null.")

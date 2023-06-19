@@ -7,15 +7,12 @@ public class CreateShipDTO {
     @NotBlank(message = "The name cannot be blank.")
     private String name;
 
-    @NotBlank(message = "The speed cannot be blank.")
     @PositiveOrZero(message = "The speed must be a positive value.")
     private double speed;
 
-    @NotBlank(message = "The autonomy cannot be blank.")
     @PositiveOrZero(message = "The autonomy must be a positive value.")
     private double autonomy;
 
-    @NotBlank(message = "The cost per mile cannot be blank.")
     @PositiveOrZero(message = "The cost per mile must be a positive value.")
     private double costPerMile;
 

@@ -1,9 +1,9 @@
 package modules.harbor.dtos;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PositiveOrZero;
 
 public class FindHarborByIdDTO {
-    @NotBlank(message = "The id cannot be blank.")
+    @PositiveOrZero(message = "The id must be a positive value.")
     private int id;
 
     public FindHarborByIdDTO(int id) {
