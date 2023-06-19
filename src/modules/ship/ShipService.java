@@ -5,6 +5,7 @@ import java.util.List;
 import modules.ship.dtos.CreateShipDTO;
 import modules.ship.dtos.FindShipByNameDTO;
 import modules.ship.entities.interfaces.IShipReadable;
+import modules.ship.repositories.InMemoryShipRepository;
 import modules.ship.repositories.interfaces.IShipRepository;
 
 import shared.errors.NoShipRegistered;
@@ -15,8 +16,8 @@ public class ShipService {
 
     private IShipRepository shipRepository;
 
-    public ShipService(IShipRepository shipRepository) {
-        this.shipRepository = shipRepository;
+    public ShipService() {
+        this.shipRepository = InMemoryShipRepository.instanceOf();
     }
 
     public IShipReadable createShip(CreateShipDTO createShipDTO) {

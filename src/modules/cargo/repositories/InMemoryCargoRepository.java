@@ -10,6 +10,7 @@ import modules.cargo.enums.CargoPriority;
 import modules.cargo.enums.CargoStatus;
 import modules.cargo.repositories.interfaces.ICargoRepository;
 import modules.cargoType.entities.interfaces.ICargoTypeReadable;
+import modules.client.entities.interfaces.IClientReadable;
 import modules.harbor.entities.interfaces.IHarborReadable;
 
 public class InMemoryCargoRepository implements ICargoRepository {
@@ -29,9 +30,10 @@ public class InMemoryCargoRepository implements ICargoRepository {
 
     @Override
     public ICargoReadable create(int id, double weight, double declaredValue, int maxTime, CargoPriority priority,
-            ICargoTypeReadable cargoType, IHarborReadable originHarbor, IHarborReadable destinationHarbor) {
+            ICargoTypeReadable cargoType, IHarborReadable originHarbor, IHarborReadable destinationHarbor,
+            IClientReadable client) {
         Cargo cargo = new Cargo(id, weight, declaredValue,
-                maxTime, priority, cargoType, originHarbor, destinationHarbor);
+                maxTime, priority, cargoType, originHarbor, destinationHarbor, client);
         this.cargoList.add(cargo);
 
         return cargo;

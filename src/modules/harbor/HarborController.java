@@ -16,8 +16,8 @@ import shared.errors.FieldValidationError;
 public class HarborController {
     private HarborService harborService;
 
-    public HarborController(HarborService harborService) {
-        this.harborService = harborService;
+    public HarborController() {
+        this.harborService = new HarborService();
     }
 
     public IHarborReadable onCreateHarbor(int id, String name, String country) {

@@ -6,12 +6,13 @@ import modules.cargo.entities.interfaces.ICargoReadable;
 import modules.cargo.enums.CargoPriority;
 import modules.cargo.enums.CargoStatus;
 import modules.cargoType.entities.interfaces.ICargoTypeReadable;
+import modules.client.entities.interfaces.IClientReadable;
 import modules.harbor.entities.interfaces.IHarborReadable;
 
 public interface ICargoRepository {
     ICargoReadable create(int id, double weight, double declaredValue, int maxTime, CargoPriority priority,
             ICargoTypeReadable cargoType,
-            IHarborReadable originHarbor, IHarborReadable destinationHarbor);
+            IHarborReadable originHarbor, IHarborReadable destinationHarbor, IClientReadable client);
 
     ICargoReadable updateStatus(int id, CargoStatus cargoStatus);
 

@@ -14,8 +14,8 @@ import java.util.Set;
 public class HarborDistanceController {
     private HarborDistanceService harborDistanceService;
 
-    public HarborDistanceController(HarborDistanceService harborDistanceService) {
-        this.harborDistanceService = harborDistanceService;
+    public HarborDistanceController() {
+        this.harborDistanceService = new HarborDistanceService();
     }
 
     public IHarborDistanceReadable onCreateHarborDistance(double value, int firstHarborId, int secondHarborId) {
