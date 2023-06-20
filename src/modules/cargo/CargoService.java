@@ -14,6 +14,7 @@ import modules.cargoType.entities.interfaces.ICargoTypeReadable;
 import modules.cargoType.repositories.InMemoryCargoTypeRepository;
 import modules.cargoType.repositories.interfaces.ICargoTypeRepository;
 import modules.client.entities.interfaces.IClientReadable;
+import modules.client.repositories.InMemoryClientRepository;
 import modules.client.repositories.interfaces.IClientRepository;
 import modules.harbor.entities.interfaces.IHarborReadable;
 import modules.harbor.repositories.InMemoryHarborRepository;
@@ -37,12 +38,13 @@ public class CargoService {
         this.harborRepository = InMemoryHarborRepository.instanceOf();
         this.cargoTypeRepository = InMemoryCargoTypeRepository.instanceOf();
         this.cargoRepository = InMemoryCargoRepository.instanceOf();
+        this.clientRepository = InMemoryClientRepository.instanceOf();
     }
 
     public ICargoReadable createCargo(CreateCargoDTO createCargoDTO) {
         ICargoTypeReadable cargoType = this.cargoTypeRepository.findByNumber(createCargoDTO.getCargoTypeNumber());
 
-        if (cargoType != null) {
+        if (cargoType != null) { // TODO corrigir isso aqui, to com preguiça de entender oq ta errado
             throw new CargoAlreadyExists(String.valueOf(createCargoDTO.getCargoTypeNumber()));
         }
 

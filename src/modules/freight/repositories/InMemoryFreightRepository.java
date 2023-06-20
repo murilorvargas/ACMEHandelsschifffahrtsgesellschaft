@@ -47,8 +47,8 @@ public class InMemoryFreightRepository implements IFreightRepository {
     @Override
     public List<IFreightReadable> findAllInProgress() {
         List<IFreightReadable> freightList = new ArrayList<>();
-        for(Freight freight : freightSet) {
-            if(freight.getStatus() == FreightStatus.IN_PROGRESS) {
+        for (Freight freight : freightSet) {
+            if (freight.getStatus() == FreightStatus.IN_PROGRESS) {
                 freightList.add(freight);
             }
         }
@@ -56,7 +56,7 @@ public class InMemoryFreightRepository implements IFreightRepository {
         return freightList;
     }
 
-    @Override 
+    @Override
     public IFreightReadable findById(String id) {
         for (Freight freight : freightSet) {
             if (freight.getId().equals(id)) {
@@ -64,5 +64,15 @@ public class InMemoryFreightRepository implements IFreightRepository {
             }
         }
         return null;
+    }
+
+    @Override
+    public List<IFreightReadable> findAll() {
+        List<IFreightReadable> freightList = new ArrayList<>();
+        for (Freight freight : freightSet) {
+            freightList.add(freight);
+        }
+
+        return freightList;
     }
 }

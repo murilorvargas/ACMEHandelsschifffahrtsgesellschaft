@@ -1,6 +1,7 @@
 package modules.harborDistance.repositories;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import modules.harborDistance.entities.HarborDistance;
 import modules.harborDistance.entities.interfaces.IHarborDistanceReadable;
@@ -51,6 +52,15 @@ public class InMemoryHarborDistanceRepository implements IHarborDistanceReposito
             }
         }
         return null;
+    }
+
+    @Override
+    public List<IHarborDistanceReadable> findAll() {
+        List<IHarborDistanceReadable> harborDistances = new ArrayList<>();
+        for (HarborDistance harborDistance : harborDistanceList) {
+            harborDistances.add(harborDistance);
+        }
+        return harborDistances;
     }
 
 }

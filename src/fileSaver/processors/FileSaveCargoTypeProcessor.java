@@ -6,7 +6,6 @@ import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fileSaver.processors.interfaces.IFileSaver;
-import modules.cargo.entities.interfaces.ICargoReadable;
 import modules.cargoType.CargoTypeController;
 import modules.cargoType.entities.interfaces.ICargoTypeReadable;
 
@@ -25,8 +24,8 @@ public class FileSaveCargoTypeProcessor extends BaseFileSaverProcessor implement
 
     @Override
     public void saveFile() throws Exception {
-        List<ICargoTypeReadable> cargoTypes = this.cargoTypeController.onFindAllCargoTypes(); // TODO implementar
-                                                                                              // onFindAllCargoTypes
+        List<ICargoTypeReadable> cargoTypes = this.cargoTypeController.onFindAllCargoTypes();
+
         fileWriter.write("[\n");
 
         for (int i = 0; i < cargoTypes.size(); i++) {

@@ -4,10 +4,13 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+
+import java.util.List;
 import java.util.Set;
 
 import modules.cargoType.dtos.CreateDurableCargoTypeDTO;
 import modules.cargoType.dtos.CreatePerishableCargoTypeDTO;
+import modules.cargoType.entities.interfaces.ICargoTypeReadable;
 import modules.cargoType.entities.interfaces.IDurableCargoTypeReadable;
 import modules.cargoType.entities.interfaces.IPerishableCargoTypeReadable;
 import shared.errors.FieldValidationError;
@@ -58,5 +61,9 @@ public class CargoTypeController {
         } else {
             return cargoTypeService.createDurableCargoType(cargoTypeDTO);
         }
+    }
+
+    public List<ICargoTypeReadable> onFindAllCargoTypes() {
+        return cargoTypeService.findAllCargoTypes();
     }
 }

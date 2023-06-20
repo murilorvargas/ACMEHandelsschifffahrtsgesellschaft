@@ -37,9 +37,9 @@ public class FileReadShipProcessor extends BaseFileReaderProcessor implements IF
 
             if (fields.length >= 4) {
                 String shipName = fields[0];
-                double shipSpeed = Double.parseDouble(fields[1]);
-                double autonomy = Double.parseDouble(fields[2]);
-                double costPerMile = Double.parseDouble(fields[3]);
+                double shipSpeed = Double.parseDouble(fields[1].replaceAll(",", "."));
+                double autonomy = Double.parseDouble(fields[2].replaceAll(",", "."));
+                double costPerMile = Double.parseDouble(fields[3].replaceAll(",", "."));
                 this.shipController.onCreateShip(shipName, shipSpeed, autonomy, costPerMile);
             }
         }

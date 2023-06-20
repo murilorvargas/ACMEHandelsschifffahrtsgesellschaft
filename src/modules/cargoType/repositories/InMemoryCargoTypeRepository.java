@@ -1,5 +1,7 @@
 package modules.cargoType.repositories;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeSet;
 
 import modules.cargoType.entities.CargoType;
@@ -60,5 +62,16 @@ public class InMemoryCargoTypeRepository implements ICargoTypeRepository {
             }
         }
         return null;
+    }
+
+    @Override
+    public List<ICargoTypeReadable> findAll() {
+        List<ICargoTypeReadable> cargoTypes = new ArrayList<>();
+
+        for (CargoType cargoType : cargoTypeList) {
+            cargoTypeList.add(cargoType);
+        }
+
+        return cargoTypes;
     }
 }

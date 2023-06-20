@@ -1,0 +1,5 @@
+[
+{"id":"ec7b594d-63f0-486b-b294-fc50be282b12","name":"Aquaman","speed":20.0,"autonomy":6500.0,"costPerMile":25.0,"isAvailable":true},
+{"id":"5b360a1f-4429-494d-8315-58a9357c24d4","name":"Netuno","speed":40.0,"autonomy":5500.0,"costPerMile":50.0,"isAvailable":true},
+{"id":"85703335-2b0d-4b5a-90e8-7a2200920fe3","name":"Poseidon","speed":10.0,"autonomy":10000.0,"costPerMile":10.0,"isAvailable":true}
+]

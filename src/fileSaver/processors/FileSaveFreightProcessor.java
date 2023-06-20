@@ -6,7 +6,6 @@ import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fileSaver.processors.interfaces.IFileSaver;
-import modules.cargoType.entities.interfaces.ICargoTypeReadable;
 import modules.freight.FreightController;
 import modules.freight.entities.interfaces.IFreightReadable;
 
@@ -25,10 +24,7 @@ public class FileSaveFreightProcessor extends BaseFileSaverProcessor implements 
 
     @Override
     public void saveFile() throws Exception {
-        List<IFreightReadable> freights = this.freightController.onFindAllInProgressFreights(); // TODO: Verificar se
-                                                                                                // precisa exibir os
-                                                                                                // fretes que não estão
-                                                                                                // em progresso
+        List<IFreightReadable> freights = this.freightController.onFindAll();
         fileWriter.write("[\n");
 
         for (int i = 0; i < freights.size(); i++) {
