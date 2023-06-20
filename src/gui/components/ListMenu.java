@@ -12,6 +12,7 @@ import modules.client.ClientController;
 import modules.harbor.HarborController;
 import modules.cargoType.CargoTypeController;
 import modules.ship.ShipController;
+import modules.freight.FreightController;
 import shared.errors.BaseRunTimeException;
 
 import java.awt.*;
@@ -27,6 +28,7 @@ public class ListMenu extends JFrame {
     private JButton clientButton;
     private JButton harborButton;
     private JButton shipButton;
+    private JButton freightButton;
     private JButton backButton;
     private JLabel message;
 
@@ -35,6 +37,7 @@ public class ListMenu extends JFrame {
     private HarborController harnorController;
     private CargoTypeController cargoTypeController;
     private ShipController shipController;
+    private FreightController freightController;
 
     public ListMenu() {
         super();
@@ -43,6 +46,7 @@ public class ListMenu extends JFrame {
         harnorController = new HarborController();
         cargoTypeController = new CargoTypeController();
         shipController = new ShipController();
+        freightController = new FreightController();
 
         // Título do formulário
         JLabel formTitle = new JLabel("Leitura de Arquivos");
@@ -54,6 +58,7 @@ public class ListMenu extends JFrame {
         clientButton = new JButton("Lista de Cliente");
         harborButton = new JButton("Lista de Porto");
         shipButton = new JButton("Lista de Navio");
+        freightButton = new JButton("Lista de Frete");
         backButton = new JButton("Voltar");
         message = new JLabel();
 
@@ -185,6 +190,30 @@ public class ListMenu extends JFrame {
             }
         });
 
+        freightButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    freightController.onFindAllInProgressFreights();
+                } catch (BaseRunTimeException a) {
+                    message.setText(a.getTranslation());
+                    return;
+                } catch (Exception a) {
+                    message.setText("Erro ao ler o arquivo.");
+                    return;
+                }
+                ArrayList<String> list = new ArrayList<>();
+                for (int i = 0; i < freightController.onFindAllInProgressFreights().size(); i++) {
+                    String info = "Frete " + freightController.onFindAllInProgressFreights().get(i).getId() + ": " +
+                            "Carga: " + freightController.onFindAllInProgressFreights().get(i).getCargo() + ", " +
+                            "Valor: " + freightController.onFindAllInProgressFreights().get(i).getValue() + ", " +
+                            "Navio: " + freightController.onFindAllInProgressFreights().get(i).getShip() + ";  ";
+                    list.add(info);
+                }
+                displayTable("Lista de Fretes Pendentes", list);
+            }
+        });
+
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -205,6 +234,7 @@ public class ListMenu extends JFrame {
         botaoPainel.add(clientButton);
         botaoPainel.add(harborButton);
         botaoPainel.add(shipButton);
+        botaoPainel.add(freightButton);
         botaoPainel.add(backButton);
         painel.add(botaoPainel);
 
