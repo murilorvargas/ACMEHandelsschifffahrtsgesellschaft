@@ -3,6 +3,8 @@ package gui.forms;
 import javax.swing.*;
 
 import gui.components.RegisterMenu;
+import modules.cargoType.CargoTypeController;
+import shared.errors.BaseRunTimeException;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -20,8 +22,15 @@ public class CargoTypeRegisterForm extends JFrame {
     private JButton botaoVoltar;
     private JLabel mensagem;
 
+    private int numero;
+    private String descricao;
+    private String origem;
+    private int validadeMaxima;
+    private CargoTypeController cargoTypeController;
+
     public CargoTypeRegisterForm() {
         super();
+        cargoTypeController = new CargoTypeController();
 
         // Título do formulário
         JLabel tituloFormulario = new JLabel("Cadastro de Tipo de Carga");
@@ -58,7 +67,11 @@ public class CargoTypeRegisterForm extends JFrame {
         botaoCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica para cadastrar o tipo de carga
+                numero = Integer.parseInt(campoNumero.getText());
+                descricao = campoDescricao.getText();
+                origem = campoOrigem.getText();
+                validadeMaxima = Integer.parseInt(campoValidadeMaxima.getText());
+
             }
         });
 
@@ -66,7 +79,10 @@ public class CargoTypeRegisterForm extends JFrame {
         botaoLimpar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica para limpar os campos
+                campoNumero.setText("");
+                campoDescricao.setText("");
+                campoOrigem.setText("");
+                campoValidadeMaxima.setText("");
             }
         });
 
@@ -80,9 +96,10 @@ public class CargoTypeRegisterForm extends JFrame {
         });
 
         // Painel principal
-        JPanel painelPrincipal = new JPanel(new GridLayout(2, 1));
+        JPanel painelPrincipal = new JPanel(new GridLayout(4, 1));
         painelPrincipal.add(tituloFormulario);
         painelPrincipal.add(painelCampos);
+        painelPrincipal.add(mensagem);
 
         // Painel para os botões
         JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -103,4 +120,19 @@ public class CargoTypeRegisterForm extends JFrame {
     public static void main(String[] args) {
         CargoTypeRegisterForm janela = new CargoTypeRegisterForm();
     }
+
+    // private void cargoTypeRegister() {
+    // try {
+    // cargoTypeController.onCreateCargoType(numero, descricao, origem,
+    // validadeMaxima);
+    // } catch (BaseRunTimeException e) {
+    // message.setText(e.getTranslation());
+    // return;
+    // } catch (Exception e) {
+    // message.setText("Erro ao ler o arquivo.");
+    // return;
+    // }
+    // new RegisterMenu();
+    // setVisible(false);
+    // }
 }

@@ -3,6 +3,9 @@ package gui.forms;
 import javax.swing.*;
 
 import gui.components.RegisterMenu;
+import modules.cargo.CargoController;
+import modules.cargo.entities.Cargo;
+import shared.errors.BaseRunTimeException;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -25,8 +28,20 @@ public class CargoRegisterForm extends JFrame {
     private JButton backButton;
     private JLabel message;
 
+    private int id;
+    private double weight;
+    private double declaredValue;
+    private int maxTime;
+    private String priority;
+    private int cargoTypeNumber;
+    private int originHarborId;
+    private int destinationHarborId;
+    private int clientId;
+    private CargoController cargoController;
+
     public CargoRegisterForm() {
         super();
+        cargoController = new CargoController();
 
         // Título do formulário
         JLabel formTitle = new JLabel("Cadastre uma Nova Carga");
@@ -83,7 +98,18 @@ public class CargoRegisterForm extends JFrame {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica para cadastrar a carga
+                id = Integer.parseInt(idField.getText());
+                weight = Double.parseDouble(weightField.getText());
+                declaredValue = Double.parseDouble(declaredValueField.getText());
+                maxTime = Integer.parseInt(maxTimeField.getText());
+                priority = priorityField.getText();
+                cargoTypeNumber = Integer.parseInt(cargoTypeNumberField.getText());
+                originHarborId = Integer.parseInt(originHarborIdField.getText());
+                destinationHarborId = Integer.parseInt(destinationHarborIdField.getText());
+                clientId = Integer.parseInt(clientIdField.getText());
+
+                cargoRegister();
+
             }
         });
 
@@ -105,9 +131,10 @@ public class CargoRegisterForm extends JFrame {
         });
 
         // Painel principal
-        JPanel painel = new JPanel(new GridLayout(2, 1));
+        JPanel painel = new JPanel(new GridLayout(3, 1));
         painel.add(formTitle);
         painel.add(painelCampos);
+        painel.add(message);
 
         // Painel para os botões
         JPanel botaoPainel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -127,5 +154,20 @@ public class CargoRegisterForm extends JFrame {
 
     public static void main(String[] args) {
         CargoRegisterForm janela = new CargoRegisterForm();
+    }
+
+    private void cargoRegister() {
+        try {
+            cargoController.onCreateCargo(id, weight, declaredValue, maxTime, priority, cargoTypeNumber,
+                    originHarborId, destinationHarborId, clientId);
+        } catch (BaseRunTimeException e) {
+            message.setText(e.getTranslation());
+            return;
+        } catch (Exception e) {
+            message.setText("Erro ao ler o arquivo.");
+            return;
+        }
+        new RegisterMenu();
+        setVisible(false);
     }
 }

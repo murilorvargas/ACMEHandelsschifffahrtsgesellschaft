@@ -3,6 +3,9 @@ package gui.forms;
 import javax.swing.*;
 
 import gui.components.RegisterMenu;
+import modules.client.ClientController;
+import modules.client.entities.Client;
+import shared.errors.BaseRunTimeException;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,8 +22,14 @@ public class ClientRegisterForm extends JFrame {
     private JButton botaoVoltar;
     private JLabel mensagem;
 
+    private int codigo;
+    private String nome;
+    private String email;
+    private ClientController clientController;
+
     public ClientRegisterForm() {
         super();
+        clientController = new ClientController();
 
         // Título do formulário
         JLabel tituloFormulario = new JLabel("Cadastro de Cliente");
@@ -53,7 +62,28 @@ public class ClientRegisterForm extends JFrame {
         botaoCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica para cadastrar o cliente
+                try {
+                    codigo = Integer.parseInt(campoCodigo.getText());
+                } catch (NumberFormatException exception) {
+                    mensagem.setText("Por favor, insira um número inteiro no campo código.");
+                    return;
+                }
+                if (codigo < 0) {
+                    mensagem.setText("Por favor, insira um número inteiro positivo no campo código.");
+                    return;
+                }
+                if (campoNome.getText().equals("")) {
+                    mensagem.setText("Por favor, insira um nome no campo nome.");
+                    return;
+                }
+                if (campoEmail.getText().equals("")) {
+                    mensagem.setText("Por favor, insira um email no campo email.");
+                    return;
+                }
+
+                nome = campoNome.getText();
+                email = campoEmail.getText();
+                clientRegister();
             }
         });
 
@@ -61,7 +91,9 @@ public class ClientRegisterForm extends JFrame {
         botaoLimpar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica para limpar os campos
+                campoCodigo.setText("");
+                campoNome.setText("");
+                campoEmail.setText("");
             }
         });
 
@@ -75,9 +107,10 @@ public class ClientRegisterForm extends JFrame {
         });
 
         // Painel principal
-        JPanel painelPrincipal = new JPanel(new GridLayout(2, 1));
+        JPanel painelPrincipal = new JPanel(new GridLayout(3, 1));
         painelPrincipal.add(tituloFormulario);
         painelPrincipal.add(painelCampos);
+        painelPrincipal.add(mensagem);
 
         // Painel para os botões
         JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -97,5 +130,19 @@ public class ClientRegisterForm extends JFrame {
 
     public static void main(String[] args) {
         ClientRegisterForm janela = new ClientRegisterForm();
+    }
+
+    private void clientRegister() {
+        try {
+            clientController.onCreateClient(codigo, nome, email);
+        } catch (BaseRunTimeException e) {
+            mensagem.setText(e.getTranslation());
+            return;
+        } catch (Exception e) {
+            mensagem.setText("Erro ao ler o arquivo.");
+            return;
+        }
+        new RegisterMenu();
+        setVisible(false);
     }
 }

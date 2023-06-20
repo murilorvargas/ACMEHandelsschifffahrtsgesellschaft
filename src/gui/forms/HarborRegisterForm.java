@@ -3,6 +3,8 @@ package gui.forms;
 import javax.swing.*;
 
 import gui.components.RegisterMenu;
+import modules.harbor.HarborController;
+import shared.errors.BaseRunTimeException;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,8 +21,14 @@ public class HarborRegisterForm extends JFrame {
     private JButton botaoVoltar;
     private JLabel mensagem;
 
+    private int id;
+    private String nome;
+    private String pais;
+    private HarborController harborController;
+
     public HarborRegisterForm() {
         super();
+        harborController = new HarborController();
 
         // Título do formulário
         JLabel tituloFormulario = new JLabel("Cadastro de Porto");
@@ -53,7 +61,10 @@ public class HarborRegisterForm extends JFrame {
         botaoCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica para cadastrar o porto
+                id = Integer.parseInt(campoId.getText());
+                nome = campoNome.getText();
+                pais = campoPais.getText();
+                harborRegister();
             }
         });
 
@@ -97,5 +108,19 @@ public class HarborRegisterForm extends JFrame {
 
     public static void main(String[] args) {
         HarborRegisterForm janela = new HarborRegisterForm();
+    }
+
+    private void harborRegister() {
+        try {
+            harborController.onCreateHarbor(id, nome, pais);
+        } catch (BaseRunTimeException e) {
+            mensagem.setText(e.getTranslation());
+            return;
+        } catch (Exception e) {
+            mensagem.setText("Erro ao ler o arquivo.");
+            return;
+        }
+        new RegisterMenu();
+        setVisible(false);
     }
 }

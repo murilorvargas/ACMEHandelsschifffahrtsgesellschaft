@@ -3,6 +3,8 @@ package gui.forms;
 import javax.swing.*;
 
 import gui.components.RegisterMenu;
+import modules.ship.ShipController;
+import shared.errors.BaseRunTimeException;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -20,8 +22,15 @@ public class ShipRegisterForm extends JFrame {
     private JButton botaoVoltar;
     private JLabel mensagem;
 
+    private String nome;
+    private double velocidade;
+    private double autonomia;
+    private double custoPorMilha;
+    private ShipController shipController;
+
     public ShipRegisterForm() {
         super();
+        shipController = new ShipController();
 
         // Título do formulário
         JLabel tituloFormulario = new JLabel("Cadastro de Navio");
@@ -58,7 +67,42 @@ public class ShipRegisterForm extends JFrame {
         botaoCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica para cadastrar o navio
+                try {
+                    velocidade = Double.parseDouble(campoVelocidade.getText());
+                } catch (NumberFormatException exception) {
+                    mensagem.setText("Velocidade deve ser um número.");
+                    return;
+                }
+                if (velocidade < 0) {
+                    mensagem.setText("Velocidade deve ser um número positivo.");
+                    return;
+                }
+                try {
+                    autonomia = Double.parseDouble(campoAutonomia.getText());
+                } catch (NumberFormatException exception) {
+                    mensagem.setText("Autonomia deve ser um número.");
+                    return;
+                }
+                if (autonomia < 0) {
+                    mensagem.setText("Autonomia deve ser um número positivo.");
+                    return;
+                }
+                try {
+                    custoPorMilha = Double.parseDouble(campoCustoPorMilha.getText());
+                } catch (NumberFormatException exception) {
+                    mensagem.setText("Custo por Milha deve ser um número.");
+                    return;
+                }
+                if (custoPorMilha < 0) {
+                    mensagem.setText("Custo por Milha deve ser um número positivo.");
+                    return;
+                }
+                if (campoNome.getText().equals("")) {
+                    mensagem.setText("Nome não pode ser vazio.");
+                    return;
+                }
+                nome = campoNome.getText();
+                shipRegister();
             }
         });
 
@@ -84,9 +128,10 @@ public class ShipRegisterForm extends JFrame {
         });
 
         // Painel principal
-        JPanel painelPrincipal = new JPanel(new GridLayout(2, 1));
+        JPanel painelPrincipal = new JPanel(new GridLayout(3, 1));
         painelPrincipal.add(tituloFormulario);
         painelPrincipal.add(painelCampos);
+        painelPrincipal.add(mensagem);
 
         // Painel para os botões
         JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -106,5 +151,19 @@ public class ShipRegisterForm extends JFrame {
 
     public static void main(String[] args) {
         ShipRegisterForm janela = new ShipRegisterForm();
+    }
+
+    private void shipRegister() {
+        try {
+            shipController.onCreateShip(nome, velocidade, autonomia, custoPorMilha);
+        } catch (BaseRunTimeException e) {
+            mensagem.setText(e.getTranslation());
+            return;
+        } catch (Exception e) {
+            mensagem.setText("Erro ao ler o arquivo.");
+            return;
+        }
+        new RegisterMenu();
+        setVisible(false);
     }
 }

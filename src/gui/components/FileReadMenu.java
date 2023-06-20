@@ -57,10 +57,66 @@ public class FileReadMenu extends JFrame {
         });
 
         cargoTypeButton = new JButton("Cadastrar Tipo de Carga");
+        cargoTypeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fileName = nameField.getText();
+                if (fileName.equals("")) {
+                    message.setText("Por favor, insira o nome do arquivo.");
+                } else {
+                    readFile("cargoType");
+                }
+            }
+        });
         clientButton = new JButton("Cadastrar Cliente");
+        clientButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fileName = nameField.getText();
+                if (fileName.equals("")) {
+                    message.setText("Por favor, insira o nome do arquivo.");
+                } else {
+                    readFile("client");
+                }
+            }
+        });
         harborButton = new JButton("Cadastrar Porto");
+        harborButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fileName = nameField.getText();
+                if (fileName.equals("")) {
+                    message.setText("Por favor, insira o nome do arquivo.");
+                } else {
+                    readFile("harbor");
+                }
+            }
+        });
         harborDistanceButton = new JButton("Cadastrar Distância dos Portos");
+        harborDistanceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fileName = nameField.getText();
+                if (fileName.equals("")) {
+                    message.setText("Por favor, insira o nome do arquivo.");
+                } else {
+                    readFile("harborDistance");
+                }
+            }
+        });
+
         shipButton = new JButton("Cadastrar Navio");
+        shipButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fileName = nameField.getText();
+                if (fileName.equals("")) {
+                    message.setText("Por favor, insira o nome do arquivo.");
+                } else {
+                    readFile("ship");
+                }
+            }
+        });
 
         backButton = new JButton("Voltar");
         backButton.addActionListener(new ActionListener() {
