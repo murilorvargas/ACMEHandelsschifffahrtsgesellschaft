@@ -38,7 +38,7 @@ public class FileReadHarborDistanceProcessor extends BaseFileReaderProcessor imp
             if (fields.length >= 3) {
                 int harborOriginId = Integer.parseInt(fields[0]);
                 int harborDestinyId = Integer.parseInt(fields[1]);
-                double distance = Double.parseDouble(fields[2]);
+                double distance = Double.parseDouble(fields[2].replaceAll(",", "."));
 
                 this.harborDistanceController.onCreateHarborDistance(distance, harborOriginId, harborDestinyId);
             }

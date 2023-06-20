@@ -47,4 +47,8 @@ public class FreightController {
         return this.freightService.findAllInProgressFreights();
     }
 
+    public List<IFreightReadable> onFindAll() {
+        return this.freightService.findAll();
+    }
+
 }

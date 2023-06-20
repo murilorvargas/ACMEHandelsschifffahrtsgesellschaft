@@ -1,6 +1,9 @@
 package modules.harborDistance.repositories.interfaces;
 
 import modules.harborDistance.entities.interfaces.IHarborDistanceReadable;
+
+import java.util.List;
+
 import modules.harbor.entities.interfaces.IHarborReadable;
 
 public interface IHarborDistanceRepository {
@@ -9,4 +12,6 @@ public interface IHarborDistanceRepository {
     IHarborDistanceReadable update(String id, double value);
 
     IHarborDistanceReadable findByHarbors(int firstHarborId, int secondHarborId);
+
+    List<IHarborDistanceReadable> findAll();
 }

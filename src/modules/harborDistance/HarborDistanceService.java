@@ -1,5 +1,7 @@
 package modules.harborDistance;
 
+import java.util.List;
+
 import modules.harbor.entities.interfaces.IHarborReadable;
 import modules.harbor.repositories.interfaces.IHarborRepository;
 import modules.harbor.repositories.InMemoryHarborRepository;
@@ -10,6 +12,7 @@ import modules.harborDistance.repositories.interfaces.IHarborDistanceRepository;
 import modules.harborDistance.repositories.InMemoryHarborDistanceRepository;
 import shared.errors.HarborDistanceAlreadyExists;
 import shared.errors.HarborNotFound;
+import shared.errors.NoHarborDistanceRegistered;
 
 public class HarborDistanceService {
     private IHarborRepository harborRepository;
@@ -62,5 +65,15 @@ public class HarborDistanceService {
             }
         }
 
+    }
+
+    public List<IHarborDistanceReadable> findAll() {
+        List<IHarborDistanceReadable> harborDistances = harborDistanceRepository.findAll();
+
+        if (harborDistances.isEmpty()) {
+            throw new NoHarborDistanceRegistered();
+        }
+
+        return harborDistances;
     }
 }

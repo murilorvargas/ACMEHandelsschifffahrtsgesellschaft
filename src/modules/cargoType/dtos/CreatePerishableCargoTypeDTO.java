@@ -12,7 +12,7 @@ public class CreatePerishableCargoTypeDTO {
     @NotBlank(message = "The origin cannot be.")
     private String origin;
 
-    @NotBlank(message = "The max validity time cannot be blank.")
+    @PositiveOrZero(message = "The max validity time must be a positive value.")
     private int maxValidityTime;
 
     public CreatePerishableCargoTypeDTO(int number, String description, String origin,

@@ -8,7 +8,7 @@ public class BaseFileSaverProcessor {
 
     public BaseFileSaverProcessor(String fileName) {
         this.fileName = fileName;
-        this.filePath = "files/" + fileName + ".CSV";
+        this.filePath = "files/output/" + fileName + ".json";
     }
 
     public String getFileName() {
