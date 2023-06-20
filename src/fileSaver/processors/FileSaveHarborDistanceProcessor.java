@@ -1,9 +1,7 @@
 package fileSaver.processors;
 
 import fileSaver.processors.interfaces.IFileSaver;
-import modules.harbor.entities.Harbor;
 import modules.harborDistance.HarborDistanceController;
-import modules.harborDistance.entities.HarborDistance;
 
 public class FileSaveHarborDistanceProcessor extends BaseFileSaverProcessor implements IFileSaver {
 
