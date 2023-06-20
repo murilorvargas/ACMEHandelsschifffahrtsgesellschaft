@@ -40,11 +40,11 @@ public class FileReadCargoProcessor extends BaseFileReaderProcessor implements I
                 int clientId = Integer.parseInt(fields[1]);
                 int originHarborId = Integer.parseInt(fields[2]);
                 int destinationHarborId = Integer.parseInt(fields[3]);
-                double weight = Double.parseDouble(fields[4]);
-                double declaredValue = Double.parseDouble(fields[5]);
+                double weight = Double.parseDouble(fields[4].replaceAll(",", "."));
+                double declaredValue = Double.parseDouble(fields[5].replaceAll(",", "."));
                 int maxTime = Integer.parseInt(fields[6]);
                 int cargoTypeNumber = Integer.parseInt(fields[7]);
-                String priority = fields[8];
+                String priority = fields[8].equals("RAPIDO") ? "quick" : "cheap";
                 this.cargoController.onCreateCargo(id, weight, declaredValue, maxTime, priority, cargoTypeNumber,
                         originHarborId, destinationHarborId, clientId);
             }

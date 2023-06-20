@@ -47,7 +47,7 @@ public class FileReadCargoTypeProcessor extends BaseFileReaderProcessor implemen
                 } else if (type.equals("DURAVEL")) {
                     String sector = fields[3];
                     String mainMaterial = fields[4];
-                    double ipiPercentage = Double.parseDouble(fields[5]);
+                    double ipiPercentage = Double.parseDouble(fields[5].replaceAll(",", "."));
                     this.cargoTypeController.onCreateDurableCargoType(number, description, sector, mainMaterial,
                             ipiPercentage);
                 }
