@@ -7,7 +7,7 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas:
 - Java Development Kit (JDK)
 - Gradle
 
-## Configuração do Projeto
+## Linux e macOS
 
 Siga as etapas abaixo para configurar o projeto em sua máquina local:
 
@@ -23,24 +23,62 @@ git clone https://github.com/seu-usuario/ACMEHandelsschifffahrtsgesellschaft.git
 cd ACMEHandelsschifffahrtsgesellschaft
 ```
 
-3. Dê permissão de execução ao arquivo gradlew:
+3. Execute o comando para inicializar o Gradle Wrapper:
+
+```bash
+gradle wrapper
+```
+
+4. Dê permissão de execução ao arquivo gradlew:
 
 ```bash
 chmod +x gradlew
 ```
 
-4. Construa o projeto utilizando o Gradle Wrapper:
+5. Construa o projeto utilizando o Gradle Wrapper:
 
 ```bash
 ./gradlew build
 ```
 
-## Executando o Projeto
-
-Após a configuração do projeto, você pode executá-lo utilizando o seguinte comando:
+6. Execute o projeto:
 
 ```bash
 ./gradlew run
+```
+
+## Windows
+
+Siga as etapas abaixo para configurar o projeto em sua máquina local:
+
+1. Clone o repositório do projeto em sua máquina:
+
+```bash
+git clone https://github.com/seu-usuario/ACMEHandelsschifffahrtsgesellschaft.git
+```
+
+2. Navegue até o diretório do projeto:
+
+```bash
+cd ACMEHandelsschifffahrtsgesellschaft
+```
+
+3. Execute o comando para inicializar o Gradle Wrapper:
+
+```bash
+gradle wrapper
+```
+
+4. Construa o projeto utilizando o Gradle Wrapper:
+
+```bash
+./gradlew.bat build
+```
+
+5. Execute o projeto:
+
+```bash
+./gradlew.bat run
 ```
 
 ## Licença
