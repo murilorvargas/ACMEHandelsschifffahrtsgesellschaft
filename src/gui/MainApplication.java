@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import gui.components.FileReadMenu;
+import gui.components.ListMenu;
 import gui.components.RegisterMenu;
 
 public class MainApplication extends JFrame {
@@ -13,6 +14,7 @@ public class MainApplication extends JFrame {
     // Componentes principais
     private JButton fileReadButton;
     private JButton manualInputButton;
+    private JButton listButton;
     private JButton quitButton;
 
     public MainApplication() {
@@ -25,6 +27,7 @@ public class MainApplication extends JFrame {
         // Botões
         fileReadButton = new JButton("Cadastrar por meio da leitura de arquivo");
         manualInputButton = new JButton("Cadastrar Manualmente");
+        listButton = new JButton("Listar");
         quitButton = new JButton("Sair");
 
         // Tratamento de evento do botão cadastrar por meio da leitura de arquivo
@@ -45,6 +48,14 @@ public class MainApplication extends JFrame {
             }
         });
 
+        listButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ListMenu();
+                setVisible(false);
+            }
+        });
+
         // Tratamento de evento do botão sair
         quitButton.addActionListener(new ActionListener() {
             @Override
@@ -61,6 +72,7 @@ public class MainApplication extends JFrame {
         JPanel botaoPainel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         botaoPainel.add(fileReadButton);
         botaoPainel.add(manualInputButton);
+        botaoPainel.add(listButton);
         botaoPainel.add(quitButton);
         painel.add(botaoPainel);
 
