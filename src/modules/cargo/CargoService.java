@@ -19,8 +19,8 @@ import modules.client.repositories.interfaces.IClientRepository;
 import modules.harbor.entities.interfaces.IHarborReadable;
 import modules.harbor.repositories.InMemoryHarborRepository;
 import modules.harbor.repositories.interfaces.IHarborRepository;
-import shared.errors.CargoAlreadyExists;
 import shared.errors.CargoNotFound;
+import shared.errors.CargoTypeNotFound;
 import shared.errors.ClientCodeNotFound;
 import shared.errors.DestinationHarborNotFound;
 import shared.errors.NoCargoRegistered;
@@ -44,8 +44,8 @@ public class CargoService {
     public ICargoReadable createCargo(CreateCargoDTO createCargoDTO) {
         ICargoTypeReadable cargoType = this.cargoTypeRepository.findByNumber(createCargoDTO.getCargoTypeNumber());
 
-        if (cargoType != null) { // TODO corrigir isso aqui, to com preguiça de entender oq ta errado
-            throw new CargoAlreadyExists(String.valueOf(createCargoDTO.getCargoTypeNumber()));
+        if (cargoType == null) {
+            throw new CargoTypeNotFound(String.valueOf(createCargoDTO.getCargoTypeNumber()));
         }
 
         IHarborReadable originHarbor = this.harborRepository.findById(createCargoDTO.getOriginHarborId());

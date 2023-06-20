@@ -1,5 +1,5 @@
 [
-{"id":"ec7b594d-63f0-486b-b294-fc50be282b12","name":"Aquaman","speed":20.0,"autonomy":6500.0,"costPerMile":25.0,"isAvailable":true},
-{"id":"5b360a1f-4429-494d-8315-58a9357c24d4","name":"Netuno","speed":40.0,"autonomy":5500.0,"costPerMile":50.0,"isAvailable":true},
-{"id":"85703335-2b0d-4b5a-90e8-7a2200920fe3","name":"Poseidon","speed":10.0,"autonomy":10000.0,"costPerMile":10.0,"isAvailable":true}
+{"id":"6f5879d0-334c-47f3-9f63-0346a91312ad","name":"Aquaman","speed":20.0,"autonomy":6500.0,"costPerMile":25.0,"isAvailable":true},
+{"id":"f3e4cc59-e489-4dac-9d23-abdc63dbc59f","name":"Netuno","speed":40.0,"autonomy":5500.0,"costPerMile":50.0,"isAvailable":true},
+{"id":"78b55914-6929-49d2-8a1d-0c01749cfc4e","name":"Poseidon","speed":10.0,"autonomy":10000.0,"costPerMile":10.0,"isAvailable":true}
 ]

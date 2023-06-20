@@ -68,8 +68,8 @@ public class InMemoryCargoTypeRepository implements ICargoTypeRepository {
     public List<ICargoTypeReadable> findAll() {
         List<ICargoTypeReadable> cargoTypes = new ArrayList<>();
 
-        for (CargoType cargoType : cargoTypeList) {
-            cargoTypeList.add(cargoType);
+        for (ICargoTypeReadable cargoType : cargoTypeList) {
+            cargoTypes.add(cargoType);
         }
 
         return cargoTypes;

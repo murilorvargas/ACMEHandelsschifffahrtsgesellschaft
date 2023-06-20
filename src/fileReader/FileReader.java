@@ -29,7 +29,6 @@ public class FileReader {
         } catch (BaseRunTimeException e) {
             throw e;
         } catch (Exception e) {
-            System.out.println(e);
             throw new ReadingFileError();
         }
 
