@@ -61,7 +61,24 @@ public class HarborRegisterForm extends JFrame {
         botaoCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                id = Integer.parseInt(campoId.getText());
+                try {
+                    id = Integer.parseInt(campoId.getText());
+                } catch (NumberFormatException exception) {
+                    mensagem.setText("O ID deve ser um número inteiro.");
+                    return;
+                }
+                if(id < 0) {
+                    mensagem.setText("O ID deve ser um número positivo.");
+                    return;
+                }
+                if(campoNome.getText().equals("")) {
+                    mensagem.setText("O nome não pode ser vazio.");
+                    return;
+                }
+                if(campoPais.getText().equals("")) {
+                    mensagem.setText("O país não pode ser vazio.");
+                    return;
+                }
                 nome = campoNome.getText();
                 pais = campoPais.getText();
                 harborRegister();
@@ -86,9 +103,10 @@ public class HarborRegisterForm extends JFrame {
         });
 
         // Painel principal
-        JPanel painelPrincipal = new JPanel(new GridLayout(2, 1));
+        JPanel painelPrincipal = new JPanel(new GridLayout(3, 1));
         painelPrincipal.add(tituloFormulario);
         painelPrincipal.add(painelCampos);
+        painelPrincipal.add(mensagem);
 
         // Painel para os botões
         JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER));

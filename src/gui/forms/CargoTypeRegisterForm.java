@@ -17,6 +17,11 @@ public class CargoTypeRegisterForm extends JFrame {
     private JTextField campoDescricao;
     private JTextField campoOrigem;
     private JTextField campoValidadeMaxima;
+    private JTextField campoSetor;
+    private JTextField campoMaterial;
+    private JTextField campoPorcentagemIPI;
+    private JButton botaoPerecivel;
+    private JButton botaoDuravel;
     private JButton botaoCadastrar;
     private JButton botaoLimpar;
     private JButton botaoVoltar;
@@ -26,6 +31,9 @@ public class CargoTypeRegisterForm extends JFrame {
     private String descricao;
     private String origem;
     private int validadeMaxima;
+    private String setor;
+    private String material;
+    private double porcentagemIPI;
     private CargoTypeController cargoTypeController;
 
     public CargoTypeRegisterForm() {
@@ -47,6 +55,12 @@ public class CargoTypeRegisterForm extends JFrame {
         campoOrigem = new JTextField();
         JLabel rotuloValidadeMaxima = new JLabel("Validade Máxima:");
         campoValidadeMaxima = new JTextField();
+        JLabel rotuloSetor = new JLabel("Setor:");
+        campoSetor = new JTextField();
+        JLabel rotuloMaterial = new JLabel("Material:");
+        campoMaterial = new JTextField();
+        JLabel rotuloPorcentagemIPI = new JLabel("Porcentagem IPI:");
+        campoPorcentagemIPI = new JTextField();
 
         painelCampos.add(rotuloNumero);
         painelCampos.add(campoNumero);
@@ -56,12 +70,45 @@ public class CargoTypeRegisterForm extends JFrame {
         painelCampos.add(campoOrigem);
         painelCampos.add(rotuloValidadeMaxima);
         painelCampos.add(campoValidadeMaxima);
+        painelCampos.add(rotuloSetor);
+        painelCampos.add(campoSetor);
+        painelCampos.add(rotuloMaterial);
+        painelCampos.add(campoMaterial);
+        painelCampos.add(rotuloPorcentagemIPI);
+        painelCampos.add(campoPorcentagemIPI);
 
         // Botões
+        botaoPerecivel = new JButton("Perecivel");
+        botaoDuravel = new JButton("Duravel");
         botaoCadastrar = new JButton("Cadastrar");
         botaoLimpar = new JButton("Limpar Campos");
         botaoVoltar = new JButton("Voltar");
         mensagem = new JLabel();
+
+        botaoPerecivel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                campoNumero.setEnabled(true);
+                campoDescricao.setEnabled(true);
+                campoOrigem.setEnabled(true);
+                campoValidadeMaxima.setEnabled(true);
+
+                campoSetor.setEnabled(false);
+                campoSetor.setVisible(false);
+                rotuloSetor.setVisible(false);
+
+                campoMaterial.setEnabled(false);
+                campoMaterial.setVisible(false);
+                rotuloMaterial.setVisible(false);
+
+                campoPorcentagemIPI.setEnabled(false);
+                campoPorcentagemIPI.setVisible(false);
+                rotuloPorcentagemIPI.setVisible(false);
+
+                mensagem.setText("Perecível selecionado. Preencha os campos obrigatórios.");
+
+            }
+        });
 
         // Tratamento de evento do botão cadastrar
         botaoCadastrar.addActionListener(new ActionListener() {
@@ -95,9 +142,14 @@ public class CargoTypeRegisterForm extends JFrame {
             }
         });
 
+        JPanel painelBotoesSelecao = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        painelBotoesSelecao.add(botaoPerecivel);
+        painelBotoesSelecao.add(botaoDuravel);
+
         // Painel principal
         JPanel painelPrincipal = new JPanel(new GridLayout(4, 1));
         painelPrincipal.add(tituloFormulario);
+        painelPrincipal.add(painelBotoesSelecao);
         painelPrincipal.add(painelCampos);
         painelPrincipal.add(mensagem);
 
