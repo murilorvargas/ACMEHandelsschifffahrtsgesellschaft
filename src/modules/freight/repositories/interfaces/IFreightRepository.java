@@ -10,11 +10,11 @@ import modules.ship.entities.interfaces.IShipReadable;
 public interface IFreightRepository {
     IFreightReadable createFreight(double value, FreightStatus status, IShipReadable ship, ICargoReadable cargo);
 
-    void updateFreight(String id, FreightStatus status);
+    void updateFreight(int id, FreightStatus status);
 
     List<IFreightReadable> findAllInProgress();
 
-    IFreightReadable findById(String id);
+    IFreightReadable findById(int id);
 
     List<IFreightReadable> findAll();
 }

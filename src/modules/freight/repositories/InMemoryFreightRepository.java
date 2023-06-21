@@ -29,15 +29,15 @@ public class InMemoryFreightRepository implements IFreightRepository {
     @Override
     public IFreightReadable createFreight(double value, FreightStatus status, IShipReadable ship,
             ICargoReadable cargo) {
-        Freight freight = new Freight(value, status, ship, cargo);
+        Freight freight = new Freight(freightSet.size() + 1, value, status, ship, cargo);
         freightSet.add(freight);
         return freight;
     }
 
     @Override
-    public void updateFreight(String id, FreightStatus status) {
+    public void updateFreight(int id, FreightStatus status) {
         for (Freight freight : freightSet) {
-            if (freight.getId().equals(id)) {
+            if (freight.getId() == id) {
                 freight.setStatus(status);
                 break;
             }
@@ -57,9 +57,9 @@ public class InMemoryFreightRepository implements IFreightRepository {
     }
 
     @Override
-    public IFreightReadable findById(String id) {
+    public IFreightReadable findById(int id) {
         for (Freight freight : freightSet) {
-            if (freight.getId().equals(id)) {
+            if (freight.getId() == id) {
                 return freight;
             }
         }

@@ -1,28 +1,26 @@
 package modules.freight.entities;
 
-import java.util.UUID;
-
 import modules.cargo.entities.interfaces.ICargoReadable;
 import modules.freight.entities.interfaces.IFreightReadable;
 import modules.freight.enums.FreightStatus;
 import modules.ship.entities.interfaces.IShipReadable;
 
 public class Freight implements IFreightReadable, Comparable<Freight> {
-    private String id;
+    private int id;
     private double value;
     private FreightStatus status;
     private IShipReadable ship;
     private ICargoReadable cargo;
 
-    public Freight(double value, FreightStatus status, IShipReadable ship, ICargoReadable cargo) {
-        this.id = UUID.randomUUID().toString();
+    public Freight(int id, double value, FreightStatus status, IShipReadable ship, ICargoReadable cargo) {
+        this.id = id;
         this.value = value;
         this.status = status;
         this.ship = ship;
         this.cargo = cargo;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -48,6 +46,6 @@ public class Freight implements IFreightReadable, Comparable<Freight> {
 
     @Override
     public int compareTo(Freight o) {
-        return this.id.compareTo(o.id);
+        return this.id - o.id;
     }
 }
