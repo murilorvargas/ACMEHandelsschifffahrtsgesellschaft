@@ -8,27 +8,55 @@ import java.awt.event.ActionListener;
 import gui.components.FileReadMenu;
 import gui.components.ListMenu;
 import gui.components.RegisterMenu;
+import modules.freight.FreightController;
+import shared.errors.BaseRunTimeException;
 
 public class MainApplication extends JFrame {
 
     // Componentes principais
+    private JTextField nameFreightField;
+    private JButton submitButton;
+
     private JButton fileReadButton;
     private JButton manualInputButton;
     private JButton listButton;
+    private JButton upDateFreightButton;
+    private JButton deleteFreightButton;
     private JButton quitButton;
+    private JLabel message;
+
+    private FreightController freightController;
 
     public MainApplication() {
         super();
+        freightController = new FreightController();
 
         // Título do formulário
         JLabel formTitle = new JLabel("ACME Handelsschifffahrtsgesellschaft");
         formTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
+        GridLayout gridCampos = new GridLayout(1, 2);
+        JPanel painelCampos = new JPanel(gridCampos);
+        JLabel nameFreightLabel = new JLabel("ID do Frete:");
+        nameFreightField = new JTextField();
+        submitButton = new JButton("Finalizar!");
+
+        painelCampos.add(nameFreightLabel);
+        painelCampos.add(nameFreightField);
+        painelCampos.add(submitButton);
+
+        nameFreightField.setEnabled(false);
+        nameFreightField.setVisible(false);
+        nameFreightLabel.setVisible(false);
+        submitButton.setVisible(false);
         // Botões
         fileReadButton = new JButton("Cadastrar por meio da leitura de arquivo");
         manualInputButton = new JButton("Cadastrar Manualmente");
         listButton = new JButton("Listar");
+        upDateFreightButton = new JButton("Atualizar Lista de Fretes Pendentes");
+        deleteFreightButton = new JButton("Finalizar Frete");
         quitButton = new JButton("Sair");
+        message = new JLabel();
 
         // Tratamento de evento do botão cadastrar por meio da leitura de arquivo
         fileReadButton.addActionListener(new ActionListener() {
@@ -56,6 +84,65 @@ public class MainApplication extends JFrame {
             }
         });
 
+        upDateFreightButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    freightController.onCreateFreights();
+                } catch (BaseRunTimeException a) {
+                    message.setText(a.getTranslation());
+                    return;
+                } catch (Exception a) {
+                    message.setText("Erro ao atualizar fretes.");
+                    return;
+                }
+
+                message.setText("Lista de fretes atualizada com sucesso!");
+            }
+        });
+
+        deleteFreightButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                nameFreightField.setEnabled(true);
+                nameFreightField.setVisible(true);
+                nameFreightLabel.setVisible(true);
+                submitButton.setVisible(true);
+            }
+        });
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String id;
+                try {
+                    id = nameFreightField.getText();
+                } catch (Exception a) {
+                    message.setText("Erro ao finalizar frete.");
+                    return;
+                }
+                if (id.equals("")) {
+                    message.setText("Preencha o campo de ID.");
+                    return;
+                }
+                try {
+                    freightController.onFinishFreight(id);
+                } catch (BaseRunTimeException a) {
+                    message.setText(a.getTranslation());
+                    return;
+                } catch (Exception a) {
+                    message.setText("Erro ao finalizar frete.");
+                    return;
+                }
+                message.setText("Frete finalizado com sucesso!");
+
+                nameFreightField.setEnabled(false);
+                nameFreightField.setVisible(false);
+                nameFreightLabel.setVisible(false);
+                submitButton.setVisible(false);
+            }
+        });
+
         // Tratamento de evento do botão sair
         quitButton.addActionListener(new ActionListener() {
             @Override
@@ -65,14 +152,18 @@ public class MainApplication extends JFrame {
         });
 
         // Painel principal
-        JPanel painel = new JPanel(new GridLayout(2, 1));
+        JPanel painel = new JPanel(new GridLayout(4, 1));
         painel.add(formTitle);
+        painel.add(message);
+        painel.add(painelCampos);
 
         // Painel para os botões
         JPanel botaoPainel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         botaoPainel.add(fileReadButton);
         botaoPainel.add(manualInputButton);
         botaoPainel.add(listButton);
+        botaoPainel.add(upDateFreightButton);
+        botaoPainel.add(deleteFreightButton);
         botaoPainel.add(quitButton);
         painel.add(botaoPainel);
 
