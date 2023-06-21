@@ -21,6 +21,7 @@ import modules.harborDistance.repositories.interfaces.IHarborDistanceRepository;
 import modules.ship.entities.interfaces.IShipReadable;
 import modules.ship.repositories.InMemoryShipRepository;
 import modules.ship.repositories.interfaces.IShipRepository;
+import shared.errors.FreightAlreadyCompleted;
 import shared.errors.FreightNotFound;
 import shared.errors.HarborDistanceNotFound;
 import shared.errors.NoFreightsRegistered;
@@ -92,6 +93,9 @@ public class FreightService {
         IFreightReadable freight = this.freightRepository.findById(finishFreightDTO.getFreightId());
         if (freight == null) {
             throw new FreightNotFound(finishFreightDTO.getFreightId());
+        }
+        if (freight.getStatus() == FreightStatus.COMPLETED) {
+            throw new FreightAlreadyCompleted(finishFreightDTO.getFreightId());
         }
         this.freightRepository.updateFreight(finishFreightDTO.getFreightId(), FreightStatus.COMPLETED);
         this.shipRepository.updateAvailability(freight.getShip().getId(), true);
