@@ -1,11 +1,9 @@
 package application;
 
-import fileReader.FileReader;
-import fileSaver.FileSaver;
-import modules.freight.FreightController;
+import gui.MainApplication;
 
 public class App {
     public static void main(String[] args) throws Exception {
-
+        new MainApplication();
     }
 }
