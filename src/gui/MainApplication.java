@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import gui.components.FileReadMenu;
 import gui.components.ListMenu;
 import gui.components.RegisterMenu;
+import modules.cargo.CargoController;
 import modules.freight.FreightController;
 import shared.errors.BaseRunTimeException;
 
@@ -33,7 +34,7 @@ public class MainApplication extends JFrame {
         JLabel formTitle = new JLabel("ACME Handelsschifffahrtsgesellschaft");
         formTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-        GridLayout gridCampos = new GridLayout(1, 2);
+        GridLayout gridCampos = new GridLayout(5, 5);
         JPanel painelCampos = new JPanel(gridCampos);
         JLabel nameFreightLabel = new JLabel("ID do Frete:");
         nameFreightField = new JTextField();
@@ -50,7 +51,7 @@ public class MainApplication extends JFrame {
         fileReadButton = new JButton("Cadastrar por meio da leitura de arquivo");
         manualInputButton = new JButton("Cadastrar Manualmente");
         listButton = new JButton("Listar");
-        upDateFreightButton = new JButton("Atualizar Lista de Fretes Pendentes");
+        upDateFreightButton = new JButton("Atualizar Cargas Pendentes");
         deleteFreightButton = new JButton("Finalizar Frete");
         quitButton = new JButton("Sair");
         message = new JLabel();
@@ -141,11 +142,6 @@ public class MainApplication extends JFrame {
             }
         });
 
-        JPanel painel = new JPanel(new GridLayout(4, 1));
-        painel.add(formTitle);
-        painel.add(message);
-        painel.add(painelCampos);
-
         JPanel botaoPainel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         botaoPainel.add(fileReadButton);
         botaoPainel.add(manualInputButton);
@@ -153,7 +149,12 @@ public class MainApplication extends JFrame {
         botaoPainel.add(upDateFreightButton);
         botaoPainel.add(deleteFreightButton);
         botaoPainel.add(quitButton);
+
+        JPanel painel = new JPanel(new GridLayout(4, 1));
+        painel.add(formTitle);
+        painel.add(message);
         painel.add(botaoPainel);
+        painel.add(painelCampos, BorderLayout.SOUTH);
 
         this.setTitle("Main Menu");
         this.add(painel);
@@ -163,6 +164,6 @@ public class MainApplication extends JFrame {
     }
 
     public static void main(String[] args) {
-        new MainApplication();
+        MainApplication window = new MainApplication();
     }
 }

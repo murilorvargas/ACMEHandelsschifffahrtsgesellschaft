@@ -25,7 +25,7 @@ public class RegisterMenu extends JFrame {
     public RegisterMenu() {
         super();
 
-        JLabel formTitle = new JLabel("Leitura de Arquivos");
+        JLabel formTitle = new JLabel("Cadastro Manual");
         formTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
         cargoButton = new JButton("Cadastrar Carga");
@@ -95,7 +95,7 @@ public class RegisterMenu extends JFrame {
         botaoPainel.add(backButton);
         painel.add(botaoPainel);
 
-        this.setTitle("Main Menu");
+        this.setTitle("Cadastro Manual");
         this.add(painel);
         this.setSize(800, 400);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

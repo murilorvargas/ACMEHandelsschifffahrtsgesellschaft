@@ -2,8 +2,8 @@ package shared.errors;
 
 public class NoFreightsRegistered extends BaseRunTimeException {
     public NoFreightsRegistered() {
-        super("Nenhum frete cadastrado, realize a criação de algum frete",
-                "No freight registered, create some freight",
-                "No freight registered", "HUSM0028");
+        super("Nenhum frete pendente, atualize a fila de cargas pendentes",
+                "No pending freight, refresh pending cargo queue",
+                "No pending freight", "HUSM0028");
     }
 }
