@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 
 public class CargoTypeRegisterForm extends JFrame {
 
-    // Componentes
     private JTextField campoNumero;
     private JTextField campoDescricao;
     private JTextField campoOrigem;
@@ -42,11 +41,9 @@ public class CargoTypeRegisterForm extends JFrame {
         super();
         cargoTypeController = new CargoTypeController();
 
-        // Título do formulário
         JLabel tituloFormulario = new JLabel("Cadastro de Tipo de Carga");
         tituloFormulario.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-        // Painel de campos de entrada
         GridLayout gridCampos = new GridLayout(4, 2);
         JPanel painelCampos = new JPanel(gridCampos);
         JLabel rotuloNumero = new JLabel("Número:");
@@ -79,7 +76,6 @@ public class CargoTypeRegisterForm extends JFrame {
         painelCampos.add(rotuloPorcentagemIPI);
         painelCampos.add(campoPorcentagemIPI);
 
-        // Botões
         botaoPerecivel = new JButton("Perecivel");
         botaoDuravel = new JButton("Duravel");
         botaoCadastrar = new JButton("Cadastrar");
@@ -114,6 +110,8 @@ public class CargoTypeRegisterForm extends JFrame {
                 rotuloPorcentagemIPI.setVisible(false);
 
                 mensagem.setText("Perecível selecionado. Preencha os campos obrigatórios.");
+                perecivel = true;
+                duravel = false;
 
             }
         });
@@ -144,40 +142,40 @@ public class CargoTypeRegisterForm extends JFrame {
                 campoValidadeMaxima.setVisible(false);
                 rotuloValidadeMaxima.setVisible(false);
 
-
-
                 campoPorcentagemIPI.setEnabled(false);
                 campoPorcentagemIPI.setVisible(false);
                 rotuloPorcentagemIPI.setVisible(false);
 
                 mensagem.setText("Duravel selecionado. Preencha os campos obrigatórios.");
+                duravel = true;
+                perecivel = false;
 
             }
         });
 
-        // Tratamento de evento do botão cadastrar
         botaoCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(!perecivel && !duravel){
+                if (!perecivel && !duravel) {
                     mensagem.setText("Selecione um tipo de carga.");
                     return;
                 }
 
-                if(perecivel) {
-                    if (campoNumero.getText().equals("") || campoDescricao.getText().equals("") || campoOrigem.getText().equals("") || campoValidadeMaxima.getText().equals("")) {
+                if (perecivel) {
+                    if (campoNumero.getText().equals("") || campoDescricao.getText().equals("")
+                            || campoOrigem.getText().equals("") || campoValidadeMaxima.getText().equals("")) {
                         mensagem.setText("Preencha todos os campos obrigatórios.");
                         return;
                     }
                     try {
                         numero = Integer.parseInt(campoNumero.getText());
-                    } catch (NumberFormatException ex){
+                    } catch (NumberFormatException ex) {
                         mensagem.setText("Número inválido.");
                         return;
                     }
                     try {
                         validadeMaxima = Integer.parseInt(campoValidadeMaxima.getText());
-                    } catch (NumberFormatException ex){
+                    } catch (NumberFormatException ex) {
                         mensagem.setText("Validade máxima inválida.");
                         return;
                     }
@@ -186,20 +184,22 @@ public class CargoTypeRegisterForm extends JFrame {
                     perishableCargoRegister();
 
                 }
-                if(duravel) {
-                    if (campoNumero.getText().equals("") || campoDescricao.getText().equals("") || campoSetor.getText().equals("") || campoMaterial.getText().equals("") || campoPorcentagemIPI.getText().equals("")) {
+                if (duravel) {
+                    if (campoNumero.getText().equals("") || campoDescricao.getText().equals("")
+                            || campoSetor.getText().equals("") || campoMaterial.getText().equals("")
+                            || campoPorcentagemIPI.getText().equals("")) {
                         mensagem.setText("Preencha todos os campos obrigatórios.");
                         return;
                     }
                     try {
                         numero = Integer.parseInt(campoNumero.getText());
-                    } catch (NumberFormatException ex){
+                    } catch (NumberFormatException ex) {
                         mensagem.setText("Número inválido.");
                         return;
                     }
                     try {
                         porcentagemIPI = Double.parseDouble(campoPorcentagemIPI.getText());
-                    } catch (NumberFormatException ex){
+                    } catch (NumberFormatException ex) {
                         mensagem.setText("Porcentagem IPI inválida.");
                         return;
                     }
@@ -209,12 +209,10 @@ public class CargoTypeRegisterForm extends JFrame {
                     durableCargoRegister();
 
                 }
-                
 
             }
         });
 
-        // Tratamento de evento do botão limpar
         botaoLimpar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -225,7 +223,6 @@ public class CargoTypeRegisterForm extends JFrame {
             }
         });
 
-        // Tratamento de evento do botão voltar
         botaoVoltar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -238,20 +235,17 @@ public class CargoTypeRegisterForm extends JFrame {
         painelBotoesSelecao.add(botaoPerecivel);
         painelBotoesSelecao.add(botaoDuravel);
 
-        // Painel principal
         JPanel painelPrincipal = new JPanel(new GridLayout(4, 1));
         painelPrincipal.add(tituloFormulario);
         painelPrincipal.add(painelBotoesSelecao);
         painelPrincipal.add(painelCampos);
         painelPrincipal.add(mensagem);
 
-        // Painel para os botões
         JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER));
         painelBotoes.add(botaoCadastrar);
         painelBotoes.add(botaoLimpar);
         painelBotoes.add(botaoVoltar);
 
-        // Adicionar os painéis ao JFrame
         this.setTitle("Cadastro de Tipo de Carga");
         this.setLayout(new BorderLayout());
         this.add(painelPrincipal, BorderLayout.NORTH);
@@ -262,13 +256,13 @@ public class CargoTypeRegisterForm extends JFrame {
     }
 
     public static void main(String[] args) {
-        CargoTypeRegisterForm janela = new CargoTypeRegisterForm();
+        new CargoTypeRegisterForm();
     }
 
     private void perishableCargoRegister() {
         try {
             cargoTypeController.onCreatePerishableCargoType(numero, descricao, origem,
-            validadeMaxima);
+                    validadeMaxima);
         } catch (BaseRunTimeException e) {
             mensagem.setText(e.getTranslation());
             return;
@@ -280,7 +274,7 @@ public class CargoTypeRegisterForm extends JFrame {
         setVisible(false);
     }
 
-     private void durableCargoRegister() {
+    private void durableCargoRegister() {
         try {
             cargoTypeController.onCreateDurableCargoType(numero, descricao, setor, material, porcentagemIPI);
         } catch (BaseRunTimeException e) {

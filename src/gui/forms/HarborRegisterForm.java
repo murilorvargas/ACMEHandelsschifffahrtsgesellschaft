@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 
 public class HarborRegisterForm extends JFrame {
 
-    // Componentes
     private JTextField campoId;
     private JTextField campoNome;
     private JTextField campoPais;
@@ -30,11 +29,9 @@ public class HarborRegisterForm extends JFrame {
         super();
         harborController = new HarborController();
 
-        // Título do formulário
         JLabel tituloFormulario = new JLabel("Cadastro de Porto");
         tituloFormulario.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-        // Painel de campos de entrada
         GridLayout gridCampos = new GridLayout(3, 2);
         JPanel painelCampos = new JPanel(gridCampos);
         JLabel rotuloId = new JLabel("ID:");
@@ -51,13 +48,11 @@ public class HarborRegisterForm extends JFrame {
         painelCampos.add(rotuloPais);
         painelCampos.add(campoPais);
 
-        // Botões
         botaoCadastrar = new JButton("Cadastrar");
         botaoLimpar = new JButton("Limpar Campos");
         botaoVoltar = new JButton("Voltar");
         mensagem = new JLabel();
 
-        // Tratamento de evento do botão cadastrar
         botaoCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,15 +62,15 @@ public class HarborRegisterForm extends JFrame {
                     mensagem.setText("O ID deve ser um número inteiro.");
                     return;
                 }
-                if(id < 0) {
+                if (id < 0) {
                     mensagem.setText("O ID deve ser um número positivo.");
                     return;
                 }
-                if(campoNome.getText().equals("")) {
+                if (campoNome.getText().equals("")) {
                     mensagem.setText("O nome não pode ser vazio.");
                     return;
                 }
-                if(campoPais.getText().equals("")) {
+                if (campoPais.getText().equals("")) {
                     mensagem.setText("O país não pode ser vazio.");
                     return;
                 }
@@ -85,15 +80,16 @@ public class HarborRegisterForm extends JFrame {
             }
         });
 
-        // Tratamento de evento do botão limpar
         botaoLimpar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica para limpar os campos
+                campoId.setText("");
+                campoNome.setText("");
+                campoPais.setText("");
+                mensagem.setText("");
             }
         });
 
-        // Tratamento de evento do botão voltar
         botaoVoltar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -102,19 +98,16 @@ public class HarborRegisterForm extends JFrame {
             }
         });
 
-        // Painel principal
         JPanel painelPrincipal = new JPanel(new GridLayout(3, 1));
         painelPrincipal.add(tituloFormulario);
         painelPrincipal.add(painelCampos);
         painelPrincipal.add(mensagem);
 
-        // Painel para os botões
         JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER));
         painelBotoes.add(botaoCadastrar);
         painelBotoes.add(botaoLimpar);
         painelBotoes.add(botaoVoltar);
 
-        // Adicionar os painéis ao JFrame
         this.setTitle("Cadastro de Porto");
         this.setLayout(new BorderLayout());
         this.add(painelPrincipal, BorderLayout.NORTH);
@@ -125,7 +118,7 @@ public class HarborRegisterForm extends JFrame {
     }
 
     public static void main(String[] args) {
-        HarborRegisterForm janela = new HarborRegisterForm();
+        new HarborRegisterForm();
     }
 
     private void harborRegister() {

@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 
 public class ShipRegisterForm extends JFrame {
 
-    // Componentes
     private JTextField campoNome;
     private JTextField campoVelocidade;
     private JTextField campoAutonomia;
@@ -32,11 +31,9 @@ public class ShipRegisterForm extends JFrame {
         super();
         shipController = new ShipController();
 
-        // Título do formulário
         JLabel tituloFormulario = new JLabel("Cadastro de Navio");
         tituloFormulario.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-        // Painel de campos de entrada
         GridLayout gridCampos = new GridLayout(4, 2);
         JPanel painelCampos = new JPanel(gridCampos);
         JLabel rotuloNome = new JLabel("Nome:");
@@ -57,13 +54,11 @@ public class ShipRegisterForm extends JFrame {
         painelCampos.add(rotuloCustoPorMilha);
         painelCampos.add(campoCustoPorMilha);
 
-        // Botões
         botaoCadastrar = new JButton("Cadastrar");
         botaoLimpar = new JButton("Limpar Campos");
         botaoVoltar = new JButton("Voltar");
         mensagem = new JLabel();
 
-        // Tratamento de evento do botão cadastrar
         botaoCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -106,7 +101,6 @@ public class ShipRegisterForm extends JFrame {
             }
         });
 
-        // Tratamento de evento do botão limpar
         botaoLimpar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -118,7 +112,6 @@ public class ShipRegisterForm extends JFrame {
             }
         });
 
-        // Tratamento de evento do botão voltar
         botaoVoltar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -127,19 +120,16 @@ public class ShipRegisterForm extends JFrame {
             }
         });
 
-        // Painel principal
         JPanel painelPrincipal = new JPanel(new GridLayout(3, 1));
         painelPrincipal.add(tituloFormulario);
         painelPrincipal.add(painelCampos);
         painelPrincipal.add(mensagem);
 
-        // Painel para os botões
         JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER));
         painelBotoes.add(botaoCadastrar);
         painelBotoes.add(botaoLimpar);
         painelBotoes.add(botaoVoltar);
 
-        // Adicionar os painéis ao JFrame
         this.setTitle("Cadastro de Navio");
         this.setLayout(new BorderLayout());
         this.add(painelPrincipal, BorderLayout.NORTH);
@@ -150,7 +140,7 @@ public class ShipRegisterForm extends JFrame {
     }
 
     public static void main(String[] args) {
-        ShipRegisterForm janela = new ShipRegisterForm();
+        new ShipRegisterForm();
     }
 
     private void shipRegister() {

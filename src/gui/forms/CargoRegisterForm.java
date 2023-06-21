@@ -4,7 +4,6 @@ import javax.swing.*;
 
 import gui.components.RegisterMenu;
 import modules.cargo.CargoController;
-import modules.cargo.entities.Cargo;
 import shared.errors.BaseRunTimeException;
 
 import java.awt.*;
@@ -13,7 +12,6 @@ import java.awt.event.ActionListener;
 
 public class CargoRegisterForm extends JFrame {
 
-    // Componentes principais
     private JTextField idField;
     private JTextField weightField;
     private JTextField declaredValueField;
@@ -43,11 +41,9 @@ public class CargoRegisterForm extends JFrame {
         super();
         cargoController = new CargoController();
 
-        // Título do formulário
         JLabel formTitle = new JLabel("Cadastre uma Nova Carga");
         formTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-        // Painel para campos de entrada
         GridLayout gridCampos = new GridLayout(5, 2);
         JPanel painelCampos = new JPanel(gridCampos);
         JLabel idLabel = new JLabel("ID:");
@@ -88,40 +84,90 @@ public class CargoRegisterForm extends JFrame {
         painelCampos.add(clientIdLabel);
         painelCampos.add(clientIdField);
 
-        // Botões
         registerButton = new JButton("Cadastrar");
         clearButton = new JButton("Limpar Campos");
         backButton = new JButton("Voltar");
         message = new JLabel();
 
-        // Tratamento de evento do botão cadastrar
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                id = Integer.parseInt(idField.getText());
-                weight = Double.parseDouble(weightField.getText());
-                declaredValue = Double.parseDouble(declaredValueField.getText());
-                maxTime = Integer.parseInt(maxTimeField.getText());
+                try {
+                    id = Integer.parseInt(idField.getText());
+                } catch (NumberFormatException exception) {
+                    message.setText("O ID deve ser um número inteiro.");
+                    return;
+                }
+                try {
+                    weight = Double.parseDouble(weightField.getText());
+                } catch (NumberFormatException exception) {
+                    message.setText("O peso deve ser um número decimal.");
+                    return;
+                }
+                try {
+                    declaredValue = Double.parseDouble(declaredValueField.getText());
+                } catch (NumberFormatException exception) {
+                    message.setText("O valor declarado deve ser um número decimal.");
+                    return;
+                }
+                try {
+                    maxTime = Integer.parseInt(maxTimeField.getText());
+                } catch (NumberFormatException exception) {
+                    message.setText("O tempo máximo deve ser um número inteiro.");
+                    return;
+                }
+                try {
+                    cargoTypeNumber = Integer.parseInt(cargoTypeNumberField.getText());
+                } catch (NumberFormatException exception) {
+                    message.setText("O número do tipo da carga deve ser um número inteiro.");
+                    return;
+                }
+                try {
+                    originHarborId = Integer.parseInt(originHarborIdField.getText());
+                } catch (NumberFormatException exception) {
+                    message.setText("O ID da origem deve ser um número inteiro.");
+                    return;
+                }
+                try {
+                    destinationHarborId = Integer.parseInt(destinationHarborIdField.getText());
+                } catch (NumberFormatException exception) {
+                    message.setText("O ID do destino deve ser um número inteiro.");
+                    return;
+                }
+                try {
+                    clientId = Integer.parseInt(clientIdField.getText());
+                } catch (NumberFormatException exception) {
+                    message.setText("O ID do cliente deve ser um número inteiro.");
+                    return;
+                }
                 priority = priorityField.getText();
-                cargoTypeNumber = Integer.parseInt(cargoTypeNumberField.getText());
-                originHarborId = Integer.parseInt(originHarborIdField.getText());
-                destinationHarborId = Integer.parseInt(destinationHarborIdField.getText());
-                clientId = Integer.parseInt(clientIdField.getText());
 
-                cargoRegister();
+                try {
+                    cargoRegister();
+                } catch (BaseRunTimeException exception) {
+                    message.setText(exception.getTranslation());
+                    return;
+                }
 
             }
         });
 
-        // Tratamento de evento do botão limpar
         clearButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica para limpar os campos
+                idField.setText("");
+                weightField.setText("");
+                declaredValueField.setText("");
+                maxTimeField.setText("");
+                priorityField.setText("");
+                cargoTypeNumberField.setText("");
+                originHarborIdField.setText("");
+                destinationHarborIdField.setText("");
+                clientIdField.setText("");
+                message.setText("");
             }
         });
 
-        // Tratamento de evento do botão voltar
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -130,19 +176,16 @@ public class CargoRegisterForm extends JFrame {
             }
         });
 
-        // Painel principal
         JPanel painel = new JPanel(new GridLayout(3, 1));
         painel.add(formTitle);
         painel.add(painelCampos);
         painel.add(message);
 
-        // Painel para os botões
         JPanel botaoPainel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         botaoPainel.add(registerButton);
         botaoPainel.add(clearButton);
         botaoPainel.add(backButton);
 
-        // Adicionar os painéis ao JFrame
         this.setTitle("Cadastro de Carga");
         this.setLayout(new BorderLayout());
         this.add(painel, BorderLayout.NORTH);
@@ -153,7 +196,7 @@ public class CargoRegisterForm extends JFrame {
     }
 
     public static void main(String[] args) {
-        CargoRegisterForm janela = new CargoRegisterForm();
+        new CargoRegisterForm();
     }
 
     private void cargoRegister() {

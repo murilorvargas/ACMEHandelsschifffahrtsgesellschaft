@@ -28,7 +28,7 @@ public class Client implements Comparable<Client>, IClientReadable {
 
     @Override
     public int compareTo(Client other) {
-        return this.name.compareTo(other.name);
+        return Integer.compare(this.code, other.code);
     }
 
 }

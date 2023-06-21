@@ -13,7 +13,6 @@ import shared.errors.BaseRunTimeException;
 
 public class MainApplication extends JFrame {
 
-    // Componentes principais
     private JTextField nameFreightField;
     private JButton submitButton;
 
@@ -31,7 +30,6 @@ public class MainApplication extends JFrame {
         super();
         freightController = new FreightController();
 
-        // Título do formulário
         JLabel formTitle = new JLabel("ACME Handelsschifffahrtsgesellschaft");
         formTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
@@ -49,7 +47,6 @@ public class MainApplication extends JFrame {
         nameFreightField.setVisible(false);
         nameFreightLabel.setVisible(false);
         submitButton.setVisible(false);
-        // Botões
         fileReadButton = new JButton("Cadastrar por meio da leitura de arquivo");
         manualInputButton = new JButton("Cadastrar Manualmente");
         listButton = new JButton("Listar");
@@ -58,7 +55,6 @@ public class MainApplication extends JFrame {
         quitButton = new JButton("Sair");
         message = new JLabel();
 
-        // Tratamento de evento do botão cadastrar por meio da leitura de arquivo
         fileReadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,7 +63,6 @@ public class MainApplication extends JFrame {
             }
         });
 
-        // Tratamento de evento do botão cadastrar manualmente
         manualInputButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -96,7 +91,6 @@ public class MainApplication extends JFrame {
                     message.setText("Erro ao atualizar fretes.");
                     return;
                 }
-
                 message.setText("Lista de fretes atualizada com sucesso!");
             }
         });
@@ -143,7 +137,6 @@ public class MainApplication extends JFrame {
             }
         });
 
-        // Tratamento de evento do botão sair
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -151,13 +144,11 @@ public class MainApplication extends JFrame {
             }
         });
 
-        // Painel principal
         JPanel painel = new JPanel(new GridLayout(4, 1));
         painel.add(formTitle);
         painel.add(message);
         painel.add(painelCampos);
 
-        // Painel para os botões
         JPanel botaoPainel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         botaoPainel.add(fileReadButton);
         botaoPainel.add(manualInputButton);
@@ -167,7 +158,6 @@ public class MainApplication extends JFrame {
         botaoPainel.add(quitButton);
         painel.add(botaoPainel);
 
-        // Configurações da janela
         this.setTitle("Main Menu");
         this.add(painel);
         this.setSize(800, 400);
@@ -176,6 +166,6 @@ public class MainApplication extends JFrame {
     }
 
     public static void main(String[] args) {
-        MainApplication window = new MainApplication();
+        new MainApplication();
     }
 }
