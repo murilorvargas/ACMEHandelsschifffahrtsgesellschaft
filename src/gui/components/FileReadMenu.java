@@ -155,7 +155,7 @@ public class FileReadMenu extends JFrame {
         painelButtons.add(readAllButton);
         painelButtons.add(backButton);
 
-        this.setTitle("Main Menu");
+        this.setTitle("Leitura de Arquivos");
         this.setLayout(new BorderLayout());
         this.add(painel, BorderLayout.NORTH);
         this.add(painelCampos, BorderLayout.CENTER);

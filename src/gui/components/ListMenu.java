@@ -54,7 +54,7 @@ public class ListMenu extends JFrame {
         shipController = new ShipController();
         freightController = new FreightController();
 
-        JLabel formTitle = new JLabel("Leitura de Arquivos");
+        JLabel formTitle = new JLabel("Listas");
         formTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
         cargoButton = new JButton("Lista de Cargas");
@@ -80,8 +80,8 @@ public class ListMenu extends JFrame {
                     return;
                 }
                 ArrayList<String> list = new ArrayList<>();
-                
-                for(ICargoReadable cargo : cargoController.onFindAllCargos()) {
+
+                for (ICargoReadable cargo : cargoController.onFindAllCargos()) {
                     String info = "Carga " + cargo.getId() + ": " +
                             "Peso: " + cargo.getWeight() + ", " +
                             "Tempo Máximo: " + cargo.getMaxTime() + ", " +
@@ -123,7 +123,7 @@ public class ListMenu extends JFrame {
                     return;
                 }
                 ArrayList<String> list = new ArrayList<>();
-                for(ICargoTypeReadable cargoType : cargoTypeController.onFindAllCargoTypes()) {
+                for (ICargoTypeReadable cargoType : cargoTypeController.onFindAllCargoTypes()) {
                     if (cargoType instanceof IDurableCargoTypeReadable) {
                         String info = "Carga " + cargoType.getNumber() + ": " +
                                 "Descrição: " + cargoType.getDescription() + ", " +
@@ -170,7 +170,7 @@ public class ListMenu extends JFrame {
                     return;
                 }
                 ArrayList<String> list = new ArrayList<>();
-                for(IClientReadable client : clientController.onFindAllClients()) {
+                for (IClientReadable client : clientController.onFindAllClients()) {
                     String info = "Cliente " + client.getCode() + ": " +
                             "Nome: " + client.getName() + ", " +
                             "Email: " + client.getEmail() + ";  ";
@@ -193,7 +193,7 @@ public class ListMenu extends JFrame {
                     return;
                 }
                 ArrayList<String> list = new ArrayList<>();
-                for(IHarborReadable harbor : harborController.onFindAllHarbors()) {
+                for (IHarborReadable harbor : harborController.onFindAllHarbors()) {
                     String info = "Porto " + harbor.getId() + ": " +
                             "Nome: " + harbor.getName() + ", " +
                             "País: " + harbor.getCountry() + ";  ";
@@ -267,7 +267,7 @@ public class ListMenu extends JFrame {
                     return;
                 }
                 ArrayList<String> list = new ArrayList<>();
-                for(IFreightReadable freightReadable : freightController.onFindAllInProgressFreights()) {
+                for (IFreightReadable freightReadable : freightController.onFindAllInProgressFreights()) {
                     String info = "Frete " + freightReadable.getId() + ": " +
                             "Carga: " + freightReadable.getCargo().getId() + ", "
                             +
@@ -303,7 +303,7 @@ public class ListMenu extends JFrame {
         botaoPainel.add(backButton);
         painel.add(botaoPainel);
 
-        this.setTitle("Main Menu");
+        this.setTitle("Lista");
         this.add(painel);
         this.setSize(800, 400);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
