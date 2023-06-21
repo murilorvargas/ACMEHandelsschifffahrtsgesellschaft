@@ -24,14 +24,14 @@ import java.util.ArrayList;
 
 public class ListMenu extends JFrame {
 
-    // Componentes principais
     private JButton cargoButton;
     private JButton cargoTypePerishbleButton;
     private JButton cargoTypeDurableButton;
     private JButton clientButton;
     private JButton harborButton;
     private JButton shipButton;
-    private JButton freightButton;
+    private JButton freightPendingButton;
+    private JButton allFreightButton;
     private JButton backButton;
     private JLabel message;
 
@@ -51,22 +51,20 @@ public class ListMenu extends JFrame {
         shipController = new ShipController();
         freightController = new FreightController();
 
-        // Título do formulário
         JLabel formTitle = new JLabel("Leitura de Arquivos");
         formTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-        // Botões
         cargoButton = new JButton("Lista de Cargas");
         cargoTypePerishbleButton = new JButton("Lista Carga Perecível");
         cargoTypeDurableButton = new JButton("Lista Carga Durável");
         clientButton = new JButton("Lista de Cliente");
         harborButton = new JButton("Lista de Porto");
         shipButton = new JButton("Lista de Navio");
-        freightButton = new JButton("Lista de Frete");
+        freightPendingButton = new JButton("Lista de Frete Pendentes");
+        allFreightButton = new JButton("Lista de Todos os Fretes");
         backButton = new JButton("Voltar");
         message = new JLabel();
 
-        // Tratamento de evento do botão cadastrar carga
         cargoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -92,7 +90,17 @@ public class ListMenu extends JFrame {
                             "Porto de Destino: "
                             + cargoController.onFindAllCargos().get(i).getDestinationHarbor().getName()
                             + ", " +
-                            "Cliente: " + cargoController.onFindAllCargos().get(i).getClient().getName() + ";  ";
+                            "Cliente: " + cargoController.onFindAllCargos().get(i).getClient().getName()
+                            + ", " +
+                            "Status da Carga: " + cargoController.onFindAllCargos().get(i).getStatus() +
+                            " ,";
+
+                    if (cargoController.onFindAllCargos().get(i).getDestinedShip() != null) {
+                        info += "Navio: " + cargoController.onFindAllCargos().get(i).getDestinedShip().getName() + " ;";
+                    } else {
+                        info += "Navio: Não Atribuido ;";
+                    }
+
                     list.add(info);
                 }
                 displayTable("Lista de Cargas", list);
@@ -244,7 +252,33 @@ public class ListMenu extends JFrame {
             }
         });
 
-        freightButton.addActionListener(new ActionListener() {
+        allFreightButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    freightController.onFindAll();
+                } catch (BaseRunTimeException a) {
+                    message.setText(a.getTranslation());
+                    return;
+                } catch (Exception a) {
+                    message.setText("Erro ao ler o arquivo.");
+                    return;
+                }
+                ArrayList<String> list = new ArrayList<>();
+                for (int i = 0; i < freightController.onFindAll().size(); i++) {
+                    String info = "Frete " + freightController.onFindAll().get(i).getId() + ": " +
+                            "Carga: " + freightController.onFindAll().get(i).getCargo().getId() + ", "
+                            +
+                            "Valor: " + freightController.onFindAll().get(i).getValue() + ", " +
+                            "Navio: " + freightController.onFindAll().get(i).getShip().getName() + ", " +
+                            "Status do Frete: " + freightController.onFindAll().get(i).getStatus() + ";  ";
+                    list.add(info);
+                }
+                displayTable("Lista de Todos os Fretes", list);
+            }
+        });
+
+        freightPendingButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -259,9 +293,11 @@ public class ListMenu extends JFrame {
                 ArrayList<String> list = new ArrayList<>();
                 for (int i = 0; i < freightController.onFindAllInProgressFreights().size(); i++) {
                     String info = "Frete " + freightController.onFindAllInProgressFreights().get(i).getId() + ": " +
-                            "Carga: " + freightController.onFindAllInProgressFreights().get(i).getCargo() + ", " +
+                            "Carga: " + freightController.onFindAllInProgressFreights().get(i).getCargo().getId() + ", "
+                            +
                             "Valor: " + freightController.onFindAllInProgressFreights().get(i).getValue() + ", " +
-                            "Navio: " + freightController.onFindAllInProgressFreights().get(i).getShip() + ";  ";
+                            "Navio: " + freightController.onFindAllInProgressFreights().get(i).getShip().getName()
+                            + ";  ";
                     list.add(info);
                 }
                 displayTable("Lista de Fretes Pendentes", list);
@@ -277,12 +313,10 @@ public class ListMenu extends JFrame {
             }
         });
 
-        // Painel principal
         JPanel painel = new JPanel(new GridLayout(3, 1));
         painel.add(formTitle);
         painel.add(message);
 
-        // Painel para os botões
         JPanel botaoPainel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         botaoPainel.add(cargoButton);
         botaoPainel.add(cargoTypePerishbleButton);
@@ -290,11 +324,11 @@ public class ListMenu extends JFrame {
         botaoPainel.add(clientButton);
         botaoPainel.add(harborButton);
         botaoPainel.add(shipButton);
-        botaoPainel.add(freightButton);
+        botaoPainel.add(freightPendingButton);
+        botaoPainel.add(allFreightButton);
         botaoPainel.add(backButton);
         painel.add(botaoPainel);
 
-        // Configurações da janela
         this.setTitle("Main Menu");
         this.add(painel);
         this.setSize(800, 400);

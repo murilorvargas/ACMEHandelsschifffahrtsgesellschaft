@@ -13,7 +13,6 @@ import shared.errors.BaseRunTimeException;
 
 public class FileReadMenu extends JFrame {
 
-    // Componentes principais
     private JTextField nameField;
     private JButton cargoButton;
     private JButton cargoTypeButton;
@@ -22,6 +21,7 @@ public class FileReadMenu extends JFrame {
     private JButton harborDistanceButton;
     private JButton shipButton;
     private JButton backButton;
+    private JButton readAllButton;
     private JLabel message;
 
     private String fileName;
@@ -30,11 +30,9 @@ public class FileReadMenu extends JFrame {
     public FileReadMenu() {
         super();
         fileReader = new FileReader();
-        // Título do formulário
         JLabel formTitle = new JLabel("Leitura de Arquivos");
         formTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-        // Painel para campos de entrada
         GridLayout gridCampos = new GridLayout(7, 7);
         JPanel painelCampos = new JPanel(gridCampos);
         JLabel nameLabel = new JLabel("Nome do arquivo:");
@@ -42,7 +40,6 @@ public class FileReadMenu extends JFrame {
         painelCampos.add(nameLabel);
         painelCampos.add(nameField);
 
-        // Tratamento de evento do botão "Cadastrar Carga"
         cargoButton = new JButton("Cadastrar Carga");
         cargoButton.addActionListener(new ActionListener() {
             @Override
@@ -118,6 +115,20 @@ public class FileReadMenu extends JFrame {
             }
         });
 
+        readAllButton = new JButton("Cadastrar Todos");
+
+        readAllButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fileName = nameField.getText();
+                if (fileName.equals("")) {
+                    message.setText("Por favor, insira o nome do arquivo.");
+                } else {
+                    readFile("all");
+                }
+            }
+        });
+
         backButton = new JButton("Voltar");
         backButton.addActionListener(new ActionListener() {
             @Override
@@ -128,13 +139,11 @@ public class FileReadMenu extends JFrame {
         });
         message = new JLabel();
 
-        // Painel principal
         GridLayout grid = new GridLayout(3, 3);
         JPanel painel = new JPanel(grid);
         painel.add(formTitle);
         painel.add(message);
 
-        // Painel para os botões
         GridLayout gridButton = new GridLayout(3, 3);
         JPanel painelButtons = new JPanel(gridButton);
         FlowLayout botaoLayout = new FlowLayout(FlowLayout.CENTER);
@@ -145,9 +154,9 @@ public class FileReadMenu extends JFrame {
         painelButtons.add(harborButton);
         painelButtons.add(harborDistanceButton);
         painelButtons.add(shipButton);
+        painelButtons.add(readAllButton);
         painelButtons.add(backButton);
 
-        // Adicionar os painéis ao JFrame
         this.setTitle("Main Menu");
         this.setLayout(new BorderLayout());
         this.add(painel, BorderLayout.NORTH);
@@ -164,7 +173,16 @@ public class FileReadMenu extends JFrame {
 
     private void readFile(String type) {
         try {
-            fileReader.readFile(fileName, type);
+            if (type.equals("all")) {
+                fileReader.readFile(fileName + "-PORTOS", "harbor");
+                fileReader.readFile(fileName + "-DISTANCIAS", "harborDistance");
+                fileReader.readFile(fileName + "-NAVIOS", "ship");
+                fileReader.readFile(fileName + "-CLIENTES", "client");
+                fileReader.readFile(fileName + "-TIPOSCARGAS", "cargoType");
+                fileReader.readFile(fileName + "-CARGAS", "cargo");
+            } else {
+                fileReader.readFile(fileName, type);
+            }
         } catch (BaseRunTimeException e) {
             message.setText(e.getTranslation());
             return;

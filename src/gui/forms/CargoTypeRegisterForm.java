@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 
 public class CargoTypeRegisterForm extends JFrame {
 
-    // Componentes
     private JTextField campoNumero;
     private JTextField campoDescricao;
     private JTextField campoOrigem;
@@ -42,11 +41,9 @@ public class CargoTypeRegisterForm extends JFrame {
         super();
         cargoTypeController = new CargoTypeController();
 
-        // Título do formulário
         JLabel tituloFormulario = new JLabel("Cadastro de Tipo de Carga");
         tituloFormulario.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-        // Painel de campos de entrada
         GridLayout gridCampos = new GridLayout(4, 2);
         JPanel painelCampos = new JPanel(gridCampos);
         JLabel rotuloNumero = new JLabel("Número:");
@@ -79,7 +76,6 @@ public class CargoTypeRegisterForm extends JFrame {
         painelCampos.add(rotuloPorcentagemIPI);
         painelCampos.add(campoPorcentagemIPI);
 
-        // Botões
         botaoPerecivel = new JButton("Perecivel");
         botaoDuravel = new JButton("Duravel");
         botaoCadastrar = new JButton("Cadastrar");
@@ -157,7 +153,6 @@ public class CargoTypeRegisterForm extends JFrame {
             }
         });
 
-        // Tratamento de evento do botão cadastrar
         botaoCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -218,7 +213,6 @@ public class CargoTypeRegisterForm extends JFrame {
             }
         });
 
-        // Tratamento de evento do botão limpar
         botaoLimpar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -229,7 +223,6 @@ public class CargoTypeRegisterForm extends JFrame {
             }
         });
 
-        // Tratamento de evento do botão voltar
         botaoVoltar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -242,20 +235,17 @@ public class CargoTypeRegisterForm extends JFrame {
         painelBotoesSelecao.add(botaoPerecivel);
         painelBotoesSelecao.add(botaoDuravel);
 
-        // Painel principal
         JPanel painelPrincipal = new JPanel(new GridLayout(4, 1));
         painelPrincipal.add(tituloFormulario);
         painelPrincipal.add(painelBotoesSelecao);
         painelPrincipal.add(painelCampos);
         painelPrincipal.add(mensagem);
 
-        // Painel para os botões
         JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER));
         painelBotoes.add(botaoCadastrar);
         painelBotoes.add(botaoLimpar);
         painelBotoes.add(botaoVoltar);
 
-        // Adicionar os painéis ao JFrame
         this.setTitle("Cadastro de Tipo de Carga");
         this.setLayout(new BorderLayout());
         this.add(painelPrincipal, BorderLayout.NORTH);

@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 
 public class ClientRegisterForm extends JFrame {
 
-    // Componentes
     private JTextField campoCodigo;
     private JTextField campoNome;
     private JTextField campoEmail;
@@ -31,11 +30,9 @@ public class ClientRegisterForm extends JFrame {
         super();
         clientController = new ClientController();
 
-        // Título do formulário
         JLabel tituloFormulario = new JLabel("Cadastro de Cliente");
         tituloFormulario.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-        // Painel de campos de entrada
         GridLayout gridCampos = new GridLayout(3, 2);
         JPanel painelCampos = new JPanel(gridCampos);
         JLabel rotuloCodigo = new JLabel("Código:");
@@ -52,13 +49,11 @@ public class ClientRegisterForm extends JFrame {
         painelCampos.add(rotuloEmail);
         painelCampos.add(campoEmail);
 
-        // Botões
         botaoCadastrar = new JButton("Cadastrar");
         botaoLimpar = new JButton("Limpar Campos");
         botaoVoltar = new JButton("Voltar");
         mensagem = new JLabel();
 
-        // Tratamento de evento do botão cadastrar
         botaoCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -87,7 +82,6 @@ public class ClientRegisterForm extends JFrame {
             }
         });
 
-        // Tratamento de evento do botão limpar
         botaoLimpar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -97,7 +91,6 @@ public class ClientRegisterForm extends JFrame {
             }
         });
 
-        // Tratamento de evento do botão voltar
         botaoVoltar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -106,19 +99,16 @@ public class ClientRegisterForm extends JFrame {
             }
         });
 
-        // Painel principal
         JPanel painelPrincipal = new JPanel(new GridLayout(3, 1));
         painelPrincipal.add(tituloFormulario);
         painelPrincipal.add(painelCampos);
         painelPrincipal.add(mensagem);
 
-        // Painel para os botões
         JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER));
         painelBotoes.add(botaoCadastrar);
         painelBotoes.add(botaoLimpar);
         painelBotoes.add(botaoVoltar);
 
-        // Adicionar os painéis ao JFrame
         this.setTitle("Cadastro de Cliente");
         this.setLayout(new BorderLayout());
         this.add(painelPrincipal, BorderLayout.NORTH);

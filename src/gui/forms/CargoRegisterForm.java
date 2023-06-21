@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 
 public class CargoRegisterForm extends JFrame {
 
-    // Componentes principais
     private JTextField idField;
     private JTextField weightField;
     private JTextField declaredValueField;
@@ -43,11 +42,9 @@ public class CargoRegisterForm extends JFrame {
         super();
         cargoController = new CargoController();
 
-        // Título do formulário
         JLabel formTitle = new JLabel("Cadastre uma Nova Carga");
         formTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-        // Painel para campos de entrada
         GridLayout gridCampos = new GridLayout(5, 2);
         JPanel painelCampos = new JPanel(gridCampos);
         JLabel idLabel = new JLabel("ID:");
@@ -88,13 +85,11 @@ public class CargoRegisterForm extends JFrame {
         painelCampos.add(clientIdLabel);
         painelCampos.add(clientIdField);
 
-        // Botões
         registerButton = new JButton("Cadastrar");
         clearButton = new JButton("Limpar Campos");
         backButton = new JButton("Voltar");
         message = new JLabel();
 
-        // Tratamento de evento do botão cadastrar
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -158,7 +153,6 @@ public class CargoRegisterForm extends JFrame {
             }
         });
 
-        // Tratamento de evento do botão limpar
         clearButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -175,7 +169,6 @@ public class CargoRegisterForm extends JFrame {
             }
         });
 
-        // Tratamento de evento do botão voltar
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -184,19 +177,16 @@ public class CargoRegisterForm extends JFrame {
             }
         });
 
-        // Painel principal
         JPanel painel = new JPanel(new GridLayout(3, 1));
         painel.add(formTitle);
         painel.add(painelCampos);
         painel.add(message);
 
-        // Painel para os botões
         JPanel botaoPainel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         botaoPainel.add(registerButton);
         botaoPainel.add(clearButton);
         botaoPainel.add(backButton);
 
-        // Adicionar os painéis ao JFrame
         this.setTitle("Cadastro de Carga");
         this.setLayout(new BorderLayout());
         this.add(painel, BorderLayout.NORTH);

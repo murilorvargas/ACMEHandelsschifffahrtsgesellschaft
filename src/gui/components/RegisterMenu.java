@@ -15,7 +15,6 @@ import java.awt.event.ActionListener;
 
 public class RegisterMenu extends JFrame {
 
-    // Componentes principais
     private JButton cargoButton;
     private JButton cargoTypeButton;
     private JButton clientButton;
@@ -26,11 +25,9 @@ public class RegisterMenu extends JFrame {
     public RegisterMenu() {
         super();
 
-        // Título do formulário
         JLabel formTitle = new JLabel("Leitura de Arquivos");
         formTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-        // Botões
         cargoButton = new JButton("Cadastrar Carga");
         cargoTypeButton = new JButton("Cadastrar Tipo de Carga");
         clientButton = new JButton("Cadastrar Cliente");
@@ -38,7 +35,6 @@ public class RegisterMenu extends JFrame {
         shipButton = new JButton("Cadastrar Navio");
         backButton = new JButton("Voltar");
 
-        // Tratamento de evento do botão cadastrar carga
         cargoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -87,11 +83,9 @@ public class RegisterMenu extends JFrame {
             }
         });
 
-        // Painel principal
         JPanel painel = new JPanel(new GridLayout(2, 2));
         painel.add(formTitle);
 
-        // Painel para os botões
         JPanel botaoPainel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         botaoPainel.add(cargoButton);
         botaoPainel.add(cargoTypeButton);
@@ -101,7 +95,6 @@ public class RegisterMenu extends JFrame {
         botaoPainel.add(backButton);
         painel.add(botaoPainel);
 
-        // Configurações da janela
         this.setTitle("Main Menu");
         this.add(painel);
         this.setSize(800, 400);
