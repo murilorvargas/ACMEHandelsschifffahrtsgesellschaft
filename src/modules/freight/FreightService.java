@@ -80,6 +80,7 @@ public class FreightService {
                 if (ship.getIsAvailable()) {
                     this.freightRepository.createFreight(this.freightCost(ship, pendingCargo, harborDistance),
                             FreightStatus.IN_PROGRESS, ship, pendingCargo);
+                    this.cargoRepository.updateDestinedShip(pendingCargo.getId(), ship);
                     this.cargoRepository.updateStatus(pendingCargo.getId(), CargoStatus.RENTED);
                     this.shipRepository.updateAvailability(ship.getId(), false);
                 }

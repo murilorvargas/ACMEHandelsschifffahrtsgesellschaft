@@ -12,6 +12,7 @@ import modules.cargo.repositories.interfaces.ICargoRepository;
 import modules.cargoType.entities.interfaces.ICargoTypeReadable;
 import modules.client.entities.interfaces.IClientReadable;
 import modules.harbor.entities.interfaces.IHarborReadable;
+import modules.ship.entities.interfaces.IShipReadable;
 
 public class InMemoryCargoRepository implements ICargoRepository {
     private TreeSet<Cargo> cargoList;
@@ -44,6 +45,18 @@ public class InMemoryCargoRepository implements ICargoRepository {
         for (Cargo cargo : this.cargoList) {
             if (cargo.getId() == id) {
                 cargo.setStatus(cargoStatus);
+                return cargo;
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public ICargoReadable updateDestinedShip(int id, IShipReadable destinedShip) {
+        for (Cargo cargo : this.cargoList) {
+            if (cargo.getId() == id) {
+                cargo.setDestinedShip(destinedShip);
                 return cargo;
             }
         }
