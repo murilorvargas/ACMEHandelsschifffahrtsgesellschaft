@@ -51,7 +51,7 @@ public class MainApplication extends JFrame {
         fileReadButton = new JButton("Cadastrar por meio da leitura de arquivo");
         manualInputButton = new JButton("Cadastrar Manualmente");
         listButton = new JButton("Listar");
-        upDateFreightButton = new JButton("Atualizar Lista de Fretes Pendentes");
+        upDateFreightButton = new JButton("Atualizar Cargas Pendentes");
         deleteFreightButton = new JButton("Finalizar Frete");
         quitButton = new JButton("Sair");
         message = new JLabel();

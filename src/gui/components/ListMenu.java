@@ -275,7 +275,7 @@ public class ListMenu extends JFrame {
                             "Navio: " + freightReadable.getShip().getName() + ";  ";
                     list.add(info);
                 }
-                displayTable("Lista de Fretes Pendentes", list);
+                displayTable("Lista de Fretes Em Progresso", list);
             }
         });
 
