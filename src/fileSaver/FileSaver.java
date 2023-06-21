@@ -2,12 +2,11 @@ package fileSaver;
 
 import java.lang.reflect.Constructor;
 
-import fileReader.processors.interfaces.IFileReader;
 import fileSaver.processors.FileSaverProcessorFactory;
 import fileSaver.processors.interfaces.IFileSaver;
 import shared.errors.BaseRunTimeException;
 import shared.errors.FileTypeNotFound;
-import shared.errors.ReadingFileError;
+import shared.errors.WritingFileError;
 
 public class FileSaver {
     private FileSaverProcessorFactory fileSaverProcessorFactory;
@@ -30,7 +29,7 @@ public class FileSaver {
         } catch (BaseRunTimeException e) {
             throw e;
         } catch (Exception e) {
-            // TODO writing file error
+            throw new WritingFileError();
         }
 
     }

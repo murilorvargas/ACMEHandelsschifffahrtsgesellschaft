@@ -7,7 +7,7 @@ import modules.freight.entities.interfaces.IFreightReadable;
 import modules.freight.enums.FreightStatus;
 import modules.ship.entities.interfaces.IShipReadable;
 
-public class Freight implements IFreightReadable {
+public class Freight implements IFreightReadable, Comparable<Freight> {
     private String id;
     private double value;
     private FreightStatus status;
@@ -44,5 +44,10 @@ public class Freight implements IFreightReadable {
 
     public ICargoReadable getCargo() {
         return cargo;
+    }
+
+    @Override
+    public int compareTo(Freight o) {
+        return this.id.compareTo(o.id);
     }
 }

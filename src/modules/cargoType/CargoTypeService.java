@@ -1,5 +1,7 @@
 package modules.cargoType;
 
+import java.util.List;
+
 import modules.cargoType.dtos.CreateDurableCargoTypeDTO;
 import modules.cargoType.dtos.CreatePerishableCargoTypeDTO;
 import modules.cargoType.entities.interfaces.ICargoTypeReadable;
@@ -8,6 +10,7 @@ import modules.cargoType.entities.interfaces.IPerishableCargoTypeReadable;
 import modules.cargoType.repositories.InMemoryCargoTypeRepository;
 import modules.cargoType.repositories.interfaces.ICargoTypeRepository;
 import shared.errors.CargoTypeAlreadyExists;
+import shared.errors.NoCargoTypeRegistered;
 
 public class CargoTypeService {
     private ICargoTypeRepository cargoTypeRepository;
@@ -38,5 +41,15 @@ public class CargoTypeService {
                 createDurableCargoTypeDTO.getNumber(),
                 createDurableCargoTypeDTO.getDescription(), createDurableCargoTypeDTO.getSector(),
                 createDurableCargoTypeDTO.getMainMaterial(), createDurableCargoTypeDTO.getIpiPercentage());
+    }
+
+    public List<ICargoTypeReadable> findAllCargoTypes() {
+        List<ICargoTypeReadable> cargoType = this.cargoTypeRepository.findAll();
+
+        if (cargoType.isEmpty()) {
+            throw new NoCargoTypeRegistered();
+        }
+
+        return cargoType;
     }
 }

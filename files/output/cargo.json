@@ -1,0 +1,4 @@
+[
+{"id":111,"weight":60000.0,"declaredValue":102000.0,"maxTime":3,"priority":"CHEAP","status":"PENDING","cargoType":{"number":11111,"description":"Carne suina","origin":"Animal","maxValidityTime":30},"originHarbor":{"id":11,"name":"Rio Grande","country":"Brasil"},"destinationHarbor":{"id":22,"name":"Santos","country":"Brasil"},"client":{"code":1111,"name":"Maria da Silva","email":"maria@email.com"}},
+{"id":222,"weight":30000.0,"declaredValue":100000.0,"maxTime":10,"priority":"QUICK","status":"PENDING","cargoType":{"number":22222,"description":"Pneus de automovel","sector":"Borracharia","mainMaterial":"Borracha","ipiPercentage":15.0},"originHarbor":{"id":22,"name":"Santos","country":"Brasil"},"destinationHarbor":{"id":33,"name":"Lisboa","country":"Portugal"},"client":{"code":2222,"name":"Tires Inc.","email":"pedro@mail.com.br"}}
+]

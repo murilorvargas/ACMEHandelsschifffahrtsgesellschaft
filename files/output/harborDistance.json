@@ -1,0 +1,5 @@
+[
+{"id":"7d37b333-baef-4b18-a3a8-3e11c3867185","firstHarbor":{"id":11,"name":"Rio Grande","country":"Brasil"},"secondHarbor":{"id":22,"name":"Santos","country":"Brasil"},"value":680.0},
+{"id":"894e6bfc-5ec9-414a-a744-831d92bda04b","firstHarbor":{"id":22,"name":"Santos","country":"Brasil"},"secondHarbor":{"id":33,"name":"Lisboa","country":"Portugal"},"value":5500.0},
+{"id":"4b0e4745-95e8-4ebb-a8f6-e5389e6c5ec1","firstHarbor":{"id":11,"name":"Rio Grande","country":"Brasil"},"secondHarbor":{"id":33,"name":"Lisboa","country":"Portugal"},"value":6200.0}
+]

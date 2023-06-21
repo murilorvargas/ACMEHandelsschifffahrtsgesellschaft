@@ -9,6 +9,8 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+
+import java.util.List;
 import java.util.Set;
 
 public class HarborDistanceController {
@@ -57,5 +59,9 @@ public class HarborDistanceController {
         } else {
             harborDistanceService.createDefaultHarborDistanceToAllHarbors(createDefaultHarborDistanceToAllHarborsDTO);
         }
+    }
+
+    public List<IHarborDistanceReadable> onFindAll() {
+        return harborDistanceService.findAll();
     }
 }
