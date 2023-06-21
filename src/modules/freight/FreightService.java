@@ -21,6 +21,7 @@ import modules.harborDistance.repositories.interfaces.IHarborDistanceRepository;
 import modules.ship.entities.interfaces.IShipReadable;
 import modules.ship.repositories.InMemoryShipRepository;
 import modules.ship.repositories.interfaces.IShipRepository;
+import shared.errors.CargoQueueIsEmpty;
 import shared.errors.FreightAlreadyCompleted;
 import shared.errors.FreightNotFound;
 import shared.errors.HarborDistanceNotFound;
@@ -42,6 +43,10 @@ public class FreightService {
     public void createFreights() {
         List<IShipReadable> ships = this.shipRepository.findAll();
         List<ICargoReadable> pendingCargos = this.cargoRepository.findByStatus(CargoStatus.PENDING);
+
+        if (pendingCargos.size() == 0) {
+            throw new CargoQueueIsEmpty();
+        }
 
         for (ICargoReadable pendingCargo : pendingCargos) {
             IHarborDistanceReadable harborDistance = this.harborDistanceRepository.findByHarbors(
