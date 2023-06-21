@@ -67,15 +67,15 @@ public class HarborRegisterForm extends JFrame {
                     mensagem.setText("O ID deve ser um número inteiro.");
                     return;
                 }
-                if(id < 0) {
+                if (id < 0) {
                     mensagem.setText("O ID deve ser um número positivo.");
                     return;
                 }
-                if(campoNome.getText().equals("")) {
+                if (campoNome.getText().equals("")) {
                     mensagem.setText("O nome não pode ser vazio.");
                     return;
                 }
-                if(campoPais.getText().equals("")) {
+                if (campoPais.getText().equals("")) {
                     mensagem.setText("O país não pode ser vazio.");
                     return;
                 }
@@ -89,7 +89,10 @@ public class HarborRegisterForm extends JFrame {
         botaoLimpar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica para limpar os campos
+                campoId.setText("");
+                campoNome.setText("");
+                campoPais.setText("");
+                mensagem.setText("");
             }
         });
 

@@ -114,6 +114,8 @@ public class CargoTypeRegisterForm extends JFrame {
                 rotuloPorcentagemIPI.setVisible(false);
 
                 mensagem.setText("Perecível selecionado. Preencha os campos obrigatórios.");
+                perecivel = true;
+                duravel = false;
 
             }
         });
@@ -144,13 +146,13 @@ public class CargoTypeRegisterForm extends JFrame {
                 campoValidadeMaxima.setVisible(false);
                 rotuloValidadeMaxima.setVisible(false);
 
-
-
                 campoPorcentagemIPI.setEnabled(false);
                 campoPorcentagemIPI.setVisible(false);
                 rotuloPorcentagemIPI.setVisible(false);
 
                 mensagem.setText("Duravel selecionado. Preencha os campos obrigatórios.");
+                duravel = true;
+                perecivel = false;
 
             }
         });
@@ -159,25 +161,26 @@ public class CargoTypeRegisterForm extends JFrame {
         botaoCadastrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(!perecivel && !duravel){
+                if (!perecivel && !duravel) {
                     mensagem.setText("Selecione um tipo de carga.");
                     return;
                 }
 
-                if(perecivel) {
-                    if (campoNumero.getText().equals("") || campoDescricao.getText().equals("") || campoOrigem.getText().equals("") || campoValidadeMaxima.getText().equals("")) {
+                if (perecivel) {
+                    if (campoNumero.getText().equals("") || campoDescricao.getText().equals("")
+                            || campoOrigem.getText().equals("") || campoValidadeMaxima.getText().equals("")) {
                         mensagem.setText("Preencha todos os campos obrigatórios.");
                         return;
                     }
                     try {
                         numero = Integer.parseInt(campoNumero.getText());
-                    } catch (NumberFormatException ex){
+                    } catch (NumberFormatException ex) {
                         mensagem.setText("Número inválido.");
                         return;
                     }
                     try {
                         validadeMaxima = Integer.parseInt(campoValidadeMaxima.getText());
-                    } catch (NumberFormatException ex){
+                    } catch (NumberFormatException ex) {
                         mensagem.setText("Validade máxima inválida.");
                         return;
                     }
@@ -186,20 +189,22 @@ public class CargoTypeRegisterForm extends JFrame {
                     perishableCargoRegister();
 
                 }
-                if(duravel) {
-                    if (campoNumero.getText().equals("") || campoDescricao.getText().equals("") || campoSetor.getText().equals("") || campoMaterial.getText().equals("") || campoPorcentagemIPI.getText().equals("")) {
+                if (duravel) {
+                    if (campoNumero.getText().equals("") || campoDescricao.getText().equals("")
+                            || campoSetor.getText().equals("") || campoMaterial.getText().equals("")
+                            || campoPorcentagemIPI.getText().equals("")) {
                         mensagem.setText("Preencha todos os campos obrigatórios.");
                         return;
                     }
                     try {
                         numero = Integer.parseInt(campoNumero.getText());
-                    } catch (NumberFormatException ex){
+                    } catch (NumberFormatException ex) {
                         mensagem.setText("Número inválido.");
                         return;
                     }
                     try {
                         porcentagemIPI = Double.parseDouble(campoPorcentagemIPI.getText());
-                    } catch (NumberFormatException ex){
+                    } catch (NumberFormatException ex) {
                         mensagem.setText("Porcentagem IPI inválida.");
                         return;
                     }
@@ -209,7 +214,6 @@ public class CargoTypeRegisterForm extends JFrame {
                     durableCargoRegister();
 
                 }
-                
 
             }
         });
@@ -268,7 +272,7 @@ public class CargoTypeRegisterForm extends JFrame {
     private void perishableCargoRegister() {
         try {
             cargoTypeController.onCreatePerishableCargoType(numero, descricao, origem,
-            validadeMaxima);
+                    validadeMaxima);
         } catch (BaseRunTimeException e) {
             mensagem.setText(e.getTranslation());
             return;
@@ -280,7 +284,7 @@ public class CargoTypeRegisterForm extends JFrame {
         setVisible(false);
     }
 
-     private void durableCargoRegister() {
+    private void durableCargoRegister() {
         try {
             cargoTypeController.onCreateDurableCargoType(numero, descricao, setor, material, porcentagemIPI);
         } catch (BaseRunTimeException e) {
