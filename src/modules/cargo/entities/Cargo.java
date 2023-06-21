@@ -6,6 +6,7 @@ import modules.cargo.enums.CargoStatus;
 import modules.cargoType.entities.interfaces.ICargoTypeReadable;
 import modules.client.entities.interfaces.IClientReadable;
 import modules.harbor.entities.interfaces.IHarborReadable;
+import modules.ship.entities.interfaces.IShipReadable;
 
 public class Cargo implements Comparable<Cargo>, ICargoReadable {
     private int id;
@@ -18,6 +19,7 @@ public class Cargo implements Comparable<Cargo>, ICargoReadable {
     private IHarborReadable originHarbor;
     private IHarborReadable destinationHarbor;
     private IClientReadable client;
+    private IShipReadable destinedShip;
 
     public Cargo(int id, double weight, double declaredValue, int maxTime, CargoPriority priority,
             ICargoTypeReadable cargoType,
@@ -72,6 +74,14 @@ public class Cargo implements Comparable<Cargo>, ICargoReadable {
 
     public IClientReadable getClient() {
         return client;
+    }
+
+    public IShipReadable getDestinedShip() {
+        return destinedShip;
+    }
+
+    public void setDestinedShip(IShipReadable destinedShip) {
+        this.destinedShip = destinedShip;
     }
 
     public void setStatus(CargoStatus status) {
