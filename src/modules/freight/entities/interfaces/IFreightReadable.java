@@ -5,7 +5,7 @@ import modules.freight.enums.FreightStatus;
 import modules.ship.entities.interfaces.IShipReadable;
 
 public interface IFreightReadable {
-    String getId();
+    int getId();
 
     double getValue();
 

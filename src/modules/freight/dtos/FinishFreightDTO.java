@@ -1,16 +1,16 @@
 package modules.freight.dtos;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PositiveOrZero;
 
 public class FinishFreightDTO {
-    @NotBlank(message = "The id cannot be blank")
-    private String freightId;
+    @PositiveOrZero(message = "Id must be positive or zero")
+    private int freightId;
 
-    public FinishFreightDTO(String freightId) {
+    public FinishFreightDTO(int freightId) {
         this.freightId = freightId;
     }
 
-    public String getFreightId() {
+    public int getFreightId() {
         return freightId;
     }
 }

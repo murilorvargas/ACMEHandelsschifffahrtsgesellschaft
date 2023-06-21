@@ -109,17 +109,14 @@ public class MainApplication extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String id;
+                int id;
                 try {
-                    id = nameFreightField.getText();
+                    id = Integer.parseInt(nameFreightField.getText());
                 } catch (Exception a) {
                     message.setText("Erro ao finalizar frete.");
                     return;
                 }
-                if (id.equals("")) {
-                    message.setText("Preencha o campo de ID.");
-                    return;
-                }
+
                 try {
                     freightController.onFinishFreight(id);
                 } catch (BaseRunTimeException a) {

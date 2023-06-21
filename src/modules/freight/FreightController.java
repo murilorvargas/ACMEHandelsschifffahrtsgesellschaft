@@ -24,7 +24,7 @@ public class FreightController {
         this.freightService.createFreights();
     }
 
-    public void onFinishFreight(String freightId) {
+    public void onFinishFreight(int freightId) {
         FinishFreightDTO finishFreightDTO = new FinishFreightDTO(freightId);
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
