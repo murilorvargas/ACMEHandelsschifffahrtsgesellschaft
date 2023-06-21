@@ -99,7 +99,7 @@ public class FreightService {
     }
 
     public List<IFreightReadable> findAllInProgressFreights() {
-        List<IFreightReadable> freightsList =  this.freightRepository.findAllInProgress();
+        List<IFreightReadable> freightsList = this.freightRepository.findAllInProgress();
         if (freightsList.isEmpty()) {
             throw new NoFreightsRegistered();
         }
@@ -138,5 +138,14 @@ public class FreightService {
         }
 
         return distanceCost + weightCost + regionCost;
+    }
+
+    public List<IFreightReadable> findAll() {
+        List<IFreightReadable> freightsList = this.freightRepository.findAll();
+
+        if (freightsList.isEmpty()) {
+            throw new NoFreightsRegistered();
+        }
+        return freightsList;
     }
 }

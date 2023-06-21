@@ -1,5 +1,7 @@
 package modules.cargoType.repositories.interfaces;
 
+import java.util.List;
+
 import modules.cargoType.entities.interfaces.ICargoTypeReadable;
 import modules.cargoType.entities.interfaces.IDurableCargoTypeReadable;
 import modules.cargoType.entities.interfaces.IPerishableCargoTypeReadable;
@@ -13,4 +15,6 @@ public interface ICargoTypeRepository {
                         double ipiPercentage);
 
         ICargoTypeReadable findByNumber(int number);
+
+        List<ICargoTypeReadable> findAll();
 }

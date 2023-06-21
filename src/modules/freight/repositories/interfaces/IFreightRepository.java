@@ -15,4 +15,6 @@ public interface IFreightRepository {
     List<IFreightReadable> findAllInProgress();
 
     IFreightReadable findById(String id);
+
+    List<IFreightReadable> findAll();
 }

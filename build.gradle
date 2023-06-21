@@ -16,6 +16,7 @@ repositories {
 dependencies {
     implementation 'javax.validation:validation-api:2.0.1.Final'
     implementation 'org.apache.bval:bval-jsr:2.0.5'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
 }
 
 compileJava.options.encoding = 'UTF-8'

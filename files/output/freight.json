@@ -1,0 +1,3 @@
+[
+{"id":"374f6494-06ab-414e-bc9d-6a17e6a56082","value":147000.0,"status":"IN_PROGRESS","ship":{"id":"6f5879d0-334c-47f3-9f63-0346a91312ad","name":"Aquaman","speed":20.0,"autonomy":6500.0,"costPerMile":25.0,"isAvailable":false},"cargo":{"id":111,"weight":60000.0,"declaredValue":102000.0,"maxTime":3,"priority":"CHEAP","status":"RENTED","cargoType":{"number":11111,"description":"Carne suina","origin":"Animal","maxValidityTime":30},"originHarbor":{"id":11,"name":"Rio Grande","country":"Brasil"},"destinationHarbor":{"id":22,"name":"Santos","country":"Brasil"},"client":{"code":1111,"name":"Maria da Silva","email":"maria@email.com"}}}
+]
