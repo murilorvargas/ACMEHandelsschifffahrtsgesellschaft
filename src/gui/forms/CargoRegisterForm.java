@@ -4,7 +4,6 @@ import javax.swing.*;
 
 import gui.components.RegisterMenu;
 import modules.cargo.CargoController;
-import modules.cargo.entities.Cargo;
 import shared.errors.BaseRunTimeException;
 
 import java.awt.*;
@@ -197,7 +196,7 @@ public class CargoRegisterForm extends JFrame {
     }
 
     public static void main(String[] args) {
-        CargoRegisterForm janela = new CargoRegisterForm();
+        new CargoRegisterForm();
     }
 
     private void cargoRegister() {

@@ -3,18 +3,22 @@ package gui.components;
 import javax.swing.*;
 
 import gui.MainApplication;
-import gui.forms.CargoTypeRegisterForm;
-import gui.forms.ClientRegisterForm;
-import gui.forms.HarborRegisterForm;
-import gui.forms.ShipRegisterForm;
 import modules.cargo.CargoController;
+import modules.cargo.entities.interfaces.ICargoReadable;
 import modules.client.ClientController;
+import modules.client.entities.interfaces.IClientReadable;
 import modules.harbor.HarborController;
+import modules.harbor.entities.interfaces.IHarborReadable;
 import modules.cargoType.CargoTypeController;
 import modules.cargoType.entities.DurableCargoType;
 import modules.cargoType.entities.PerishableCargoType;
+import modules.cargoType.entities.interfaces.ICargoTypeReadable;
+import modules.cargoType.entities.interfaces.IDurableCargoTypeReadable;
+import modules.cargoType.entities.interfaces.IPerishableCargoTypeReadable;
 import modules.ship.ShipController;
+import modules.ship.entities.interfaces.IShipReadable;
 import modules.freight.FreightController;
+import modules.freight.entities.interfaces.IFreightReadable;
 import shared.errors.BaseRunTimeException;
 
 import java.awt.*;
@@ -25,8 +29,7 @@ import java.util.ArrayList;
 public class ListMenu extends JFrame {
 
     private JButton cargoButton;
-    private JButton cargoTypePerishbleButton;
-    private JButton cargoTypeDurableButton;
+    private JButton cargoTypeButton;
     private JButton clientButton;
     private JButton harborButton;
     private JButton shipButton;
@@ -37,7 +40,7 @@ public class ListMenu extends JFrame {
 
     private CargoController cargoController;
     private ClientController clientController;
-    private HarborController harnorController;
+    private HarborController harborController;
     private CargoTypeController cargoTypeController;
     private ShipController shipController;
     private FreightController freightController;
@@ -46,7 +49,7 @@ public class ListMenu extends JFrame {
         super();
         cargoController = new CargoController();
         clientController = new ClientController();
-        harnorController = new HarborController();
+        harborController = new HarborController();
         cargoTypeController = new CargoTypeController();
         shipController = new ShipController();
         freightController = new FreightController();
@@ -55,8 +58,7 @@ public class ListMenu extends JFrame {
         formTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
         cargoButton = new JButton("Lista de Cargas");
-        cargoTypePerishbleButton = new JButton("Lista Carga Perecível");
-        cargoTypeDurableButton = new JButton("Lista Carga Durável");
+        cargoTypeButton = new JButton("Lista Tipo de Cargas");
         clientButton = new JButton("Lista de Cliente");
         harborButton = new JButton("Lista de Porto");
         shipButton = new JButton("Lista de Navio");
@@ -78,25 +80,26 @@ public class ListMenu extends JFrame {
                     return;
                 }
                 ArrayList<String> list = new ArrayList<>();
-                for (int i = 0; i < cargoController.onFindAllCargos().size(); i++) {
-                    String info = "Carga " + cargoController.onFindAllCargos().get(i).getId() + ": " +
-                            "Peso: " + cargoController.onFindAllCargos().get(i).getWeight() + ", " +
-                            "Tempo Máximo: " + cargoController.onFindAllCargos().get(i).getMaxTime() + ", " +
-                            "Prioridade: " + cargoController.onFindAllCargos().get(i).getPriority() + ", " +
-                            "Tipo de carga: " + cargoController.onFindAllCargos().get(i).getCargoType().getDescription()
+                
+                for(ICargoReadable cargo : cargoController.onFindAllCargos()) {
+                    String info = "Carga " + cargo.getId() + ": " +
+                            "Peso: " + cargo.getWeight() + ", " +
+                            "Tempo Máximo: " + cargo.getMaxTime() + ", " +
+                            "Prioridade: " + cargo.getPriority() + ", " +
+                            "Tipo de carga: " + cargo.getCargoType().getDescription()
                             + ", " +
-                            "Porto de Origem: " + cargoController.onFindAllCargos().get(i).getOriginHarbor().getName()
+                            "Porto de Origem: " + cargo.getOriginHarbor().getName()
                             + ", " +
                             "Porto de Destino: "
-                            + cargoController.onFindAllCargos().get(i).getDestinationHarbor().getName()
+                            + cargo.getDestinationHarbor().getName()
                             + ", " +
-                            "Cliente: " + cargoController.onFindAllCargos().get(i).getClient().getName()
+                            "Cliente: " + cargo.getClient().getName()
                             + ", " +
-                            "Status da Carga: " + cargoController.onFindAllCargos().get(i).getStatus() +
+                            "Status da Carga: " + cargo.getStatus() +
                             " ,";
 
-                    if (cargoController.onFindAllCargos().get(i).getDestinedShip() != null) {
-                        info += "Navio: " + cargoController.onFindAllCargos().get(i).getDestinedShip().getName() + " ;";
+                    if (cargo.getDestinedShip() != null) {
+                        info += "Navio: " + cargo.getDestinedShip().getName() + " ;";
                     } else {
                         info += "Navio: Não Atribuido ;";
                     }
@@ -107,7 +110,7 @@ public class ListMenu extends JFrame {
             }
         });
 
-        cargoTypePerishbleButton.addActionListener(new ActionListener() {
+        cargoTypeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -120,64 +123,37 @@ public class ListMenu extends JFrame {
                     return;
                 }
                 ArrayList<String> list = new ArrayList<>();
-                for (int i = 0; i < cargoTypeController.onFindAllCargoTypes().size(); i++) {
-                    if (cargoController.onFindAllCargos().get(i).getCargoType() instanceof PerishableCargoType) {
-                        String info = "Carga " + cargoController.onFindAllCargos().get(i).getCargoType().getNumber()
+                for(ICargoTypeReadable cargoType : cargoTypeController.onFindAllCargoTypes()) {
+                    if (cargoType instanceof IDurableCargoTypeReadable) {
+                        String info = "Carga " + cargoType.getNumber() + ": " +
+                                "Descrição: " + cargoType.getDescription() + ", " +
+                                "Setor: "
+                                + ((DurableCargoType) cargoType).getSector()
+                                + ", " +
+                                "Material: "
+                                + ((DurableCargoType) cargoType).getMainMaterial()
+                                + ", " +
+                                "Porcentagem IPI: "
+                                + ((DurableCargoType) cargoType).getIpiPercentage()
+                                + ";  ";
+                        list.add(info);
+                    } else if (cargoType instanceof IPerishableCargoTypeReadable) {
+                        String info = "Carga " + cargoType.getNumber()
                                 + ": " +
-                                "Descrição: " + cargoController.onFindAllCargos().get(i).getCargoType().getDescription()
+                                "Descrição: " + cargoType.getDescription()
                                 + ", " +
                                 "Origem: "
-                                + ((PerishableCargoType) cargoController.onFindAllCargos().get(i).getCargoType())
+                                + ((PerishableCargoType) cargoType)
                                         .getOrigin()
                                 + ", " +
                                 "Validade: "
-                                + ((PerishableCargoType) cargoController.onFindAllCargos().get(i).getCargoType())
+                                + ((PerishableCargoType) cargoType)
                                         .getMaxValidityTime()
                                 + ";  ";
                         list.add(info);
                     }
-
                 }
-                displayTable("Lista de Cargas", list);
-            }
-        });
-
-        cargoTypeDurableButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    cargoTypeController.onFindAllCargoTypes();
-                } catch (BaseRunTimeException a) {
-                    message.setText(a.getTranslation());
-                    return;
-                } catch (Exception a) {
-                    message.setText("Erro ao ler o arquivo.");
-                    return;
-                }
-                ArrayList<String> list = new ArrayList<>();
-                for (int i = 0; i < cargoTypeController.onFindAllCargoTypes().size(); i++) {
-                    if (cargoController.onFindAllCargos().get(i).getCargoType() instanceof DurableCargoType) {
-                        String info = "Carga " + cargoController.onFindAllCargos().get(i).getCargoType().getNumber()
-                                + ": " +
-                                "Descrição: " + cargoController.onFindAllCargos().get(i).getCargoType().getDescription()
-                                + ", " +
-                                "Setor: "
-                                + ((DurableCargoType) cargoController.onFindAllCargos().get(i).getCargoType())
-                                        .getSector()
-                                + ", " +
-                                "Material: "
-                                + ((DurableCargoType) cargoController.onFindAllCargos().get(i).getCargoType())
-                                        .getMainMaterial()
-                                + ", " +
-                                "Porcentagem IPI: "
-                                + ((DurableCargoType) cargoController.onFindAllCargos().get(i).getCargoType())
-                                        .getIpiPercentage()
-                                + ";  ";
-                        list.add(info);
-                    }
-
-                }
-                displayTable("Lista de Cargas", list);
+                displayTable("Lista de Tipo Cargas", list);
             }
         });
 
@@ -194,10 +170,10 @@ public class ListMenu extends JFrame {
                     return;
                 }
                 ArrayList<String> list = new ArrayList<>();
-                for (int i = 0; i < clientController.onFindAllClients().size(); i++) {
-                    String info = "Cliente " + clientController.onFindAllClients().get(i).getCode() + ": " +
-                            "Nome: " + clientController.onFindAllClients().get(i).getName() + ", " +
-                            "Email: " + clientController.onFindAllClients().get(i).getEmail() + ";  ";
+                for(IClientReadable client : clientController.onFindAllClients()) {
+                    String info = "Cliente " + client.getCode() + ": " +
+                            "Nome: " + client.getName() + ", " +
+                            "Email: " + client.getEmail() + ";  ";
                     list.add(info);
                 }
                 displayTable("Lista de Clientes", list);
@@ -208,7 +184,7 @@ public class ListMenu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    harnorController.onFindAllHarbors();
+                    harborController.onFindAllHarbors();
                 } catch (BaseRunTimeException a) {
                     message.setText(a.getTranslation());
                     return;
@@ -217,10 +193,10 @@ public class ListMenu extends JFrame {
                     return;
                 }
                 ArrayList<String> list = new ArrayList<>();
-                for (int i = 0; i < harnorController.onFindAllHarbors().size(); i++) {
-                    String info = "Porto " + harnorController.onFindAllHarbors().get(i).getId() + ": " +
-                            "Nome: " + harnorController.onFindAllHarbors().get(i).getName() + ", " +
-                            "País: " + harnorController.onFindAllHarbors().get(i).getCountry() + ";  ";
+                for(IHarborReadable harbor : harborController.onFindAllHarbors()) {
+                    String info = "Porto " + harbor.getId() + ": " +
+                            "Nome: " + harbor.getName() + ", " +
+                            "País: " + harbor.getCountry() + ";  ";
                     list.add(info);
                 }
                 displayTable("Lista de Portos", list);
@@ -240,12 +216,12 @@ public class ListMenu extends JFrame {
                     return;
                 }
                 ArrayList<String> list = new ArrayList<>();
-                for (int i = 0; i < shipController.onFindAllShips().size(); i++) {
-                    String info = "Navio " + (i + 1) + ": " +
-                            "Nome: " + shipController.onFindAllShips().get(i).getName() + ", " +
-                            "Velocidade: " + shipController.onFindAllShips().get(i).getSpeed() + ", " +
-                            "Autonomia: " + shipController.onFindAllShips().get(i).getAutonomy() + ", " +
-                            "Autonomia: " + shipController.onFindAllShips().get(i).getCostPerMile() + ";  ";
+                for (IShipReadable ship : shipController.onFindAllShips()) {
+                    String info = "Navio " + ship.getId() + ": " +
+                            "Nome: " + ship.getName() + ", " +
+                            "Velocidade: " + ship.getSpeed() + ", " +
+                            "Autonomia: " + ship.getAutonomy() + ", " +
+                            "Autonomia: " + ship.getCostPerMile() + ";  ";
                     list.add(info);
                 }
                 displayTable("Lista de Navios", list);
@@ -265,13 +241,13 @@ public class ListMenu extends JFrame {
                     return;
                 }
                 ArrayList<String> list = new ArrayList<>();
-                for (int i = 0; i < freightController.onFindAll().size(); i++) {
-                    String info = "Frete " + freightController.onFindAll().get(i).getId() + ": " +
-                            "Carga: " + freightController.onFindAll().get(i).getCargo().getId() + ", "
+                for (IFreightReadable freightReadable : freightController.onFindAll()) {
+                    String info = "Frete " + freightReadable.getId() + ": " +
+                            "Carga: " + freightReadable.getCargo().getId() + ", "
                             +
-                            "Valor: " + freightController.onFindAll().get(i).getValue() + ", " +
-                            "Navio: " + freightController.onFindAll().get(i).getShip().getName() + ", " +
-                            "Status do Frete: " + freightController.onFindAll().get(i).getStatus() + ";  ";
+                            "Valor: " + freightReadable.getValue() + ", " +
+                            "Navio: " + freightReadable.getShip().getName() + ", " +
+                            "Status do Frete: " + freightReadable.getStatus() + ";  ";
                     list.add(info);
                 }
                 displayTable("Lista de Todos os Fretes", list);
@@ -291,13 +267,12 @@ public class ListMenu extends JFrame {
                     return;
                 }
                 ArrayList<String> list = new ArrayList<>();
-                for (int i = 0; i < freightController.onFindAllInProgressFreights().size(); i++) {
-                    String info = "Frete " + freightController.onFindAllInProgressFreights().get(i).getId() + ": " +
-                            "Carga: " + freightController.onFindAllInProgressFreights().get(i).getCargo().getId() + ", "
+                for(IFreightReadable freightReadable : freightController.onFindAllInProgressFreights()) {
+                    String info = "Frete " + freightReadable.getId() + ": " +
+                            "Carga: " + freightReadable.getCargo().getId() + ", "
                             +
-                            "Valor: " + freightController.onFindAllInProgressFreights().get(i).getValue() + ", " +
-                            "Navio: " + freightController.onFindAllInProgressFreights().get(i).getShip().getName()
-                            + ";  ";
+                            "Valor: " + freightReadable.getValue() + ", " +
+                            "Navio: " + freightReadable.getShip().getName() + ";  ";
                     list.add(info);
                 }
                 displayTable("Lista de Fretes Pendentes", list);
@@ -319,8 +294,7 @@ public class ListMenu extends JFrame {
 
         JPanel botaoPainel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         botaoPainel.add(cargoButton);
-        botaoPainel.add(cargoTypePerishbleButton);
-        botaoPainel.add(cargoTypeDurableButton);
+        botaoPainel.add(cargoTypeButton);
         botaoPainel.add(clientButton);
         botaoPainel.add(harborButton);
         botaoPainel.add(shipButton);
@@ -337,7 +311,7 @@ public class ListMenu extends JFrame {
     }
 
     public static void main(String[] args) {
-        ListMenu window = new ListMenu();
+        new ListMenu();
     }
 
     private void displayTable(String title, ArrayList<String> data) {

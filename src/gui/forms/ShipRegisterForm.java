@@ -140,7 +140,7 @@ public class ShipRegisterForm extends JFrame {
     }
 
     public static void main(String[] args) {
-        ShipRegisterForm janela = new ShipRegisterForm();
+        new ShipRegisterForm();
     }
 
     private void shipRegister() {

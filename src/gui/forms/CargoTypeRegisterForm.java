@@ -256,7 +256,7 @@ public class CargoTypeRegisterForm extends JFrame {
     }
 
     public static void main(String[] args) {
-        CargoTypeRegisterForm janela = new CargoTypeRegisterForm();
+        new CargoTypeRegisterForm();
     }
 
     private void perishableCargoRegister() {

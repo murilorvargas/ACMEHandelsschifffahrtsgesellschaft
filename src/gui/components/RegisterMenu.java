@@ -103,6 +103,6 @@ public class RegisterMenu extends JFrame {
     }
 
     public static void main(String[] args) {
-        RegisterMenu window = new RegisterMenu();
+        new RegisterMenu();
     }
 }

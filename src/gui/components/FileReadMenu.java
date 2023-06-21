@@ -146,8 +146,6 @@ public class FileReadMenu extends JFrame {
 
         GridLayout gridButton = new GridLayout(3, 3);
         JPanel painelButtons = new JPanel(gridButton);
-        FlowLayout botaoLayout = new FlowLayout(FlowLayout.CENTER);
-        JPanel botaoPainel = new JPanel(botaoLayout);
         painelButtons.add(cargoButton);
         painelButtons.add(cargoTypeButton);
         painelButtons.add(clientButton);
@@ -168,7 +166,7 @@ public class FileReadMenu extends JFrame {
     }
 
     public static void main(String[] args) {
-        FileReadMenu window = new FileReadMenu();
+        new FileReadMenu();
     }
 
     private void readFile(String type) {

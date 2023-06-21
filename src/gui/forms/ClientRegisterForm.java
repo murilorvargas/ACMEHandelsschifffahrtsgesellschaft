@@ -4,7 +4,6 @@ import javax.swing.*;
 
 import gui.components.RegisterMenu;
 import modules.client.ClientController;
-import modules.client.entities.Client;
 import shared.errors.BaseRunTimeException;
 
 import java.awt.*;
@@ -119,7 +118,7 @@ public class ClientRegisterForm extends JFrame {
     }
 
     public static void main(String[] args) {
-        ClientRegisterForm janela = new ClientRegisterForm();
+        new ClientRegisterForm();
     }
 
     private void clientRegister() {

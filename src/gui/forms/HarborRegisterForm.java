@@ -118,7 +118,7 @@ public class HarborRegisterForm extends JFrame {
     }
 
     public static void main(String[] args) {
-        HarborRegisterForm janela = new HarborRegisterForm();
+        new HarborRegisterForm();
     }
 
     private void harborRegister() {

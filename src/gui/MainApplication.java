@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import gui.components.FileReadMenu;
 import gui.components.ListMenu;
 import gui.components.RegisterMenu;
-import modules.cargo.CargoController;
 import modules.freight.FreightController;
 import shared.errors.BaseRunTimeException;
 
@@ -167,6 +166,6 @@ public class MainApplication extends JFrame {
     }
 
     public static void main(String[] args) {
-        MainApplication window = new MainApplication();
+        new MainApplication();
     }
 }
