@@ -48,11 +48,7 @@ public class FileReadCargoTypeProcessor extends BaseFileReaderProcessor implemen
                     String sector = fields[3];
                     String mainMaterial = fields[4];
                     double ipiPercentage = Double.parseDouble(fields[5].replaceAll(",", "."));
-<<<<<<< HEAD
-                    this.cargoTypeController.onCreateDurableCargoType(number, description, sector, mainMaterial,
-=======
                     cargoTypeController.onCreateDurableCargoType(number, description, sector, mainMaterial,
->>>>>>> 09fa1b8044a6d8464ff22a5408bf65980c976a67
                             ipiPercentage);
                 }
             }

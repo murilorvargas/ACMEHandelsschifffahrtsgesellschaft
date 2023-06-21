@@ -11,6 +11,8 @@ import modules.cargo.CargoController;
 import modules.client.ClientController;
 import modules.harbor.HarborController;
 import modules.cargoType.CargoTypeController;
+import modules.cargoType.entities.DurableCargoType;
+import modules.cargoType.entities.PerishableCargoType;
 import modules.ship.ShipController;
 import modules.freight.FreightController;
 import shared.errors.BaseRunTimeException;
@@ -24,7 +26,8 @@ public class ListMenu extends JFrame {
 
     // Componentes principais
     private JButton cargoButton;
-    private JButton cargoTypeButton;
+    private JButton cargoTypePerishbleButton;
+    private JButton cargoTypeDurableButton;
     private JButton clientButton;
     private JButton harborButton;
     private JButton shipButton;
@@ -54,7 +57,8 @@ public class ListMenu extends JFrame {
 
         // Botões
         cargoButton = new JButton("Lista de Cargas");
-        cargoTypeButton = new JButton("Lista de Tipo de Carga");
+        cargoTypePerishbleButton = new JButton("Lista Carga Perecível");
+        cargoTypeDurableButton = new JButton("Lista Carga Durável");
         clientButton = new JButton("Lista de Cliente");
         harborButton = new JButton("Lista de Porto");
         shipButton = new JButton("Lista de Navio");
@@ -81,41 +85,91 @@ public class ListMenu extends JFrame {
                             "Peso: " + cargoController.onFindAllCargos().get(i).getWeight() + ", " +
                             "Tempo Máximo: " + cargoController.onFindAllCargos().get(i).getMaxTime() + ", " +
                             "Prioridade: " + cargoController.onFindAllCargos().get(i).getPriority() + ", " +
-                            "Tipo de carga: " + cargoController.onFindAllCargos().get(i).getCargoType() + ", " +
-                            "Porto de Origem: " + cargoController.onFindAllCargos().get(i).getOriginHarbor() + ", " +
-                            "Porto de Destino: " + cargoController.onFindAllCargos().get(i).getDestinationHarbor()
+                            "Tipo de carga: " + cargoController.onFindAllCargos().get(i).getCargoType().getDescription()
                             + ", " +
-                            "Cliente: " + cargoController.onFindAllCargos().get(i).getClient() + ";  ";
+                            "Porto de Origem: " + cargoController.onFindAllCargos().get(i).getOriginHarbor().getName()
+                            + ", " +
+                            "Porto de Destino: "
+                            + cargoController.onFindAllCargos().get(i).getDestinationHarbor().getName()
+                            + ", " +
+                            "Cliente: " + cargoController.onFindAllCargos().get(i).getClient().getName() + ";  ";
                     list.add(info);
                 }
                 displayTable("Lista de Cargas", list);
             }
         });
 
-        cargoTypeButton.addActionListener(new ActionListener() {
+        cargoTypePerishbleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String aux = "";
-                // for (int i = 0; i < cargoTypeController..size(); i++) {
-                // aux += "Tipo de carga " + cargoTypeController.onFindAllCargoTypes().get(i) +
-                // ": " +
-                // "Peso: " + cargoTypeController.onFindAllCargoTypes().get(i).getWeight() + ",
-                // " +
-                // "Tempo Máximo: " +
-                // cargoTypeController.onFindAllCargoTypes().get(i).getMaxTime() + ", " +
-                // "Prioridade: " +
-                // cargoTypeController.onFindAllCargoTypes().get(i).getPriority() + ", "+
-                // "Tipo de carga: " +
-                // cargoTypeController.onFindAllCargoTypes().get(i).getCargoType() + ", "+
-                // "Porto de Origem: " +
-                // cargoTypeController.onFindAllCargoTypes().get(i).getOriginHarbor() + ", "+
-                // "Porto de Destino: " +
-                // cargoTypeController.onFindAllCargoTypes().get(i).getDestinationHarbor() + ",
-                // "+
-                // "Cliente: " + cargoTypeController.onFindAllCargoTypes().get(i).getClient() +
-                // "; ";
-                // }
-                // message.setText("Lista de Clientes: " + "\n" + aux);
+                try {
+                    cargoTypeController.onFindAllCargoTypes();
+                } catch (BaseRunTimeException a) {
+                    message.setText(a.getTranslation());
+                    return;
+                } catch (Exception a) {
+                    message.setText("Erro ao ler o arquivo.");
+                    return;
+                }
+                ArrayList<String> list = new ArrayList<>();
+                for (int i = 0; i < cargoTypeController.onFindAllCargoTypes().size(); i++) {
+                    if (cargoController.onFindAllCargos().get(i).getCargoType() instanceof PerishableCargoType) {
+                        String info = "Carga " + cargoController.onFindAllCargos().get(i).getCargoType().getNumber()
+                                + ": " +
+                                "Descrição: " + cargoController.onFindAllCargos().get(i).getCargoType().getDescription()
+                                + ", " +
+                                "Origem: "
+                                + ((PerishableCargoType) cargoController.onFindAllCargos().get(i).getCargoType())
+                                        .getOrigin()
+                                + ", " +
+                                "Validade: "
+                                + ((PerishableCargoType) cargoController.onFindAllCargos().get(i).getCargoType())
+                                        .getMaxValidityTime()
+                                + ";  ";
+                        list.add(info);
+                    }
+
+                }
+                displayTable("Lista de Cargas", list);
+            }
+        });
+
+        cargoTypeDurableButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    cargoTypeController.onFindAllCargoTypes();
+                } catch (BaseRunTimeException a) {
+                    message.setText(a.getTranslation());
+                    return;
+                } catch (Exception a) {
+                    message.setText("Erro ao ler o arquivo.");
+                    return;
+                }
+                ArrayList<String> list = new ArrayList<>();
+                for (int i = 0; i < cargoTypeController.onFindAllCargoTypes().size(); i++) {
+                    if (cargoController.onFindAllCargos().get(i).getCargoType() instanceof DurableCargoType) {
+                        String info = "Carga " + cargoController.onFindAllCargos().get(i).getCargoType().getNumber()
+                                + ": " +
+                                "Descrição: " + cargoController.onFindAllCargos().get(i).getCargoType().getDescription()
+                                + ", " +
+                                "Setor: "
+                                + ((DurableCargoType) cargoController.onFindAllCargos().get(i).getCargoType())
+                                        .getSector()
+                                + ", " +
+                                "Material: "
+                                + ((DurableCargoType) cargoController.onFindAllCargos().get(i).getCargoType())
+                                        .getMainMaterial()
+                                + ", " +
+                                "Porcentagem IPI: "
+                                + ((DurableCargoType) cargoController.onFindAllCargos().get(i).getCargoType())
+                                        .getIpiPercentage()
+                                + ";  ";
+                        list.add(info);
+                    }
+
+                }
+                displayTable("Lista de Cargas", list);
             }
         });
 
@@ -231,7 +285,8 @@ public class ListMenu extends JFrame {
         // Painel para os botões
         JPanel botaoPainel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         botaoPainel.add(cargoButton);
-        botaoPainel.add(cargoTypeButton);
+        botaoPainel.add(cargoTypePerishbleButton);
+        botaoPainel.add(cargoTypeDurableButton);
         botaoPainel.add(clientButton);
         botaoPainel.add(harborButton);
         botaoPainel.add(shipButton);
