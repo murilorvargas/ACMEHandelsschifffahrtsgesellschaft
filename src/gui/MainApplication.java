@@ -1,14 +1,15 @@
 package gui;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import gui.components.FileReadMenu;
+import gui.components.FileSave;
 import gui.components.ListMenu;
 import gui.components.RegisterMenu;
-import modules.cargo.CargoController;
 import modules.freight.FreightController;
 import shared.errors.BaseRunTimeException;
 
@@ -22,6 +23,7 @@ public class MainApplication extends JFrame {
     private JButton listButton;
     private JButton upDateFreightButton;
     private JButton deleteFreightButton;
+    private JButton saveAllButton;
     private JButton quitButton;
     private JLabel message;
 
@@ -53,6 +55,7 @@ public class MainApplication extends JFrame {
         listButton = new JButton("Listar");
         upDateFreightButton = new JButton("Atualizar Cargas Pendentes");
         deleteFreightButton = new JButton("Finalizar Frete");
+        saveAllButton = new JButton("Salvar Dados");
         quitButton = new JButton("Sair");
         message = new JLabel();
 
@@ -60,6 +63,14 @@ public class MainApplication extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new FileReadMenu();
+                setVisible(false);
+            }
+        });
+
+        saveAllButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new FileSave();
                 setVisible(false);
             }
         });
@@ -144,6 +155,7 @@ public class MainApplication extends JFrame {
 
         JPanel botaoPainel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         botaoPainel.add(fileReadButton);
+        botaoPainel.add(saveAllButton);
         botaoPainel.add(manualInputButton);
         botaoPainel.add(listButton);
         botaoPainel.add(upDateFreightButton);
@@ -164,6 +176,6 @@ public class MainApplication extends JFrame {
     }
 
     public static void main(String[] args) {
-        MainApplication window = new MainApplication();
+        new MainApplication();
     }
 }
